@@ -1,0 +1,109 @@
+<?php
+    session_name("LOGIN");
+    session_start();
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=6">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8" />
+
+	<!-- =======================================DESCRIPCION======================================= -->
+    <title>Politica de Privacidad - Scarpetoss</title>
+    <meta name="description" content="Vendemos zapatos de tu preferencias para que estes comodo y contento con tus elecciones.">
+    
+    <meta name="product_id" content="102856451">
+    <meta property="fb:admins" content="100000984792126">
+    <meta property="fb:app_id" content="255986568181021">
+
+	<!-- =======================================INSTAGRAM======================================= -->
+    <meta property="og:site_name" content="Scarpetoss">
+    <meta property="og:description" content="Vendemos zapatos de tu preferencias para que estes comodo y contento con tus elecciones.">
+    <meta property="og:title" content="Tienda online - Scarpetoss">
+    <meta property="og:url" content="http://scarpetoss.infinityfreeapp.com/legalidad/politica-privacidad.php">
+    <meta property="og:image" content="../image/logo.jpeg">
+    <meta property="og:updated_time" content="2024-01-28T10:35:47+00:00">
+    <meta property="og:type" content="website">
+
+	<!-- =======================================TWITTER======================================= -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:site_name" content="Scarpetoss">
+    <meta property="twitter:description" content="Vendemos zapatos de tu preferencias para que estes comodo y contento con tus elecciones.">
+    <meta property="twitter:title" content="Tienda online - Scarpetoss">
+    <meta property="twitter:url" content="http://scarpetoss.infinityfreeapp.com/legalidad/politica-privacidad.php">
+    <meta property="twitter:image" content="../image/logo.jpeg">
+    <meta property="twitter:updated_time" content="2024-01-28T10:35:47+00:00">
+
+	<!-- =======================================PRECONECCIONES	======================================= -->
+    <meta rel="canonical" href="http://scarpetoss.infinityfreeapp.com/legalidad/politica-privacidad.php">
+    <meta name="robots" content="NOODP,NOYDIR">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://kit.fontawesome.com">
+    <script src="https://kit.fontawesome.com/8f34396e62.js" crossorigin="anonymous"></script>
+
+    <!-- =======================================FAVICON======================================= -->
+    <link rel="icon" type="image/x-icon" href="../image/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="../image/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../image/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../image/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../image/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../image/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../image/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../image/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../image/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../image/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="../image/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../image/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../image/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../image/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../image/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="../image/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+    <?php require_once "../view/menu.php" ?>
+
+    <div id="contenedor-cookie">
+    </div>
+    <script src="./js/cookie.js"></script>
+    
+    <main class="main-aviso-privacidad">
+        <div class="aviso-privacidad">
+            <div class="contenido-privacidad">
+                <h2>POLITICA DE PRIVACIDAD</h2>
+                
+                <h3>USO Y TRATAMIENTO DE DATOS DE CARÁCTER PERSONAL</h3>
+                <p>Le informamos que los datos de carácter personal que pudieran proporcionarse, a través de este sitio web, así como los que pudiera facilitar en el futuro en el marco de su relación jurídica con esta entidad, serán incorporados a nuestra base de datos.</p>
+                <p>Se informa sobre los siguientes extremos relativos a la protección de datos:</p>
+                <ol>
+                    <li><strong>Responsable del tratamiento:</strong>Somos responsables de los datos recogidos en el formulario correspondiente.</li>
+                    <li><strong>Necesidad del tratamiento:</strong>La comunicación de sus datos a través del formulario correspondiente es obligatoria para podamos contactar.</li>
+                    <li><strong>Finalidades del tratamiento y legitimación del tratamiento:</strong>
+                        <ul class="dentro-li">
+                            <li>Gestionar, administrar, prestarle los servicios o facilitarle los productos que solicite y, en su caso, para el cumplimiento y ejecución de los contratos que pudiera celebrar, conocer mejor sus gustos, adecuar los servicios a sus preferencias.</li>
+                            <li>Enviarle, por correo postal, correo electrónico y otros medios de comunicación electrónica equivalente, comunicaciones comerciales y publicitarias sobre nuestros productos y/o servicios.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Destinatarios</strong>Contratamos con alguna entidad que prestan servicios como los de mantenimiento y hosting, a través de contratos de encargo del tratamiento para dar soporte a los fines de tratamiento indicados.</li>
+                    <li><strong>Plazo de conservación de datos:</strong>Conservaremos sus datos mientras se mantenga el tratamiento y no solicite la supresión de los mismos.</li>
+                    <li><strong>Derechos:</strong> Podrá ejercitar los derechos de acceso, rectificación, supresión, limitación al tratamiento, oposición, portabilidad y derecho a no ser objeto de una decisión basada únicamente en el tratamiento automatizado, mediante comunicación escrita al domicilio indicado en el aviso legal y a revocar su consentimiento sin efectos retroactivos u oponerse a la recepción de comunicaciones comerciales publicitarias por email y otros medios de comunicación electrónica equivalente, enviando y a presentar una reclamación ante la Autoridad de control, en Italia, la Agencia Italiana de Protección de Datos.</li>
+                    <li><strong>Modificación de la política de privacidad: </strong>Nos reservamos el derecho a modificar su Política de Privacidad, de acuerdo a nuestro propio criterio, o motivado por un cambio doctrinal de la Autoridad competente en Protección de Datos, legislativo o jurisprudencial. El uso de la Web después de dichos cambios implicará la aceptación de éstos.</li>
+                    <li><strong>Legislación aplicable:</strong>Cualquier controversia que se derive del uso de este Site, será regida, interpretada y sometida de acuerdo con las leyes de Italianas.</li>
+
+                </ol>
+            </div>
+        </div>
+    </main>
+
+    <?php require_once "../view/footer.php" ?>
+    <script src="../js/style.js"></script>
+    <script src="../js/sessionstorage.js"></script>
+    <script src="../js/cart.js"></script>
+
+</body>
+</html>
