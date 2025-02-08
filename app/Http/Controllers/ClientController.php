@@ -31,33 +31,25 @@ class ClientController extends Controller
      */
     public function editUser(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required|string|max:255',
             'password' => 'required|string',
+            'address' => 'required|string|max:255',
         ]);
-
-        if ($validator->fails()) {
-            // Validación fallida
-            return redirect()->back()->withErrors(['errors' => 'La clave debe tener min. 8 caracteres.']);
-        }
 
         if(Hash::check($request->password, auth()->user()->password)){
             $user = User::find(auth()->user()->id);
 
-            if($request->address > 0){
-                $user->name = $request->name;
-                $user->address = $request->address;
-                $user->save();
-
-            }else{
-                return redirect()->back()->withErrors(['errors' => 'Error en la direccion.']);
-            }
-
-        }else{
-            return redirect()->back()->withErrors(['errors' => 'La clave no es la misma.']);
+            $user->name = $request->name ? $request->name : $user->name;
+            $user->address = $request->address ? $request->address : $user->address;
+            
+            $user->save();
+            
+            return back()->with('status', 'Datos actualizados con éxito.');
         }
-
-        return back();
+            
+        return redirect()->back()->withErrors(['password' => 'La clave es incorrecta.']);
+        
     }
 
     /**
@@ -65,29 +57,24 @@ class ClientController extends Controller
      */
     public function editPassword(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'password' => 'required',
-            'password_new' => 'required|string|min:8|confirmed',
+            'password_new' => 'required|string|min:8|confirmed|different:password',
         ]);
-
-        if ($validator->fails()) {
-            // Validación fallida
-            return redirect()->back()->withErrors(['errorPassword' => $validator->errors()->get("password_new")]);
-        }
 
         $user = User::find(Auth::user()->id);
 
         if (Hash::check($request->password, $user->password)) {
             $user->password = Hash::make($request->password_new);
+
             $user->save();
 
             $request->session()->regenerate();
-            return redirect()->back()->withErrors(['errorPassword' => '']);
+
+            return back()->with('status', 'Contraseña actualizada con éxito.');
         }else{
-            return redirect()->back()->withErrors(['errorPassword' => 'La contraseña actual es incorrecta.']);
+            return redirect()->back()->withErrors(['password_password' => 'La clave es incorrecta.']);
         }
 
     }
-
-    
 }

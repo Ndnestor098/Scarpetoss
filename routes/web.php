@@ -64,9 +64,9 @@ Route::controller(ClientController::class)->group(function(){
 
     Route::get("/client/details", "details")->name("client.details")->middleware("auth");
 
-    Route::put("/client/details/email", "editUser")->name("edit.User")->middleware("auth");
+    Route::put("/client/details/email", "editUser")->name("edit.user")->middleware("auth");
 
-    Route::put("/client/details/password", "editPassword")->name("edit.Password")->middleware("auth");
+    Route::put("/client/details/password", "editPassword")->name("edit.password")->middleware("auth");
 
 });
 

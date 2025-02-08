@@ -21,7 +21,7 @@
                                 <p>Mis datos</p>
                             </div>
                             <div class="info-usuario">
-                                <form action="{{ route('edit.User') }}" method="POST" autocomplete="off"
+                                <form action="{{ route('edit.user') }}" method="POST" autocomplete="off"
                                     enctype="application/x-www-form-urlencoded" class="cambiar-info">
                                     @csrf
                                     @method('PUT')
@@ -30,6 +30,11 @@
                                         <input type="text" name="name" id="name" placeholder="Nombre"
                                             value="{{ Auth::user()->name }}">
                                     </div>
+                                    <span class="error">
+                                        @if ($errors->has('name'))
+                                            {{ $errors->first('name') }}
+                                        @endif
+                                    </span>
                                     <div>
                                         <label>Email</label>
                                         <input type="email" disabled="disabled" value="{{ Auth::user()->email }}">
@@ -39,14 +44,19 @@
                                         <input type="text" name="address" id="address" placeholder="address"
                                             value="{{ Auth::user()->address }}">
                                     </div>
+                                    <span class="error">
+                                        @if ($errors->has('address'))
+                                            {{ $errors->first('address') }}
+                                        @endif
+                                    </span>
                                     <div>
                                         <label for="password">Clave Actual</label>
                                         <input type="password" name="password" id="password" required
                                             placeholder="Clave Actual">
                                     </div>
                                     <span class="error">
-                                        @if ($errors->has('errors'))
-                                            {{ $errors->first('errors') }}
+                                        @if ($errors->has('password'))
+                                            {{ $errors->first('password') }}
                                         @endif
                                     </span>
                                     <button type="submit">Guardar Cambios</button>
@@ -58,7 +68,7 @@
                                 <p>Cambiar Clave</p>
                             </div>
                             <div class="info-usuario">
-                                <form action="{{ route('edit.Password', [], true) }}" method="POST"
+                                <form action="{{ route('edit.password', [], true) }}" method="POST"
                                     enctype="application/x-www-form-urlencoded" class="cambiar-clave">
                                     @csrf
                                     @method('PUT')
@@ -70,8 +80,13 @@
                                     </div>
                                     <div>
                                         <label for="password_new">Clave Nueva</label>
-                                        <input type="text" name="password_new" id="password_new" required
-                                            placeholder="Clave Nueva">
+                                        <input type="text" name="password_new" id="password_new" required placeholder="Clave Nueva">
+                                        
+                                        <span class="error">
+                                            @if ($errors->has('password_new'))
+                                                {{ $errors->first('password_new') }}
+                                            @endif
+                                        </span>
                                     </div>
                                     <div>
                                         <label for="password_new_confirmation">Confirmar Clave Nueva</label>
@@ -79,8 +94,8 @@
                                             id="password_new_confirmation" required placeholder="Clave Nueva">
                                     </div>
                                     <span class="error">
-                                        @if ($errors->has('errorPassword'))
-                                            {{ $errors->first('errorPassword') }}
+                                        @if ($errors->has('password_password'))
+                                            {{ $errors->first('password_password') }}
                                         @endif
                                     </span>
                                     <button type="submit">Guardar Cambios</button>
