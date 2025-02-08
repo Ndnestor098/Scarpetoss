@@ -9,34 +9,31 @@ class Carousel
 {
     static public function getCarousel()
     {
-        if(Cache::has('carousel')){
+         // Si el carrusel ya está en caché, retornarlo
+        if (Cache::has('carousel')) {
             return Cache::get('carousel');
-
-        } else {
-            $carousel = Product::limit(8)->where('stock', '>', 0)->inRandomOrder()->get();
-
-            $carousel->transform(function($carousel){
-                $image_json = json_decode($carousel->images, true);
-
-                if(str_contains($image_json[0], 'https://') || str_contains($image_json[0], 'http://')){
-                    $carousel->images = $image_json;
-
-                    return $carousel;
-                }
-
-                $images = [];
-
-                foreach($image_json as $item){
-                    array_push($images, Storage::url('public/'.$item));
-                }
-
-                $carousel->images = $images;
-
-                return $carousel;
-            });
-
-            Cache::put('carousel', $carousel, now()->addMinutes(60));
-            return $carousel;
         }
+
+        // Obtener productos en orden aleatorio con stock disponible (máximo 8)
+        $carousel = Product::where('stock', '>', 0)
+            ->inRandomOrder()
+            ->limit(8)
+            ->get();
+
+        // Procesar las imágenes de cada producto
+        $carousel->transform(function ($carousel) {
+            $carousel->images = collect($carousel->images)->map(function ($item) {
+                return (str_contains($item, 'https://') || str_contains($item, 'http://')) 
+                    ? $item 
+                    : Storage::url('public/' . $item);
+            })->toArray();
+
+            return $carousel;
+        });
+
+        // Guardar en caché por 60 minutos
+        Cache::put('carousel', $carousel, now()->addMinutes(60));
+
+        return $carousel;
     }
 }
