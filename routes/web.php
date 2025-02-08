@@ -70,12 +70,12 @@ Route::controller(ClientController::class)->group(function(){
 
 });
 
-//===============================================Area de Administrador=================================================
+//=============================================== Area de Administrador=================================================
 Route::middleware(["auth", AdminMiddleware::class])->controller(AdminController::class)->group(function(){
     Route::get("/client/admin", "index")->name("admin");
 });
 
-//===============================================Area de Administrador / Productos =================================================
+//=============================================== Area de Administrador / Productos =================================================
 Route::middleware(["auth", AdminMiddleware::class])->controller(ProductAdminController::class)->group(function () {
     Route::get("/client/admin/products", "index")->name("products");
     Route::get("/client/admin/products/add", "create")->name("products.create");
@@ -85,12 +85,12 @@ Route::middleware(["auth", AdminMiddleware::class])->controller(ProductAdminCont
     Route::delete("/client/admin/products/{id}", "destroy")->name('products.delete');
 });
 
-//===============================================Area de Administrador / Ventas =================================================
+//=============================================== Area de Administrador / Ventas =================================================
 Route::middleware(["auth", AdminMiddleware::class])->controller(SellController::class)->group(function () {
     Route::get("/client/admin/sell", "index")->name("sell");
 });
 
-//===============================================Area de Administrador / Usuarios =================================================
+//=============================================== Area de Administrador / Usuarios =================================================
 Route::middleware(["auth", AdminMiddleware::class])->controller(UserController::class)->group(function () {
     Route::get("/client/admin/users", "index")->name("users");
     Route::get("/client/admin/users/create", 'create')->name('users.create');
@@ -98,17 +98,17 @@ Route::middleware(["auth", AdminMiddleware::class])->controller(UserController::
     Route::delete("/client/admin/users/{id}", "destroy")->name('users.delete');
 });
 
-//===============================================Area de cart=================================================
+//=============================================== Area de cart / Usuarios =================================================
 Route::controller(CartController::class)->group(function (){
-    Route::get("/cart", "index")->name("cart")->middleware("auth");
-    Route::put("/cart", "create")->name("cart.create")->middleware("auth");
-    Route::delete("/cart/single", "destroy")->name("cart.destroy")->middleware("auth");
-    Route::delete("/cart/Allone", "destroyOneAll")->name("cart.destroy.oneAll")->middleware("auth");
-    Route::delete("/cart/all", "destroyAll")->name("cart.destroyAll")->middleware("auth");
-});
+    Route::get("/cart", "index")->name("cart");
+    Route::put("/cart", "create")->name("cart.create");
+    Route::delete("/cart/single", "destroy")->name("cart.destroy");
+    Route::delete("/cart/allone", "destroyOneAll")->name("cart.destroy.oneAll");
+    Route::delete("/cart/all", "destroyAll")->name("cart.destroyAll");
+})->middleware("auth");
 
 
-//===============================================Pasarela de Pago=================================================
+//=============================================== Pasarela de Pago / Usuarios =================================================
 Route::controller(StripeController::class)->group(function (){
     Route::get('/register-card', 'index')->name('stripe.index')->middleware('auth');
     Route::post('/register-card', 'createPayment')->name('stripe.createPay')->middleware('auth');
@@ -118,12 +118,12 @@ Route::controller(StripeController::class)->group(function (){
     Route::get('/client/details/purchase', 'showPurchase')->name('purchase')->middleware("auth");
 });
 
-//===============================================Agradecimiento de compra=================================================
+//=============================================== Agradecimiento de compra=================================================
 Route::get('/thanks', function(){
     return view('client.thanks');
 })->name('thanks')->middleware('auth');
 
-//===========================================Area de Legal de la pagina==========================================
+//=========================================== Area de Legal de la pagina==========================================
 Route::post("/cookie", function(Request $request){
     if($request->cookie){
         // Crear una nueva instancia de la respuesta
@@ -140,7 +140,7 @@ Route::post("/cookie", function(Request $request){
 })->name("cookie");
 
 
-//===========================================Area de Legal de la pagina==========================================
+//=========================================== Area de Legal de la pagina==========================================
 Route::get("/legalidades/politica-privacidad", fn()=>view("legalidades.politica-privacidad"))->name("politica.privacidad");
 
 Route::get("/legalidades/politica-cookie", fn()=>view("legalidades.politica-cookie"))->name("politica.cookie");

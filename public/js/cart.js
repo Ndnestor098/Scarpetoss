@@ -5,37 +5,45 @@ formularios.addEventListener('submit', function(e) {
     const select = document.getElementById('sizes');
     e.preventDefault();
 
-    if (select.value === "") { 
+    if (select.value === "") {
         select.classList.add('alerta-talla');
-
-    }else{
+    } else {
+        if (typeof window.isAuthenticated !== "undefined" && !window.isAuthenticated) {
+            window.location.href = "/login";
+            return;
+        }
+        
         select.classList.remove('alerta-talla');
 
-        let data = new FormData(formularios);
-        let method = formularios.getAttribute("method");
-        let action = formularios.getAttribute("action");
+        let data = new FormData(formulario);
+        let method = formulario.getAttribute("method");
+        let action = formulario.getAttribute("action");
 
-        let encabezado = new Headers();
+        let headers = new Headers();
 
-        let config = { 
-            method:method,
-            header:encabezado,
-            mode:"cors",
-            cache:'no-cache',
-            body:data,
-        }
+        let config = {
+            method: method,
+            headers: headers, 
+            mode: "cors",
+            cache: 'no-cache',
+            body: data,
+        };
 
         fetch(action, config)
-            .then(res => res.text())
+            .then(res => res.json())
             .then(res => {
-                try {
-                    if(document.getElementById("contador-carrello").innerHTML = parseInt(document.getElementById('contador-carrello').textContent) + 1){
-                        //
+                if (res.status === 200) {
+                    try {
+                        document.getElementById("contador-carrello").innerHTML = parseInt(document.getElementById('contador-carrello').textContent) + 1;
+                    } catch (error) {
+                        document.getElementById("add-cart").innerHTML = `<i id="contador-carrello">1</i>`;
                     }
-                } catch (error) {
-                    document.getElementById("add-cart").innerHTML = `<i id="contador-carrello">1</i>`;
+                } else {
+                    console.error(res.message);
                 }
-                
+            })
+            .catch(error => {
+                console.error('Error en la solicitud fetch:', error);
             });
     }
 });

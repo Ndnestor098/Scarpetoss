@@ -54,7 +54,10 @@ class CartController extends Controller
     public function create(Request $request)
     {
         if(empty($request->sizes)){
-            return 'Error en la talla.';
+            return response()->json([
+                'status' => 400,
+                'message' => 'No se ha seleccionado una talla.'
+            ]);
         }
 
         // Crear una nueva entrada en la tabla carritos
@@ -65,6 +68,11 @@ class CartController extends Controller
         $carrito->save();
 
         Cache::forget('cart');
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Producto añadido al carrito.'
+        ]);
     }
 
     public function destroy(Request $request)
