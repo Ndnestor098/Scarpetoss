@@ -12,6 +12,10 @@ class Product extends Model
 
     protected $table = "products";
 
+    protected $casts = [
+        'images' => 'array',
+    ];
+
     public function sizes()
     {
         return $this->belongsToMany(Size::class, 'product_sizes');

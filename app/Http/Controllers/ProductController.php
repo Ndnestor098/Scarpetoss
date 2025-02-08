@@ -9,44 +9,42 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function __invoke($slug)
     {
+        // Buscar el producto por su slug y asegurarse de que tenga stock disponible
         $product = Product::where("slug", $slug)->where('stock', '!=', 0)->first();
 
-        if($product){
+        // Si el producto existe, procedemos con la lógica
+        if ($product) {
+            // Obtener los datos del carrusel para la vista
             $carousel = Carousel::getCarousel();
-            $product->visited = intval($product->visited) + 1;
-            $product->save();
 
-            if(Cache::has('product')){
-                $product = Cache::get('product');
+            // Incrementar el contador de visitas directamente en la base de datos
+            $product->increment('visited');
 
+            // Verificar si el producto ya está almacenado en caché
+            if (Cache::has("product_{$slug}")) {
+                // Recuperar el producto desde la caché para evitar consultas innecesarias
+                $product = Cache::get("product_{$slug}");
             } else {
-                $images = [];
-    
-                foreach (json_decode($product->images, true) as $item) {
-                    if(str_contains($item, 'https://') || str_contains($item, 'http://')){
-                        array_push($images, $item);
-                        continue;
-                    }
+                // Procesar las imágenes del producto, convirtiendo rutas locales en URLs accesibles
+                $product->images = array_map(function ($item) {
+                    return (str_contains($item, 'https://') || str_contains($item, 'http://')) 
+                        ? $item 
+                        : Storage::url('public/' . $item);
+                }, $product->images);
 
-                    array_push($images, Storage::url('public/' . $item));
-                }
-                
-                $product->images = $images;
-
-                Cache::put('product', $product, now()->addMinutes(60));
+                // Guardar el producto en caché durante 60 minutos para mejorar el rendimiento
+                Cache::put("product_{$slug}", $product, now()->addMinutes(60));
             }
 
-            
-
-            return view("product", ["product"=>$product, "carousel"=>$carousel]);
+            // Retornar la vista del producto con la información correspondiente
+            return view("product", ["product" => $product, "carousel" => $carousel]);
         }
 
+        // Si el producto no existe o no tiene stock, redirigir a la página principal
         return redirect(route("home"));
     }
+
 
 }
