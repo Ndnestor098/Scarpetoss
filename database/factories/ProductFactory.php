@@ -22,7 +22,7 @@ class ProductFactory extends Factory
             "price" => $this->faker->numberBetween(10,300),
             "gender" => $this->faker->randomElement(['mujer', 'hombre', 'niño', 'unisex']),
             "images" => json_encode(['https://cdn.pixabay.com/photo/2013/07/12/18/20/shoes-153310_1280.png', 
-                                    'https://pixabay.com/photos/feet-footwear-legs-shoes-sneakers-1842328/',
+                                    'https://cdn.pixabay.com/photo/2016/11/20/09/13/feet-1842328_1280.jpg',
                                     'https://cdn.pixabay.com/photo/2015/07/05/23/28/shoes-832875_640.jpg']),
             "stock" => $this->faker->numberBetween(50,150),
             "brand" => $this->faker->company(),
