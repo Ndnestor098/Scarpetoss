@@ -15,9 +15,9 @@ formularios.addEventListener('submit', function(e) {
         
         select.classList.remove('alerta-talla');
 
-        let data = new FormData(formulario);
-        let method = formulario.getAttribute("method");
-        let action = formulario.getAttribute("action");
+        let data = new FormData(formularios);
+        let method = formularios.getAttribute("method");
+        let action = formularios.getAttribute("action");
 
         let headers = new Headers();
 

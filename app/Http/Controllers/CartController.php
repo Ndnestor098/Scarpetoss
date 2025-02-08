@@ -14,60 +14,56 @@ class CartController extends Controller
 {
     public function index()
     {
-        $data = Cart::with('product') // Carga los productos relacionados con los carritos
-            ->select('product_id', 'user_id', 'sizes', DB::raw('COUNT(*) as count_total')) // Selecciona los campos necesarios y cuenta las filas agrupadas
-            ->groupBy('product_id', 'user_id', 'sizes') // Agrupa por product_id, user_id y sizes
+        if(Cache::has('cart_' . auth()->user()->id)){
+            $data = Cache::get('cart_' . auth()->user()->id);
+        } else {
+            $data = Cart::with('product')
+            ->select('product_id', 'user_id', 'sizes', DB::raw('COUNT(*) as count_total'))
+            ->groupBy('product_id', 'user_id', 'sizes')
             ->where('user_id', auth()->user()->id)
-            ->get(); // Ejecuta la consulta y obtiene los resultados
+            ->get();
         
-        $data->transform(function ($data) {
-            $images = [];
+            $data->transform(function ($data) {
+                $data->product->images = collect($data->product->images)->map(function ($image){
+                    return (str_contains($image, 'https://') || str_contains($image, 'http://')) 
+                        ? $image 
+                        : Storage::url('public/' . $image);
+                }, $data->product->images);
 
-            // Verifica si images es un string antes de decodificar
-            if (is_string($data->product->images)) {
-                // Convierte el JSON a un array
-                $imagesArray = json_decode($data->product->images, true);
+                return $data; 
+            });
 
-                foreach ($imagesArray as $item) {
-                    // Asegúrate de que no tenga el prefijo 'public/' o 'storage/'
-                    $cleanedPath = preg_replace('/^\/?storage\/+/', '', $item); // Limpia duplicados
-                    $images[] = Storage::url($cleanedPath);
-                }
-            } else if (is_array($data->product->images)) {
-                foreach ($data->product->images as $item) {
-                    // Limpia duplicados
-                    $cleanedPath = preg_replace('/^\/?storage\/+/', '', $item); // Limpia duplicados
-                    $images[] = Storage::url($cleanedPath);
-                }
-            }
-
-            $data->product->images = $images; // Asigna el nuevo array de imágenes
-            return $data; 
-        });
-
+            Cache::put('cart_' . auth()->user()->id, $data, now()->addMinutes(60));
+        }
+        
         $count = $data->count();
 
         return view("client.cart", ["data" => $data, 'count' => $count]);
     }
 
-
     public function create(Request $request)
     {
-        if(empty($request->sizes)){
+        $request->validate([
+            'sizes' => 'required|numeric',
+            'product_id' => 'required|exists:products,id' 
+        ]);
+
+        if (!auth()->check()) {
             return response()->json([
-                'status' => 400,
-                'message' => 'No se ha seleccionado una talla.'
+                'status' => 401,
+                'message' => 'No estás autenticado.'
             ]);
         }
 
         // Crear una nueva entrada en la tabla carritos
         $carrito = new Cart();
         $carrito->product_id = $request->product_id;
-        $carrito->user_id = auth()->id(); // O cualquier forma de obtener el ID del usuario
-        $carrito->sizes = $request->sizes;
+        $carrito->user_id = auth()->id(); 
+        $carrito->sizes = $request->sizes; 
         $carrito->save();
 
-        Cache::forget('cart');
+        // Eliminar caché del carrito
+        Cache::forget('cart_' . auth()->user()->id);
 
         return response()->json([
             'status' => 200,
@@ -84,38 +80,39 @@ class CartController extends Controller
         if ($entradaCarrito) {
             // Eliminar la entrada del carrito
             $entradaCarrito->delete();
-            return Redirect::back();
 
-        } else {
-            // Si la entrada del carrito no existe, redireccionar con un mensaje de error
-            return redirect()->back();
+            Cache::forget('cart_' . auth()->user()->id);
         }
+            
+        return redirect()->back();
     }
 
     public function destroyOneAll(Request $request)
     {
-        // Buscar la entrada del carrito por su ID
         $entradaCarrito = Cart::where('product_id', $request->product_id)->where('sizes', $request->sizes)->get();
 
-        // Verificar si la entrada del carrito existe
-        if ($entradaCarrito) {
-            // Eliminar la entrada del carrito
-            Cart::where('product_id', $request->product_id)->where('sizes', $request->sizes)->delete();
+        if ($entradaCarrito->isNotEmpty()) {
+            foreach ($entradaCarrito as $item) {
+                $item->delete();
+            }
 
-            return Redirect::back();
-
-        } else {
-            // Si la entrada del carrito no existe, redireccionar con un mensaje de error
-            return redirect()->back();
+            Cache::forget('cart_' . auth()->user()->id);
         }
+        
+        return redirect()->back();
     }
 
     public function destroyAll()
     {
         $entradaCarrito = Cart::where('user_id', Auth::user()->id)->get();
 
-        if($entradaCarrito){
-            Cart::where('user_id', Auth::user()->id)->delete();
+        if ($entradaCarrito->isNotEmpty()) {
+            // Eliminar cada entrada del carrito
+            foreach ($entradaCarrito as $item) {
+                $item->delete();
+            }
+
+            Cache::forget('cart_' . auth()->user()->id);
         }
 
         return redirect()->back();
