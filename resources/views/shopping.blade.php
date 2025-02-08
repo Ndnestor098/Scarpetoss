@@ -19,7 +19,7 @@
                         <a href="{{ request()->fullUrlWithQuery(['gender' => 'hombre']) }}"><div class="content-product">
                             <p class="title-content-cell">Hombre</p>
                             <p class="max-content-cell">
-                                {{$totalHombre}}
+                                {{$totals->hombre}}
                             </p>
                         </div></a>
                     </div>
@@ -27,7 +27,7 @@
                         <a href="{{ request()->fullUrlWithQuery(['gender' => 'mujer']) }}"><div class="content-product">
                             <p class="title-content-cell">Mujeres</p>
                             <p class="max-content-cell">
-                                {{$totalMujer}}
+                                {{$totals->mujer}}
                             </p>
                         </div></a>
                     </div>
@@ -35,7 +35,7 @@
                         <a href="{{ request()->fullUrlWithQuery(['gender' => 'niño']) }}"><div class="content-product">
                             <p class="title-content-cell">Niños</p>
                             <p class="max-content-cell">
-                                {{$totalNiño}}
+                                {{$totals->niño}}
                             </p>
                         </div></a>
                     </div>
@@ -43,7 +43,7 @@
                         <a href="{{ request()->fullUrlWithQuery(['gender' => 'unisex']) }}"><div class="content-product">
                             <p class="title-content-cell">Unisex</p>
                             <p class="max-content-cell">
-                                {{$totalUnisex}}
+                                {{$totals->unisex}}
                             </p>
                         </div></a>
                     </div>
@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="cantidad-producto">
-                                <p class="text-sm font-normal">Resultado: {{$totalProducts}}</p>
+                                <p class="text-sm font-normal">Resultado: {{$totals->products}}</p>
                             </div>
                             <div class="div-buscar">
                                 <button type="submit">Buscar</button>

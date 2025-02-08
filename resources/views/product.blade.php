@@ -23,12 +23,14 @@
                 @endforeach
             </div>
         </div>
+
         <div class="info-producto">
             <div class="contenedor">
                 <div class="name-producto">
                     <h2>{{$product->brand}}</h2>
                     <p>{{$product->name}}</p>
                 </div>
+                
                 <div class="price">
                     <span>${{$product->price}}</span>
                     <p>El precio más bajo de los 30 días antes del descuento:<br> ${{$product->price}}</p>
@@ -50,6 +52,7 @@
                         <button type="submit">Agregar al Carrito</button>
                     </form>
                 </div>
+
                 <div class="info-entrega">
                     <span><i class="fa-solid fa-circle"></i><p>El tiempo estimado de entrega es de 5 a 6 días hábiles</p></span>
                     <span><i class="fa-solid fa-wallet"></i><p>Entrega gratuita a partir de 45 € y devoluciones gratuitas hasta 30 días.</p></span>

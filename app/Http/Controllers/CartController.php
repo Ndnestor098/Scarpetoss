@@ -6,6 +6,7 @@ use App\Models\Cart;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
@@ -62,6 +63,8 @@ class CartController extends Controller
         $carrito->user_id = auth()->id(); // O cualquier forma de obtener el ID del usuario
         $carrito->sizes = $request->sizes;
         $carrito->save();
+
+        Cache::forget('cart');
     }
 
     public function destroy(Request $request)
