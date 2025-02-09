@@ -1058,7 +1058,7 @@ main{
 
 /* ===========================================CONTENIDO - SHOPPING=========================================== */
 /* ------Menu parte 1 / Catalago de la pagina------ */
-.contenido-shopping{
+.shopping-overview{
     height: 100%;
     width: 100%;
     padding-top: 160px;
@@ -1066,7 +1066,7 @@ main{
     display: flex;
 }
 
-.contenido-shopping .count-productos{
+.shopping-overview .product-counter{
     width: 25%;
     display: flex;
     flex-direction: column;
@@ -1075,7 +1075,7 @@ main{
     border-right: 1px solid var(--color-5)42;
 }
 
-.count-productos .contenido-title-celda{
+.product-counter .counter-grid{
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -1083,25 +1083,19 @@ main{
     cursor: pointer;
 }
 
-.count-productos .celda-content{
-    height: 100%;
-    width: 100%;
-    padding-left: 30%;
-}
-
-.count-productos .content-product{
+.product-counter .counter-item{
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.content-product .title-content-cell{
+.counter-item .category-title{
     font-size: 17px;
     font-weight: 500;
     color: var(--color-1);
 }
 
-.content-product .max-content-cell{
+.counter-item .category-total{
     padding: 1px 5px;
     border-radius: 15px;
     background-color: var(--color-2);
@@ -1110,12 +1104,12 @@ main{
     height: fit-content;
 }
 
-.contenido-shopping .productos{
+.shopping-overview .product-listing{
     width: 100%;
     height: 100%;
 }
 
-.contenido-shopping .producto-filtro{
+.shopping-overview .product-filter{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1125,61 +1119,74 @@ main{
     border-right: 1px solid var(--color-5)38;
     border-top: 1px solid var(--color-5)38;
     border-bottom: 1px solid var(--color-5)38;
-
-    .producto-opcion{
-        width: 100%;
-
-        label{
-            font-size: 14px;
-            font-weight: 300;
-            color: var(--color-1);
-        }
-        select{
-            padding: 5px 10px;
-            border: 1px solid var(--color-1)85;
-        }
-    }
-    .cantidad-producto{
-        width: 100%;
-        font-size: 14px;
-        color: var(--color-1);
-        font-weight: 300;
-        text-align: end;
-        padding-right: 15px;
-    }
-    .div-buscar{
-        height: 100%;
-
-        button{
-            height: 100%;
-            width: 100%;
-            color: var(--color-2);
-            font-weight: 500;
-            background-color: var(--color-1);
-            cursor: pointer;
-            padding: 5px 2px;
-            border-radius: 3px;  
-
-            border: none;   
-        }
-    }
 }
 
-.catalogo .carousel-item{
+.product-filter .filter-options{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-filter .filter-options label{
+    font-size: 14px;
+    font-weight: 300;
+    white-space: nowrap;
+    color: var(--color-1);
+}
+
+.product-filter .filter-options select{
+    padding: 5px 10px;
+    border: 1px solid var(--color-1);
+    color: var(--color-1);
+    font-size: 14px;
+}
+
+.product-filter .product-count{
+    width: 100%;
+    font-size: 14px;
+    color: var(--color-1);
+    font-weight: 300;
+    text-align: end;
+    padding-right: 15px;
+}
+
+.product-filter .search-button{  
+    height: 100%;
+    width: 70px;
+    color: var(--color-2);
+    font-weight: 500;
+    background-color: var(--color-1);
+    cursor: pointer;
+    padding: 5px 2px;
+    border-radius: 3px;  
+    border: none;   
+}
+
+
+/* ======= CATALOGO ======= */
+.catalog-grid{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.catalog .product-card{
     width: fit-content;
     box-shadow: 0 0 5px 3px rgba(0,0,0,0.1);
     border-radius: 10px;
     transition: all .5s;
 }
 
-.catalogo .carousel-item img{
+.catalog .product-card img{
     width: 270px;
     height: 270px;
     object-fit: cover;
     border-radius: 10px 10px 0 0;
 }
 
-.catalogo .product-info{
+.catalog .product-info{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -1187,23 +1194,27 @@ main{
     padding: 20px 30px;
 }
  
-.product-info .title-producto{
+.product-info .product-title{
     height: 45px;
     width: 210px;
 }
 
-.product-info .precio-producto{
+.product-info .product-price{
     font-size: 17px;
     font-weight: 500;
 }
 
-.product-info .enlace{
+.product-info .view-product-link{
     width: 100%;
     padding: 7px 10px;
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
     background-color: var(--color-2);
+}
+
+.catalog .pagination{
+    padding: 0px 20xp;
 }
 
 /* ===========================================CONTENIDO - PRODUCTO=========================================== */
@@ -2581,12 +2592,12 @@ main{
 
 /* ===========================================CONTENIDO - SHOPPING=========================================== */
 /* ------Menu parte 1 / Carrito de la pagina------ */
-    .contenido-shopping{
+    .shopping-overview{
         flex-direction: column;
         transition: all .5s;
     }
 
-    .contenido-shopping .count-productos{
+    .shopping-overview .product-counter{
         width: 100%;
         justify-content: space-between;
         padding: 10px;
@@ -2594,7 +2605,7 @@ main{
         transition: all .5s;
     }
 
-    .count-productos .contenido-title-celda{
+    .product-counter .counter-grid{
         height: 100%;
         display: flex;
         flex-direction: row;
@@ -2602,22 +2613,22 @@ main{
         transition: all .5s;
     }
 
-    .count-productos .celda-content{
+    .product-counter .celda-content{
         padding-left: 0%;
         transition: all .5s;
     }
 
-    .count-productos .content-product{
+    .product-counter .counter-item{
         justify-content: center;
     }
 
-    .content-product .title-content-cell{
+    .counter-item .title-content-cell{
         font-size: 14px !important;
         transition: all .5s;
 
     }
 
-    .contenido-shopping .catalogo{
+    .shopping-overview .catalog{
         .contenido-catalogo{
             padding: 40px 2px;
             display: flex;

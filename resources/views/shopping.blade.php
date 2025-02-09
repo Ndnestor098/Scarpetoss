@@ -1,114 +1,101 @@
-@extends('layouts.template')
+<x-app>
+    <x-slot name="title">Shopping</x-slot>
+    <x-slot name="style">
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </x-slot>
 
-@section('name-page')
-    Shopping
-@endsection
-
-@section('link')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-@endsection
-
-@section('content-page')
     <main>
         <!-- Contenido de la pagina principal -->
-        <div class="contenido-shopping">
+        <section class="shopping-overview">
             
-            <div class="count-productos">
-                <div class="contenido-title-celda">
-                    <div class="celda-content">
-                        <a href="{{ request()->fullUrlWithQuery(['gender' => 'hombre']) }}"><div class="content-product">
-                            <p class="title-content-cell">Hombre</p>
-                            <p class="max-content-cell">
-                                {{$totals->hombre}}
-                            </p>
-                        </div></a>
-                    </div>
-                    <div class="celda-content">
-                        <a href="{{ request()->fullUrlWithQuery(['gender' => 'mujer']) }}"><div class="content-product">
-                            <p class="title-content-cell">Mujeres</p>
-                            <p class="max-content-cell">
-                                {{$totals->mujer}}
-                            </p>
-                        </div></a>
-                    </div>
-                    <div class="celda-content">
-                        <a href="{{ request()->fullUrlWithQuery(['gender' => 'niño']) }}"><div class="content-product">
-                            <p class="title-content-cell">Niños</p>
-                            <p class="max-content-cell">
-                                {{$totals->niño}}
-                            </p>
-                        </div></a>
-                    </div>
-                    <div class="celda-content">
-                        <a href="{{ request()->fullUrlWithQuery(['gender' => 'unisex']) }}"><div class="content-product">
-                            <p class="title-content-cell">Unisex</p>
-                            <p class="max-content-cell">
-                                {{$totals->unisex}}
-                            </p>
-                        </div></a>
-                    </div>
+            <aside class="product-counter">
+                <div class="counter-grid">
+                    <a href="{{ request()->fullUrlWithQuery(['gender' => 'hombre']) }}" class="counter-item">
+                        <p class="category-title">Hombre</p>
+                        <p class="category-total">{{$totals->hombre}}</p>
+                    </a>
+    
+                    <a href="{{ request()->fullUrlWithQuery(['gender' => 'mujer']) }}" class="counter-item">
+                        <p class="category-title">Mujer</p>
+                        <p class="category-total">{{$totals->mujer}}</p>
+                    </a>
+    
+                    <a href="{{ request()->fullUrlWithQuery(['gender' => 'niño']) }}" class="counter-item">
+                        <p class="category-title">Niños</p>
+                        <p class="category-total">{{$totals->niño}}</p>
+                    </a>
+    
+                    <a href="{{ request()->fullUrlWithQuery(['gender' => 'unisex']) }}" class="counter-item">
+                        <p class="category-title">Unisex</p>
+                        <p class="category-total">{{$totals->unisex}}</p>
+                    </a>
                 </div>
-                
-            </div>
+            </aside>
 
-            <div class="productos">
-                <div>
-                    <form class="producto-filtro" action="" method="POST">
+            <section class="product-listing">
+                <header>    
+                    <form class="product-filter" action="" method="POST">
                         @if (!request()->has('moda') && !request()->has('msv'))
                             @csrf
                             @method('post')
-                            <div class="producto-opcion">
+        
+                            <div class="filter-options">
                                 <label for="order-by">Ordenar por:</label>
-                                <select style="padding-right: 35px" name="order-by" id="order-by" class="cursor-pointer">
-                                    <option value="" selected disabled>Buscar Por: </option>
-                                    <option value="{{ request()->fullUrlWithQuery(['orderBy' => 'name_asc']) }}" @if(request()->get("orderBy") == 'name_asc') selected @endif>Nombre: A - Z</option>
-                                    <option value="{{ request()->fullUrlWithQuery(['orderBy' => 'name_desc']) }}" @if(request()->get("orderBy") == 'name_desc') selected @endif>Nombre: Z - A</option>
-                                    <option value="{{ request()->fullUrlWithQuery(['orderBy' => 'price_asc']) }}" @if(request()->get("orderBy") == 'price_asc') selected @endif>Precio más bajo</option>
-                                    <option value="{{ request()->fullUrlWithQuery(['orderBy' => 'price_desc']) }}" @if(request()->get("orderBy") == 'price_desc') selected @endif>Precio más alto</option>
+                                <select name="order-by" id="order-by" class="cursor-pointer">
+                                    <option value="" selected disabled>Buscar Por:</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['orderBy' => 'name_asc']) }}" 
+                                        @if(request()->get("orderBy") == 'name_asc') selected @endif>
+                                        Nombre: A - Z
+                                    </option>
+                                    <option value="{{ request()->fullUrlWithQuery(['orderBy' => 'name_desc']) }}" 
+                                        @if(request()->get("orderBy") == 'name_desc') selected @endif>
+                                        Nombre: Z - A
+                                    </option>
+                                    <option value="{{ request()->fullUrlWithQuery(['orderBy' => 'price_asc']) }}" 
+                                        @if(request()->get("orderBy") == 'price_asc') selected @endif>
+                                        Precio más bajo
+                                    </option>
+                                    <option value="{{ request()->fullUrlWithQuery(['orderBy' => 'price_desc']) }}" 
+                                        @if(request()->get("orderBy") == 'price_desc') selected @endif>
+                                        Precio más alto
+                                    </option>
                                 </select>
                             </div>
-
-                            <div class="cantidad-producto">
-                                <p class="text-sm font-normal">Resultado: {{$totals->products}}</p>
-                            </div>
-                            <div class="div-buscar">
-                                <button type="submit">Buscar</button>
-                            </div>
+        
+                            <p class="product-count">Resultados: {{$totals->products}}</p>
+        
+                            <button type="submit" class="search-button">Buscar</button>
                         @endif
                     </form>
-                </div>
+                </header>
                 
-                <div class="catalogo"> 
-                    <div class="contenido-catalogo">
-                        @foreach ($products as $x)
-                                <div class="producto-carrusel">
-                                    <a href="{{route('products.show', ["slug"=>$x->slug])}}">
-
-                                        <div class="image-producto">
-                                            <img src='{{ $x->images[0] }}' alt="Zapato">
-                                        </div>
-                                
-                                        <div class="informacion-producto">
-                                            <div class="title-producto">{{$x->name}}</div>
-                                            <div class="precio-producto">${{$x->price}}</div>
-                                            <a class="enlace" href="{{route('products.show', ["slug"=>$x->slug])}}">Vizualizar Producto</a>
-                                        </div>
+                <div class="catalog"> 
+                    <div class="catalog-grid">
+                        @foreach ($products as $item)
+                            <div class="carousel-item product-card">
+                                <a href="{{route('products.show', ['slug' => $item->slug])}}">
+                                    <div class="product-image">
+                                        <img src="{{ $item->images[0] }}" alt="Product image">
+                                    </div>
+                                </a>
+                                <div class="product-info">
+                                    <a href="{{route('products.show', ['slug' => $item->slug])}}">
+                                        <p class="product-title">{{$item->name}}</p>
+                                        <p class="product-price">${{$item->price}}</p>
                                     </a>
+                                    <span class="view-product-link">View Product</span>
                                 </div>
+                            </div>
                         @endforeach
                     </div>
-                    <div class="px-5">
-                        {{ $products->links('vendor.pagination.tailwind') }}
 
+                    <!-- Paginación -->
+                    <div class="pagination">
+                        {{ $products->links('vendor.pagination.tailwind') }}
                     </div>
                 </div>
-
-            </div>
-        </div>
+            </section>
+        </section>
     </main>
-@endsection
 
-
-@section('files-js')
-    <script src="/js/style.js"></script>
-@endsection
+</x-app>
