@@ -37,7 +37,7 @@ class ProductController extends Controller
                 // Guardar el producto en caché durante 60 minutos para mejorar el rendimiento
                 Cache::put("product_{$slug}", $product, now()->addMinutes(60));
             }
-
+            
             // Retornar la vista del producto con la información correspondiente
             return view("product", ["product" => $product, "carousel" => $carousel]);
         }

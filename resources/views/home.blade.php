@@ -21,7 +21,7 @@
         <section>
             <h2 class="title-home">PRODUCTOS</h2>
 
-            @include('components.carousel')
+            <x-carousel :carousel="$carousel"/>
         </section>
 
         <!-- Publicidad -->

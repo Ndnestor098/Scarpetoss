@@ -38,6 +38,9 @@ formularios.addEventListener('submit', function(e) {
                     } catch (error) {
                         document.getElementById("add-cart").innerHTML = `<i id="contador-carrello">1</i>`;
                     }
+                } else if (res.status == 401) {
+                    window.location.href = "/login";
+                    return;
                 } else {
                     console.error(res.message);
                 }

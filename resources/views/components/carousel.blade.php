@@ -1,4 +1,7 @@
-<section class="carousel">
+
+@props(['carousel'])
+
+<section class="carousel"> 
     <article class="carousel-content">
         @foreach ($carousel as $item)
             <div class="carousel-item">
