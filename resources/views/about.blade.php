@@ -3,7 +3,7 @@
 
     <main>
         <!-- Contenido de la portada principal -->
-        <section class="about-hero">
+        <section class="hero-2">
             <div class="hero-container">
                 <header class="hero-content">
                     <h1 class="hero-title">Sobre Nosotros</h1>
@@ -29,7 +29,7 @@
                 </div>
             </article>
         </section>
-        
+
         <section class="about-contact">
             <div class="contact-banner">
                 <p>¿Le gustaría poder conocer más de nosotros? Contáctenos.</p>
