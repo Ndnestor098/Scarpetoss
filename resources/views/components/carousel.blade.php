@@ -1,24 +1,25 @@
-<div class="carrusel">
-    <div class="carrusel-content">
+<section class="carousel">
+    <article class="carousel-content">
         @foreach ($carousel as $item)
-            <a href="{{route('products.show', ["slug"=>$item->slug])}}">
-                <div class="producto-carrusel">
-                    <div class="image-producto">
-                        <img src="{{ $item->images[0] }}" alt="Zapato">
+            <div class="carousel-item">
+                <a href="{{route('products.show', ['slug' => $item->slug])}}">
+                    <div class="product-image">
+                        <img src="{{ $item->images[0] }}" alt="Product image">
                     </div>
-
-                    <div class="informacion-producto">
-                        <div class="title-producto">{{$item->name}}</div>
-                        <div class="precio-producto">${{$item->price}}</div></a>
-                        <a class="enlace" href="{{route('products.show', ["slug"=>$item->slug])}}">Vizualizar Producto</a>
-                    </div>
+                </a>
+                <div class="product-info">
+                    <a href="{{route('products.show', ['slug' => $item->slug])}}">
+                        <p class="product-title">{{$item->name}}</p>
+                        <p class="product-price">${{$item->price}}</p>
+                    </a>
+                    <span class="view-product-link">View Product</span>
                 </div>
-            
+            </div>
         @endforeach
 
-        <div class="arrow">
-            <button class="left" onclick="sliderLeft()"><</button>
-            <button class="right" onclick="sliderRigth()">></button>
+        <div class="carousel-arrows">
+            <button class="carousel-left" onclick="sliderLeft()">&lt;</button>
+            <button class="carousel-right" onclick="sliderRight()">&gt;</button>
         </div>
-    </div>
-</div>
+    </article>
+</section>

@@ -7,7 +7,7 @@
 @section('content-page')
     <main>
         <!-- Contenido de la portada principal -->
-        <div class="Portada-home">
+        <section class="Portada-home" style="background-image: url(../image/portada-home.png);">
             <div class="contenedor-portada">
                 <div class="title-portada">
                     <p>SHOES FOR YOU</p>
@@ -19,11 +19,14 @@
                 </div>
             </div>
             <div class="contenedor-portada"></div> 
-        </div>
+        </section>
 
         <!-- Contenido de productos -->
-        <p class="title-home">PRODUCTOS</p>
-        @include('components.carousel')
+        <section>
+            <h2 class="title-home">PRODUCTOS</h2>
+
+            @include('components.carousel')
+        </section>
 
         <!-- Contenido de Publidad -->
         <div class="banner-publicidad">
