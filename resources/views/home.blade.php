@@ -7,18 +7,18 @@
 @section('content-page')
     <main>
         <!-- Contenido de la portada principal -->
-        <section class="Portada-home" style="background-image: url(../image/portada-home.png);">
-            <div class="contenedor-portada">
-                <div class="title-portada">
-                    <p>SHOES FOR YOU</p>
-                    <p class="super-title">URBAN COLLECTION</p>
-                    <p class="promo-title">Compra hasta con un 40% de descuento</p>
+        <section class="hero" style="background-image: url(../image/portada-home.png);">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h2>SHOES FOR YOU</h2>
+                    <h1 class="hero-title">URBAN COLLECTION</h1>
+                    <p class="hero-subtitle">Compra hasta con un 40% de descuento</p>
                 </div>
-                <div class="boton-portada">
-                    <a href="{{route("shopping")}}">SHOP DAY</a>
+                
+                <div class="hero-button">
+                    <a href="{{route('shopping')}}">SHOP DAY</a>
                 </div>
             </div>
-            <div class="contenedor-portada"></div> 
         </section>
 
         <!-- Contenido de productos -->
@@ -28,36 +28,66 @@
             @include('components.carousel')
         </section>
 
-        <!-- Contenido de Publidad -->
-        <div class="banner-publicidad">
-            <div class="contenedor-global-publicidad">
-                <div class="banner-1">
-                    <p class="title-banner-1">ESCOJA ENTRE</p>
-                    <P class="info-banner-1">CLÁSICOS ROBUSTOS Y LIMPIOS</P>
-                    <div style="margin-top: 10px; height: 53px;">
-                        <a href="{{route("shopping")}}"class="button-banner">COMPRAR AHORA</a>
-                    </div>
-                </div>
-                <div class="banner-2">
-                    <p class="title-banner-2">MODELOS MÁS NOTABLES</p>
-                    <div style="margin-top: 10px; height: 53px;">
-                        <a href="{{route("shopping")}}"class="button-banner">COMPRAR AHORA</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Publicidad -->
+        <section class="ad-banner">
+            <div class="ad-banner-wrapper">
+                <article class="ad-banner-classic">
+                    <header>
+                        <h2 class="ad-banner-title">Choose Between</h2>
+                        <p class="ad-banner-description">Classic, robust, and clean styles</p>
+                    </header>
 
-        <!-- Contenido de productos destacados -->
-        <div class="marcas">
-            <div class="content-marcas">
-                <div style="background-image: url(/image/adidas.avif);"></div>
-                <div style="background-image: url(/image/boxfresh.avif);"></div>
-                <div style="background-image: url(/image/converse.avif);"></div>
-                <div style="background-image: url(/image/jimmy_choo.webp);"></div>
-                <div style="background-image: url(/image/lacoste.webp);"></div>
-                <div style="background-image: url(/image/New-Balance.webp);"></div>
+                    <div class="ad-banner-button-wrapper">
+                        <a href="{{route('shopping')}}" class="ad-banner-button">Shop Now</a>
+                    </div>
+                </article>
+
+                <article class="ad-banner-featured">
+                    <header>
+                        <h2 class="ad-banner-title">Most Notable Models</h2>
+                    </header>
+                    <div class="ad-banner-button-wrapper">
+                        <a href="{{route('shopping')}}" class="ad-banner-button">Shop Now</a>
+                    </div>
+                </article>
             </div>
-        </div>
+        </section>
+        
+        <!-- Sección de marcas destacadas -->
+        <section class="brands">
+            <ul class="brands-list">
+                <li class="brand-item">
+                    <figure>
+                        <img src="/image/adidas.avif" alt="Adidas Logo">
+                    </figure>
+                </li>
+                <li class="brand-item">
+                    <figure>
+                        <img src="/image/boxfresh.avif" alt="Boxfresh Logo">
+                    </figure>
+                </li>
+                <li class="brand-item">
+                    <figure>
+                        <img src="/image/converse.avif" alt="Converse Logo">
+                    </figure>
+                </li>
+                <li class="brand-item">
+                    <figure>
+                        <img src="/image/jimmy_choo.webp" alt="Jimmy Choo Logo">
+                    </figure>
+                </li>
+                <li class="brand-item">
+                    <figure>
+                        <img src="/image/lacoste.webp" alt="Lacoste Logo">
+                    </figure>
+                </li>
+                <li class="brand-item">
+                    <figure>
+                        <img src="/image/New-Balance.webp" alt="New Balance Logo">
+                    </figure>
+                </li>
+            </ul>
+        </section>
     </main>
 @endsection
 

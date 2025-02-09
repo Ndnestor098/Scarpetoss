@@ -33,7 +33,7 @@ body{
 }
 
 /* ===========================================MENU=========================================== */
-header{
+/* header{
     position: fixed;
     height: 110px;
     width: 100%;
@@ -43,7 +43,7 @@ header{
     -webkit-box-shadow: 2px 24px 80px -28px var(--color-shadow-2);
     -moz-box-shadow: 2px 24px 80px -28px var(--color-shadow-2);
     box-shadow: 2px 24px 80px -28px var(--color-shadow-2);
-}
+} */
 
 /* ------Menu parte 1 / Navegacion de la pagina------ */
 .primer-menu{
@@ -224,19 +224,19 @@ main{
 }
 
 /* ------Menu parte 1 / Portada de la pagina------ */
-.Portada-home{
+.hero{
     background-repeat: no-repeat;
     background-position: center;
     height: 700px;
     width: 100%;
-    padding-top: 145px;
     display: flex;
-    justify-content: space-between;
+    padding: 145px 50px 0 50px;
 }
 
-.Portada-home .contenedor-portada{
+.hero .hero-container{ 
     width: 100%;
     height: 100%;
+    max-width: 450px;
     padding: 8px;
     display: flex;
     align-items: center;
@@ -245,27 +245,27 @@ main{
     gap: 40px;
 }
 
-.Portada-home .contenedor-portada .title-portada{
+.hero .hero-container .hero-content{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.title-portada p{
+.hero-content p, .hero-content h2, .hero-content h1{
     color: var(--color-white);
     font-size: 20px;
     font-weight: 700;
 }
 
-.title-portada .super-title{
+.hero-content .hero-title{
     font-size: 55px;
 }
 
-.title-portada .promo-title{
+.hero-content .hero-subtitle{
     font-size: 13px;
 }
 
-.Portada-home .contenedor-portada .boton-portada a{
+.hero .hero-container .hero-button a{
     padding: 10px 40px;
     background-color: var(--color-2);
     font-size: 14px;
@@ -359,7 +359,7 @@ main{
 }
 
 /* ------Menu parte 3 / Banner Publicitario------ */
-.banner-publicidad{
+.ad-banner{
     height: 100%;
     width: 100%;
     display: flex;
@@ -367,7 +367,7 @@ main{
     justify-content: center;
 }
 
-.contenedor-global-publicidad{
+.ad-banner-wrapper{
     height: 600px;
     width: 100%;
     padding: 50px;
@@ -376,7 +376,7 @@ main{
     justify-content: center;    
 }
 
-.contenedor-global-publicidad .banner-1{
+.ad-banner-wrapper .ad-banner-classic{
     background-image: url(../image/banner-1.webp);
     background-repeat: no-repeat;
     background-size: cover;
@@ -392,7 +392,7 @@ main{
     width: 630px;
 }
 
-.contenedor-global-publicidad .banner-2{
+.ad-banner-wrapper .ad-banner-featured{
     background-image: url(../image/banner-2.webp);
     background-repeat: no-repeat;
     background-size: cover;
@@ -409,20 +409,25 @@ main{
     box-shadow: 0 0 50px #0000001a;
 }
 
-.contenedor-global-publicidad .title-banner-1{
+.ad-banner-classic .ad-banner-title{
     font-size: 40px;
     font-weight: 100;
     line-height: 45px;
 }
 
-.contenedor-global-publicidad .info-banner-1{
+.ad-banner-classic .ad-banner-description{
     font-size: 24px;
     line-height: 34px;
     font-weight: 700;
     text-transform: uppercase;
 }
 
-.contenedor-global-publicidad .button-banner{
+.ad-banner-wrapper .ad-banner-button-wrapper{
+    margin-top: 10px; 
+    height: 53px;
+}
+
+.ad-banner-wrapper .ad-banner-button{
     font-size: 14px;
     line-height: 14px;
     font-weight: 700;
@@ -433,7 +438,7 @@ main{
     color: var(--color-1);
 }
 
-.contenedor-global-publicidad .title-banner-2{
+.ad-banner-featured .ad-banner-title{
     font-size: 70px;
     line-height: 77px;
     font-weight: 900;
@@ -443,7 +448,7 @@ main{
 }
 
 /* ------Menu parte 5 / Marcas de zapatos------ */
-.marcas{
+.brands{
     height: 100%;
     width: 100%;
     padding: 50px;
@@ -451,7 +456,7 @@ main{
     margin-top: 25px;    
 }
 
-.marcas .content-marcas{
+.brands .brands-list{
     height: 100%;
     width: 100%;
     background-color: var(--color-white);
@@ -462,7 +467,7 @@ main{
     gap: 10px;   
 }
 
-.content-marcas div{
+.brands-list figure{
     height: 150px;
     width: 165px;
     background-repeat: no-repeat;
@@ -470,6 +475,7 @@ main{
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 /* ===========================================CONTENIDO - ABOUT=========================================== */
@@ -486,7 +492,7 @@ main{
     justify-content: space-between; 
 }
 
-.Portada-about .contenedor-portada{
+.Portada-about .hero-container{
     width: 100%;
     height: 100%;
     padding: 8px;
@@ -497,23 +503,23 @@ main{
     gap: 40px;
 }
 
-.contenedor-portada .title-portada{
+.hero-container .hero-content{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.contenedor-portada p{
+.hero-container p{
     color: var(--color-white);
     font-size: 20px;
     font-weight: 700;
 }
 
-.contenedor-portada .super-title{
+.hero-container .hero-title{
     font-size: 55px;
 }
 
-.promo-title{
+.hero-subtitle{
     padding-left: 10px;
     font-size: 13px;
 }
@@ -650,7 +656,7 @@ main{
     justify-content: space-between;
 }
 
-.Portada-contacto .contenedor-portada{
+.Portada-contacto .hero-container{
     width: 100%;
     height: 100%;
     padding: 8px;
@@ -665,27 +671,27 @@ main{
     
 }
 
-.contenedor-portada .title-portada{
+.hero-container .hero-content{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.title-portada p{
+.hero-content p{
     color: var(--color-white);
     font-size: 20px;
     font-weight: 700;
 }
 
-.title-portada .super-title{
+.hero-content .hero-title{
     font-size: 55px;
 }
 
-.title-portada .promo-title{
+.hero-content .hero-subtitle{
     font-size: 13px;
 }
 
-.contenedor-portada .promo-title{
+.hero-container .hero-subtitle{
     padding-left: 10px;
 }
 
@@ -2492,10 +2498,10 @@ main{
 @media only screen and (max-width: 1150px){
 /* ===========================================CONTENIDO - HOME=========================================== */
 /* ------Menu parte 5 / Marcas de zapatos------ */
-    .marcas{
+    .brands{
         padding: 50px 15px !important;
     }
-    .content-marcas{
+    .brands-list{
         flex-wrap: wrap !important;
         padding: 5px !important;
     }
@@ -2509,13 +2515,13 @@ main{
     
 /* ===========================================CONTENIDO - HOME=========================================== */
     /* ------Menu parte 3 / Banner Publicitario------ */
-    .contenedor-global-publicidad{
+    .ad-banner-wrapper{
         padding: 10px !important;
 
         transition: all .5s;
     }
 
-    .title-banner-2{
+    .ad-banner-featured .ad-banner-title{
         font-size: 50px !important;
         transition: all .5s;
 
@@ -2772,18 +2778,18 @@ main{
 
 /* ===========================================CONTENIDO - HOME=========================================== */
     /* ------Menu parte 2 / Banner Publicitario------ */
-    .contenedor-global-publicidad{
+    .ad-banner-wrapper{
         height: 100%;
         transition: all .5s;
     }
-    .contenedor-global-publicidad{
+    .ad-banner-wrapper{
         flex-wrap: wrap;
         transition: all .5s;
     }
-    .banner-1{
+    .ad-banner-classic{
         padding: 50px !important;
     }
-    .banner-2{
+    .ad-banner-featured{
         padding: 30px !important;
     }
 
