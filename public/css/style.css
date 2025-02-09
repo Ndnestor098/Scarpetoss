@@ -115,6 +115,7 @@ body{
     font-size: 13px;
     font-weight: 700;
     color:var(--color-1);
+    text-align: center;
 }
 
 .user-area .menu-toggle-button{
@@ -496,7 +497,7 @@ main{
 
 /* ===========================================CONTENIDO - ABOUT=========================================== */
 /* ------Menu parte 1 / Portada de la pagina------ */
-.Portada-about{
+.about-hero{
     background-image: url(../image/portada-about.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -508,7 +509,7 @@ main{
     justify-content: space-between; 
 }
 
-.Portada-about .hero-container{
+.about-hero .hero-container{
     width: 100%;
     height: 100%;
     padding: 8px;
@@ -525,7 +526,7 @@ main{
     gap: 10px;
 }
 
-.hero-container p{
+.hero-container p, .hero-container h2{
     color: var(--color-white);
     font-size: 20px;
     font-weight: 700;
@@ -535,13 +536,13 @@ main{
     font-size: 55px;
 }
 
-.hero-subtitle{
+.hero-container .hero-subtitle{
     padding-left: 10px;
     font-size: 13px;
 }
 
 /* ------Menu parte 2 / Contenido de la pagina------ */
-.contenido-about{
+.about-content{
     display: flex;
     height: 100%;
     width: 100%;
@@ -552,25 +553,25 @@ main{
     padding: 20px;
 }
 
-.contenido-about .info-about{
+.about-content .about-info{
     width: 75%;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.contenido-about .info-about h2{
+.about-content .about-info h2{
     font-size: 45px;
     font-weight: 500;
     color: var(--color-1);
 }
 
-.contenido-about .info-about p{
+.about-content .about-info p{
     max-width: 600px;
     font-size: 18px;
 }
 
-.area-img{
+.about-company{
     height: 100%;
     width: 100%;
     padding: 30px 10px;
@@ -579,8 +580,7 @@ main{
     gap: 30px;
 }
 
-.area-img .img{
-    background-image: url(../image/img-about.jpg);
+.about-company .company-image{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -594,28 +594,28 @@ main{
     -moz-box-shadow: 0px 0px 11px 0px var(--color-shadow-1);
 }
 
-.area-img .info{
+.about-company .company-details{
     padding: 50px 0px;
     display: flex;
     flex-direction: column;
     gap: 10px;  
 }
 
-.area-img .info h2{
+.about-company .company-details h2{
     color: var(--color-1);
     font-size: 29px;
 }
 
-.area-img .info p{
+.about-company .company-details p{
     max-width: 400px;
 }
 
-.area-img .info .info-scarpetoss{
+.about-company .company-details .company-description{
     font-size: 18px;
 }
 
 /* ------Menu parte 3 / Pies de la pagina------ */
-.pies-about{
+.about-contact{
     width: 100%;
     height: 100%;
     padding: 35px 0px;
@@ -625,7 +625,7 @@ main{
     justify-content: center;
 }
 
-.pies-about .pies-img{
+.about-contact .contact-banner{
     background-image: url(../image/img-about-2.png);
     background-position: 50% 40%;
     background-repeat: no-repeat;
@@ -641,7 +641,7 @@ main{
     padding: 30px 0px;
 }
 
-.pies-about .pies-img p{
+.about-contact .contact-banner p{
     text-align: center;
     padding: 10px;
     color: var(--color-white);
@@ -649,7 +649,7 @@ main{
     font-weight: 700;
 }
 
-.pies-about .pies-img a{
+.about-contact .contact-banner a{
     padding: 10px 15px;
     font-size: 20px;
     background-color: var(--color-2);
@@ -676,15 +676,11 @@ main{
     width: 100%;
     height: 100%;
     padding: 8px;
-
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 40px;
-
-    
-    
 }
 
 .hero-container .hero-content{
@@ -718,10 +714,6 @@ main{
     width: 100%;
     flex-direction: column;
     margin-top: 20px;
-
-    
-    
-
 }
 
 .content-contact .contactar{
@@ -800,31 +792,32 @@ main{
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
 
-    h2{
-        text-align: center;
-        color: var(--color-1);
-    }
-    div{
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        height: 100%;
-        width: 100%;
-        margin-top: 23px;
+.area-informacion h2{
+    text-align: center;
+    color: var(--color-1);
+}
 
-        a{
-            color: var(--color-black);
-            display: flex;
-            gap: 10px;
+.area-informacion div{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+    width: 100%;
+    margin-top: 23px;    
+}
 
-            i::before{
-                display: block;
-                font-size: 20px;
-                color: var(--color-1);
-            }
-        }
-    }
+.area-informacion div a{
+    color: var(--color-black);
+    display: flex;
+    gap: 10px;
+}
+
+.area-informacion div a i::before{
+    display: block;
+    font-size: 20px;
+    color: var(--color-1);
 }
 
 .contactar .politica-privacidad{
@@ -1668,6 +1661,7 @@ main{
         
     }
 }
+
 .area-button{
     display: flex;
     justify-content: center;
@@ -1684,6 +1678,7 @@ main{
         cursor: pointer;
     }
 }
+
 .edit-product{
     max-width: 600px;
     display: flex;
@@ -1863,6 +1858,7 @@ main{
     overflow: hidden;
     max-height: 100vh;
 }
+
 .cookie{
     background-color: #0000004d;
     height: 100vh;
@@ -1875,62 +1871,62 @@ main{
     justify-content: center;
     align-content: end;
     flex-wrap: wrap;
+}
 
-    .info-cookie{
-        background-color: var(--color-white);
-        height: fit-content;
-        width: 500px;
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        padding: 20px;
+.info-cookie{
+    background-color: var(--color-white);
+    height: fit-content;
+    width: 500px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
 
-        span{
-            font-size: 19px;
-            font-weight: 700;
-            color: var(--color-1);
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            padding: 0px 10px;
+.info-cookie span{
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--color-1);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 0px 10px;
+}
 
-            i{
-                font-size: 30px;
-                color: var(--color-2);
-                -webkit-text-stroke: var(--color-1) 1px;
-            }
-            
-        }
-        p{
-            font-size: 16px;
-            color: var(--color-5);
+.info-cookie span i{
+    font-size: 30px;
+    color: var(--color-2);
+    -webkit-text-stroke: var(--color-1) 1px;
+}
 
-            a{
-                font-weight: 500;
-                color: var(--color-1);
-            }
-        }
-        div{
-            height: 100%;
-            display: flex;
-            justify-content: space-around;
-            align-items: end;
-            gap: 15px;
+.info-cookie p{
+    font-size: 16px;
+    color: var(--color-5);
+}
 
-            button{
-                height: fit-content;
-                padding: 10px 15px;
-                border: none;
-                background-color: var(--color-2);
-                color: var(--color-1);
-                font-weight: 600;
-                font-size: 17px;
-                cursor: pointer;
-            }
+.info-cookie p a{
+    font-weight: 500;
+    color: var(--color-1);
+}
 
-        }
-    }
+.info-cookie div{
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+    gap: 15px;
+}
+
+.info-cookie div button{
+    height: fit-content;
+    padding: 10px 15px;
+    border: none;
+    background-color: var(--color-2);
+    color: var(--color-1);
+    font-weight: 600;
+    font-size: 17px;
+    cursor: pointer;
 }
 
 /* ===========================================CONTENIDO - REGISTRAR/LOGIN=========================================== */
@@ -2176,46 +2172,43 @@ main{
     }
 }
 
-
-
 /* ===========================================CONTENIDO - AVISO LEGAL=========================================== */
 /* ------Footer parte 1 / Contenido de informacion------ */
 .main-aviso-legal{
     height: 700px;
     width: 100%;
     padding-top: 145px;
-
 }
+
 .aviso-legal{
     height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
 
+.aviso-legal .contenido-legal{
+    max-width: 1170px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 50px;
+}
 
+.contenido-legal h2{
+    color: var(--color-1);
+    margin-bottom: 20px;
+}
 
+.contenido-legal ol{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0px 10px;
+}
 
-    .contenido-legal{
-        max-width: 1170px;
-        margin: 0 auto;
-        width: 100%;
-        padding: 50px;
-        h2{
-            color: var(--color-1);
-            margin-bottom: 20px;
-        }
-        ol{
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding: 0px 10px;
-
-            strong{
-                color: var(--color-1);
-            }
-        }
-    }
+.contenido-legal ol strong{
+    color: var(--color-1);
 }
 
 /* ===========================================CONTENIDO - POLITICA DE PRIVACIDAD=========================================== */
@@ -2224,7 +2217,6 @@ main{
     height: 100%;
     width: 100%;
     padding-top: 145px;
-
 }
 
 .aviso-privacidad{
@@ -2233,52 +2225,51 @@ main{
     display: flex;
     align-items: center;
     justify-content: center;
-
-
-
-
-
-    .contenido-privacidad{
-        max-width: 1170px;
-        margin: 0 auto;
-        width: 100%;
-        height: 100%;
-        padding: 50px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        h2{
-            color: var(--color-1);
-            margin-bottom: 10px;
-        }
-        ol{
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding-left: 25px;
-
-            strong{
-                color: var(--color-1);
-            }
-
-            li{
-                list-style: decimal;
-            }
-        }
-        .dentro-li{
-            margin-top: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding-left: 25px;
-            
-            li{
-                list-style: circle;
-            }
-        }
-    }
 }
+
+.aviso-privacidad .contenido-privacidad{
+    max-width: 1170px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contenido-privacidad h2{
+    color: var(--color-1);
+    margin-bottom: 10px;
+}
+
+.contenido-privacidad ol{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 25px;
+}
+
+.contenido-privacidad strong{
+    color: var(--color-1);
+}
+
+.contenido-privacidad li{
+    list-style: decimal;
+}
+
+.dentro-li{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 25px;
+}
+
+.dentro-li li{
+    list-style: circle;
+}
+
 
 /* ===========================================CONTENIDO - POLITICA DE COOKIE=========================================== */
 /* ------Footer parte 1 / Contenido de informacion------ */
@@ -2295,66 +2286,72 @@ main{
     display: flex;
     align-items: center;
     justify-content: center;
+}
 
-    .contenido-cookie{
-        max-width: 1170px;
-        margin: 0 auto;
-        width: 100%;
-        height: 100%;
-        padding: 50px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
+.contenido-cookie{
+    max-width: 1170px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-        h2{
-            color: var(--color-1);
-            margin-bottom: 10px;
-        }
-        ol{
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding-left: 25px;
+.contenido-cookie h2{
+    color: var(--color-1);
+    margin-bottom: 10px;
+}
 
-            strong{
-                color: var(--color-1);
-            }
+.contenido-cookie ol{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 25px;
+}
 
-            li{
-                list-style: decimal;
-            }
-        }
-        table{
-            margin-top: 10px;
-            width: 100%;
-            height: 100%;
+.contenido-cookie ol strong{
+    color: var(--color-1);
+}
 
-            th{
-                padding: 15px 20px;
-                background-color: var(--color-2);
-                border-width: 1px;
-                border-color: var(--color-1);
-            }
-            td{
-                padding: 15px 20px;
-                border-color: rgb(241, 241, 241);
-                border-width: 1px;
-            }
-            span{
-                font-size: 17px;
-                font-weight: 600;
-                color: var(--color-1);
-            }
-            a{
-                font-weight: 600;
-                color: var(--color-1);
-            }
-        }
-        a{
-            color: var(--color-1);
-            font-weight: 500;
-        }
-    }
+.contenido-cookie ol li{
+    list-style: decimal;
+}
+
+.contenido-cookie table{
+    margin-top: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.contenido-cookie table th{
+    padding: 15px 20px;
+    background-color: var(--color-2);
+    border-width: 1px;
+    border-color: var(--color-1);
+}
+
+.contenido-cookie table  td{
+    padding: 15px 20px;
+    border-color: rgb(241, 241, 241);
+    border-width: 1px;
+}
+
+.contenido-cookie table span{
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-1);
+}
+
+.contenido-cookie table a{
+    font-weight: 600;
+    color: var(--color-1);
+}
+
+.contenido-cookie a{
+    color: var(--color-1);
+    font-weight: 500;
 }
 
 /* ===========================================FOOTER=========================================== */
@@ -2459,39 +2456,40 @@ main{
 /* ===========================================PAGINATION=========================================== */
 .pagination{
     padding: 15px 15px;
-
-
-    .pagination-previous{
-        background-color: var(--color-1);
-        color: var(--color-2);
-        font-size: 16px;
-        font-weight: 600;
-        padding: 6px 10px;
-        border-radius: 10px;
-    }
-    .pagination-next{
-        background-color: var(--color-1);
-        color: var(--color-2);
-        font-size: 16px;
-        font-weight: 600;
-        padding: 6px 10px;
-        border-radius: 10px;
-    }
-    .pagination-list{
-        display: flex;
-        gap: 10px;
-
-
-        .pagination-link{
-            padding: 3px 8px;
-            border-radius: 50%;
-            background-color: var(--color-1);
-            color: var(--color-2);
-            font-size: 15px;
-            font-weight: 600;
-        }
-    }
 }
+
+.pagination .pagination-previous{
+    background-color: var(--color-1);
+    color: var(--color-2);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 10px;
+}
+
+.pagination .pagination-next{
+    background-color: var(--color-1);
+    color: var(--color-2);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 10px;
+}
+
+.pagination .pagination-list{
+    display: flex;
+    gap: 10px;
+}
+
+.pagination-list .pagination-link{
+    padding: 3px 8px;
+    border-radius: 50%;
+    background-color: var(--color-1);
+    color: var(--color-2);
+    font-size: 15px;
+    font-weight: 600;
+}
+
 
 
 /* ===========================================RESPONSIVE=========================================== */
@@ -2539,16 +2537,16 @@ main{
 
 /* ===========================================CONTENIDO - ABOUT=========================================== */
     /* ------Menu parte 2 / Contenido de la pagina------ */
-    .contenido-about .area-img{
+    .about-content .about-company{
         flex-wrap: wrap;
         gap: 15px !important;
     }
 
-    .contenido-about  .info{
+    .about-content  .company-details{
         padding: 25px 0px !important;
     }
 
-    .contenido-about .info-about{
+    .about-content .about-info{
             width: 95% !important;
     }
 
@@ -2696,7 +2694,7 @@ main{
         justify-content: flex-start;
         transition: all .5s;
     }
-    
+
     .Contenedor-Productos .part-img img{
         height: 380px;
         width: 380px;
@@ -2765,20 +2763,21 @@ main{
         height: 100%;
         transition: all .5s;
     }
+
     .ad-banner-wrapper{
         flex-wrap: wrap;
         transition: all .5s;
     }
+
     .ad-banner-classic{
         padding: 50px !important;
     }
+
     .ad-banner-featured{
         padding: 30px !important;
     }
 
-
     /* ------Menu parte 2 / Carousel Responsive de productos------ */
-
     .carousel-content .contenido-catalogo{
         padding: 40px 2px;
         display: flex;
@@ -2819,10 +2818,8 @@ main{
     }
 
 /* ===========================================CONTENIDO - CONTACTO=========================================== */
-    .content-registro{
-        form{
-            padding: 0px 10px;
-        }
+    .content-registro form{
+        padding: 0px 10px;    
     }
     
 /* ===========================================CONTENIDO - USUARIO=========================================== */
@@ -2830,121 +2827,102 @@ main{
     .Portada-usuario{
         flex-wrap: wrap;
         transition: all .5s;
+    }
 
-        .panel-cuenta{ 
-            padding: 10px 10px;
-            transition: all .5s;
-            
-            h2{
-                color: var(--color-1);
-                width: 120px;
-            }
-            .opciones{
-                display: flex;
-                flex-direction: column;
-                gap: 14px;
+    .Portada-usuario .panel-cuenta{ 
+        padding: 10px 10px;
+        transition: all .5s;
+    }
 
-                
-            }
-            .celda-opciones{
-                font-size: 15px;
-            }
-        }
+    .panel-cuenta h2{
+        color: var(--color-1);
+        width: 120px;
+    }
 
-        .info-cuenta{
-            padding: 4px 10px;
-            transition: all .5s;
+    .panel-cuenta .opciones{
+        display: flex;
+        flex-direction: column;
+        gap: 14px; 
+    }
 
-            .contenido-data{
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 20px;
-                transition: all .5s;
-                
-                .info-data, .cambio-key {
-                    align-items: center;
-                    transition: all .5s;
-                }
-            }
-        }
+    .panel-cuenta .celda-opciones{
+        font-size: 15px;
+    }
+
+    .Portada-usuario .info-cuenta{
+        padding: 4px 10px;
+        transition: all .5s;   
+    }
+
+    .info-cuenta .contenido-data{
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        transition: all .5s;
+    }
+
+    .contenido-data .info-data, .cambio-key {
+        align-items: center;
+        transition: all .5s;
     }
 
 }
 
 @media only screen and (max-width: 450px) {
 /* =================================MENU================================= */
-/* ------Menu parte 1 / Navegacion de la pagina------ */
-    .registrarse{
-        /* flex-direction: column; */
-        gap: 15px !important;
-        padding-right: 5px !important;
-        transition: all .5s;
-
-        a{
-            font-size: 12px;
-            transition: all .5s;
-        }
-    }
 /* ------Menu parte 2 / Busquedas rapidas shopping------ */
-    .shopping-menu{
-        li:nth-child(5){
-            display: none !important;
-        }
+    .shopping-menu li:nth-child(5){
+        display: none !important;
     }
-
 
 /* ===========================================CONTENIDO - POLITICA DE COOKIE=========================================== */
     .contenido-cookie{
         padding: 20px 7px !important;
         transition: all .5s;
     }
-    table{
 
-        th{
-            padding: 5px 8px !important;
-            font-size: 15px !important;
-        }
-        td{
-            padding: 5px 7px !important;
-            font-size: 15px !important;
-
-        }
+    .contenido-cookie table th{
+        padding: 5px 8px !important;
+        font-size: 15px !important;
     }
 
+    .contenido-cookie table td{
+        padding: 5px 7px !important;
+        font-size: 15px !important;
+    }
+    
 /* ===========================================CONTENIDO - CARRITO=========================================== */
     /* ------Menu parte 1 / Carrito de la pagina------ */
-    .cantenido-productos-cart{
-        .producto{
-            z-index: 2;
-            position: relative;
-            flex-wrap: wrap;
-            .precio-producto{
-                justify-content: start;
-            }
-        }
+    .cantenido-productos-cart .producto{
+        z-index: 2;
+        position: relative;
+        flex-wrap: wrap;
     }
 
+    .producto .precio-producto{
+        justify-content: start;
+    }
+    
 /* ===========================================CONTENIDO - PRODUCTO=========================================== */
     /* ------Menu parte 1 / Producto de la pagina------ */
-    .Contenedor-Productos{
-        .part-img{
-            img{
-                height: 360px;
-                width: 360px;
-                transition: all .5s;
-            }
-        }
-
-        .info-producto{
-            width: 100%;
-            padding: 10px 5px;
-            align-items: center;
-            .contenedor{
-                width: 362px;
-            }
-            .price{
-                width: 362px;
-            }
-        }
+    .Contenedor-Productos .part-img img{
+        height: 360px;
+        width: 360px;
+        transition: all .5s;
     }
+        
+    .Contenedor-Productos .info-producto{
+        width: 100%;
+        padding: 10px 5px;
+        align-items: center;
+    }
+
+    .info-producto .contenedor{
+        width: 362px;
+    }
+    
+    .info-producto .price{
+        width: 362px;
+    }
+    
 }
