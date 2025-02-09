@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
 
 	<!-- =======================================DESCRIPCION======================================= -->
-    <title>@yield("name-page") - Scarpetoss</title>
+    <title>Scarpetoss {{ $title }}</title>
     <meta name="description" content="Vendemos zapatos de tu preferencias para que estes comodo y contento con tus elecciones.">
     
     <meta name="product_id" content="102856451">
@@ -154,7 +154,7 @@
         </div>
     </header>
 
-    @yield('content-page')
+    {{ $slot }}
 
     <!-- ===========================================FOOTER=========================================== -->
     <footer> 
@@ -198,6 +198,6 @@
         </div>
     </footer>
 
-    @yield("files-js")
+    {{ $script }}
 </body>
 </html>

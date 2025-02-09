@@ -1,10 +1,6 @@
-@extends('layouts.template')
+<x-app>
+    <x-slot name="title">Home</x-slot>
 
-@section('name-page')
-    Home
-@endsection
-
-@section('content-page')
     <main>
         <!-- Contenido de la portada principal -->
         <section class="hero" style="background-image: url(../image/portada-home.png);">
@@ -89,10 +85,9 @@
             </ul>
         </section>
     </main>
-@endsection
 
-
-@section('files-js')
-    <script src="/js/style.js"></script>
-    <script src="/js/slider.js"></script>
-@endsection
+    <x-slot name="script">
+        <script src="/js/style.js"></script>
+        <script src="/js/slider.js"></script>
+    </x-slot>
+</x-app>

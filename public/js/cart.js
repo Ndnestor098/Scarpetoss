@@ -34,7 +34,7 @@ formularios.addEventListener('submit', function(e) {
             .then(res => {
                 if (res.status === 200) {
                     try {
-                        document.getElementById("contador-carrello").innerHTML = parseInt(document.getElementById('contador-carrello').textContent) + 1;
+                        document.getElementById("counter-cart").innerHTML = parseInt(document.getElementById('counter-cart').textContent) + 1;
                     } catch (error) {
                         document.getElementById("add-cart").innerHTML = `<i id="contador-carrello">1</i>`;
                     }

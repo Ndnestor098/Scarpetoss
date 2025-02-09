@@ -33,7 +33,7 @@ body{
 }
 
 /* ===========================================MENU=========================================== */
-/* header{
+.header{
     position: fixed;
     height: 110px;
     width: 100%;
@@ -43,10 +43,10 @@ body{
     -webkit-box-shadow: 2px 24px 80px -28px var(--color-shadow-2);
     -moz-box-shadow: 2px 24px 80px -28px var(--color-shadow-2);
     box-shadow: 2px 24px 80px -28px var(--color-shadow-2);
-} */
+}
 
 /* ------Menu parte 1 / Navegacion de la pagina------ */
-.primer-menu{
+.navigation{
     width: 100%;
     height: 100%;
     display: flex;
@@ -56,27 +56,33 @@ body{
     transition: all .5s;
 }
 
-.primer-menu div{
+.navigation div{
     height: 100%;
     width: 100%;
 }
 
-.area-submenu{
+.submenu-toggle{
     display: flex;
     align-items: center;
     margin-left: 50px;
 }
 
-.area-submenu .menu-bars{
-    padding: 12px;
+.submenu-toggle .menu-toggle-button{
+    padding: 9px 11px;
     margin-left: 50px;
     background-color: var(--color-2);
     border-radius: 50%;
     cursor: pointer;
     color: var(--color-5);
+    border: none;
 }
 
-.area-logo{
+.menu-toggle-button .fa-bars{
+    font-size: 17px;
+    padding-top: 2px;
+}
+
+.logo-area{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,18 +90,18 @@ body{
     transition: all .5s;
 }
 
-.area-logo img{
+.logo-area img{
     width: 100px;
     padding: 3px;
 }
 
-.area-logo a{
+.logo-area a{
     font-size: 18px;
     font-weight: 700;
     padding: 5px;
 }
 
-.area-usuario{
+.user-area{
     display: flex;
     width: 100%;
     gap: 20px;
@@ -105,13 +111,13 @@ body{
     transition: all .5s;
 }
 
-.area-usuario a{
+.user-area a{
     font-size: 13px;
     font-weight: 700;
     color:var(--color-1);
 }
 
-.area-usuario .menu-bars{
+.user-area .menu-toggle-button{
     padding: 12px;
     background-color: var(--color-2);
     border-radius: 50%;
@@ -120,7 +126,7 @@ body{
     transition: all .5s;
 }
 
-.area-usuario #contador-carrello{
+.user-area #counter{
     font-size: 9px;
     font-weight: 600;
     padding: 3px 5px;
@@ -133,19 +139,19 @@ body{
 }
 
 /* ------Menu parte 2 / Busquedas rapidas shopping------ */
-.segundo-menu{
+.shopping-menu{
     height: 40px;
     width: 100%;
 }
 
-.segundo-menu ul{
+.shopping-menu ul{
     display: flex;
     justify-content: space-between;
     background-color: var(--color-white);
     padding: 7px 20px;
 }
 
-.segundo-menu li{
+.shopping-menu li{
     display: flex;
     justify-content: center;
     width: 100%;
@@ -168,20 +174,23 @@ body{
     width: 0px;
 }
 
-.submenu .menu-bars-x{
+.submenu .close-submenu-button{
     position: absolute;
     font-size: 25px;
     left: 0;
     margin: 10px;
     cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
-.submenu .name_user{
+
+.submenu .user-name{
     font-size: 17px;
     font-weight: 600;
     color: var(--color-1);
 }
 
-.submenu .menu-bars{
+.submenu .user-icon{
     font-size: 50px;
     padding: 45px;
     margin: 10px;
@@ -189,22 +198,29 @@ body{
 
     color: #FAF1E4;
     background-color: var(--color-1);
-
 }
 
-.submenu ul{
+.submenu-links ul{
     display: flex;
     flex-direction: column;
     gap: 25px;  
 } 
 
-.submenu ul a{
+.submenu-links a{
     font-size: 16px;
     font-weight: 700;
     color: var(--color-5);
 }
 
-.submenu .submenu-legalidades{
+.submenu-links li{
+    transition: transform 0.3s ease-in-out;
+}
+
+.submenu-links li:hover{
+    transform: scale(1.1);
+}
+
+.submenu .submenu-legal{
     height: 100%;
     width: 100%;
     display: flex;
@@ -213,7 +229,7 @@ body{
     gap: 7px;
 }
 
-.submenu .submenu-legalidades a{
+.submenu .submenu-legal a{
     font-size: 9px;
     font-weight: 100;
 }
@@ -1754,8 +1770,6 @@ main{
             --background: var(--color-white);
             --disabled: #F6F8FF;
             --disabled-inner: #E1E6F9;
-            -webkit-appearance: none;
-            -moz-appearance: none;
             height: 21px;
             outline: none;
             display: inline-block;
@@ -2721,18 +2735,18 @@ main{
 @media only screen and (max-width: 680px) {
     /* =================================MENU================================= */
     /* ------Menu parte 1 / Navegacion de la pagina------ */
-    .area-submenu{
+    .submenu-toggle{
         margin-left: 0px !important;
         transition: all .5s;
         
-        .menu-bars{
+        .menu-toggle-button{
             margin-left: 20px;
             transition: all .5s;
         }
 
         
     }
-    .area-usuario{
+    .user-area{
         gap: 10px !important;
         padding-right: 10px !important;
         transition: all .5s;
@@ -2749,7 +2763,7 @@ main{
     }
 
     /* ------Menu parte 2 / Busquedas rapidas shopping------ */
-    .segundo-menu{
+    .shopping-menu{
         li:last-child{
             display: none !important;
         }
@@ -2903,7 +2917,7 @@ main{
         }
     }
 /* ------Menu parte 2 / Busquedas rapidas shopping------ */
-    .segundo-menu{
+    .shopping-menu{
         li:nth-child(5){
             display: none !important;
         }
