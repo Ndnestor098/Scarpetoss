@@ -2359,7 +2359,7 @@ main{
 
 /* ===========================================FOOTER=========================================== */
 /* ------Footer parte 1 / Footer principal------ */
-.div-footer{
+.footer-content{
     width: 100%;
     height: 100%;
     padding: 80px 0px;
@@ -2369,105 +2369,91 @@ main{
     justify-content: space-between;
     align-items: start;
 
-    .content-footer{
-        width: 100%;
-        height: 100%;
-        
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+    
 
-        gap: 30px;
-    }
+    
+}
 
-    .title-footer{
-        font-size: 21px;
-        font-weight: 700;
-        color: var(--color-1);
-    }
+.footer-info, .footer-nav{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.footer-content .title-footer{
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--color-1);
 }
 
 /* ------Footer parte 2 / Area de informacion------ */
-.area-informacion-footer{
+.footer-info{
     gap: 0px !important;
-
-    i{
-        color: var(--color-5);
-    }
-    .name-footer{
-        color: var(--color-5);
-        font-weight: 600;
-        font-size: 22px;
-        margin-bottom: 30px;
-    }
-    img{
-        width: 200px;
-    }
-    div{
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    a{
-        font-weight: 500;
-    }
 }
 
-/* ------Footer parte 3 / Area de productos------ */
-.area-productos-footer{
-    ul{
-        display: flex;
-        flex-direction: column;
-        gap: 7px;
-
-        a{
-            font-weight: 500;
-        }
-
-        a:hover{
-            color: var(--color-1);
-        }
-    }
+.footer-info i{
+    color: var(--color-5);
 }
 
-/* ------Footer parte 4 / Area de enlaces legales------ */
-.area-enlaces-footer{
-    ul{
-        display: flex;
-        flex-direction: column;
-        gap: 7px;
-
-        a{
-            font-weight: 500;
-        }
-
-        a:hover{
-            color: var(--color-1);
-        }
-    }
+.footer-info .footer-brand{
+    color: var(--color-5);
+    font-weight: 600;
+    font-size: 22px; 
+    margin-bottom: 30px;
 }
 
-/* ------Footer parte 5 / Pies de Pagina del Footer------ */
-.div-pies-footer{
+.footer-info img{
+    width: 200px;
+}
+
+.footer-info div{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer-info a{
+    font-weight: 500;
+}
+
+/* ------Footer parte 3 / Area de productos / Area de enlaces legales ------ */
+.footer-nav ul{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.footer-nav ul a{
+    font-weight: 500;
+}
+
+.footer-nav ul a:hover{
+    color: var(--color-1);
+}
+
+/* ------Footer parte 4 / Pies de Pagina del Footer------ */
+.footer-bottom{
     background-color: var(--color-1);
     width: 100%;
     height: 40px;
-    
     display: flex;
     justify-content: center;
     align-items: center;
+}
 
-    small{
-        color: #FAF1E4;
-        font-weight: 400;
-        text-align: center;
-    }
-    b{
-        color: #FAF1E4;
-        font-weight: 800;
-    }
+.footer-bottom small{
+    color: #FAF1E4;
+    font-weight: 400;
+    text-align: center;
+}
+
+.footer-bottom b{
+    color: #FAF1E4;
+    font-weight: 800;
 }
 
 /* ===========================================PAGINATION=========================================== */
@@ -2531,20 +2517,17 @@ main{
     /* ------Menu parte 3 / Banner Publicitario------ */
     .ad-banner-wrapper{
         padding: 10px !important;
-
         transition: all .5s;
     }
 
     .ad-banner-featured .ad-banner-title{
         font-size: 50px !important;
         transition: all .5s;
-
     }
 
 /* ===========================================CONTENIDO - CONTACTO=========================================== */
     .portada-contacto{
-        background-position: center !important;
-        
+        background-position: center !important;    
     }
     .contactar{
         flex-wrap: wrap;
@@ -2556,49 +2539,48 @@ main{
 
 /* ===========================================CONTENIDO - ABOUT=========================================== */
     /* ------Menu parte 2 / Contenido de la pagina------ */
-    .contenido-about{
-        .area-img{
-            flex-wrap: wrap;
-            gap: 15px !important;
+    .contenido-about .area-img{
+        flex-wrap: wrap;
+        gap: 15px !important;
+    }
 
-            .info{
-                padding: 25px 0px !important;
-            }
-        }
-        .info-about{
+    .contenido-about  .info{
+        padding: 25px 0px !important;
+    }
+
+    .contenido-about .info-about{
             width: 95% !important;
-        }
     }
 
 /* ===========================================CONTENIDO - CARRITO=========================================== */
     /* ------Menu parte 1 / Carrito de la pagina------ */
-    .Portada-cart{
-        
+    .Portada-cart{   
         flex-wrap: wrap;
     }
-    .cantenido-productos-cart{
-        .deleteAll{
-            align-items: center !important;
-        }
-        .producto{
-            z-index: 2;
-            position: relative;
 
-            .precio-producto{
-                justify-content: start;
-            }
-        }
+    .cantenido-productos-cart .deleteAll{
+            align-items: center !important;
     }
+
+    .cantenido-productos-cart .producto{
+        z-index: 2;
+        position: relative;
+    }
+
+    .producto .precio-producto{
+        justify-content: start;
+    }
+    
     .cantenido-pago-cart{
         padding: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
+    }
 
-        .area-pago{
-            background-color: #fafafa;
-        }
+    .cantenido-pago-cart .area-pago{
+        background-color: #fafafa;
     }
 
 /* ===========================================CONTENIDO - SHOPPING=========================================== */
@@ -2606,109 +2588,106 @@ main{
     .contenido-shopping{
         flex-direction: column;
         transition: all .5s;
+    }
 
-        .count-productos{
-            width: 100%;
-            justify-content: space-between;
-            padding: 10px;
-            border-right: none;
+    .contenido-shopping .count-productos{
+        width: 100%;
+        justify-content: space-between;
+        padding: 10px;
+        border-right: none;
+        transition: all .5s;
+    }
+
+    .count-productos .contenido-title-celda{
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        transition: all .5s;
+    }
+
+    .count-productos .celda-content{
+        padding-left: 0%;
+        transition: all .5s;
+    }
+
+    .count-productos .content-product{
+        justify-content: center;
+    }
+
+    .content-product .title-content-cell{
+        font-size: 14px !important;
+        transition: all .5s;
+
+    }
+
+    .contenido-shopping .catalogo{
+        .contenido-catalogo{
+            padding: 40px 2px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
             transition: all .5s;
-
-
-            .contenido-title-celda{
-                height: 100%;
-                display: flex;
-                flex-direction: row;
-                gap: 10px;
-                transition: all .5s;
-
-            }
-            .celda-content{
-                padding-left: 0%;
-            transition: all .5s;
-
-            }
-            .content-product{
-                justify-content: center;
-
-                .title-content-cell{
-                    font-size: 14px !important;
-                    transition: all .5s;
-
-                }
-            }
 
         }
-        .catalogo{
-            .contenido-catalogo{
-                padding: 40px 2px;
-                display: flex;
-                flex-wrap: wrap;
-                gap: 20px;
-                justify-content: center;
-                transition: all .5s;
-
-            }
-            .carousel-item{
+        .carousel-item{
+            width: fit-content;
+            box-shadow: 0 0 5px 3px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            transition: all .5s;
+            
+            .product-image{
+                height: fit-content;
                 width: fit-content;
-                box-shadow: 0 0 5px 3px rgba(0,0,0,0.1);
-                border-radius: 10px;
                 transition: all .5s;
-                
-                .product-image{
-                    height: fit-content;
-                    width: fit-content;
-                    transition: all .5s;
-                }
-                img{
-                    width: 172px;
-                    height: 200px;
-                    transition: all .5s;
-                }
             }
-            .product-info{
-                gap: 20px;
-                padding: 10px;
+            img{
+                width: 172px;
+                height: 200px;
                 transition: all .5s;
-                
-                .title-producto{
-                    width: 150px;
-                    font-size: 14px;
-                    transition: all .5s;
-                }
-                .precio-producto{
-                    font-size: 15px;
-                    color: var(--color-1);
-                    transition: all .5s;
-                }
+            }
+        }
+        .product-info{
+            gap: 20px;
+            padding: 10px;
+            transition: all .5s;
+            
+            .title-producto{
+                width: 150px;
+                font-size: 14px;
+                transition: all .5s;
+            }
+            .precio-producto{
+                font-size: 15px;
+                color: var(--color-1);
+                transition: all .5s;
             }
         }
     }
 
 /* ===========================================CONTENIDO - USUARIO=========================================== */
     /* ------Menu parte 1 / informacion usuario de la pagina------ */
-    .Portada-usuario{
-
-        .panel-cuenta{ 
-            padding: 10px 10px;
-            transition: all .5s;
-            
-            h2{
-                color: var(--color-1);
-                width: 120px;
-            }
-            .opciones{
-                display: flex;
-                flex-direction: column;
-                gap: 14px;
-
-                
-            }
-            .celda-opciones{
-                font-size: 15px;
-            }
-        }
+    .Portada-usuario .panel-cuenta{ 
+        padding: 10px 10px;
+        transition: all .5s;
     }
+
+    .panel-cuenta  h2{
+        color: var(--color-1);
+        width: 120px;
+    }
+
+    .panel-cuenta .opciones{
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .panel-cuenta.celda-opciones{
+        font-size: 15px;
+    }
+    
 
 /* ===========================================CONTENIDO - PRODUCTO=========================================== */
     /* ------Menu parte 1 / Producto de la pagina------ */
@@ -2716,19 +2695,16 @@ main{
         flex-wrap: wrap;
         justify-content: flex-start;
         transition: all .5s;
+    }
+    
+    .Contenedor-Productos .part-img img{
+        height: 380px;
+        width: 380px;
+        transition: all .5s;
+    }
 
-
-        .part-img{
-            img{
-                height: 380px;
-                width: 380px;
-                transition: all .5s;
-            }
-        }
-
-        .info-producto{
-            padding: 10px 20px;
-        }
+    .Contenedor-Productos .info-producto{
+        padding: 10px 20px;
     }
 }
 
@@ -2771,22 +2747,15 @@ main{
 
 /* ===========================================FOOTER=========================================== */
     /* ------Footer parte 1 / Footer principal------ */    
-    .div-footer{
+    .footer-content{
         padding: 30px 20px;
         flex-wrap: wrap;
         gap: 30px;
-
-        .content-footer{
-            align-items: start !important;
-        }
     }
 
     /* ------Footer parte 2 / Area de informacion------ */
-    .area-informacion-footer{
-        
-        div{
-            gap: 5px;
-        }
+    .footer-nav, .footer-info{
+        align-items: start !important;
     }
 
 

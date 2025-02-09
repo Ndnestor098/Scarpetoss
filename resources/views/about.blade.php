@@ -1,10 +1,6 @@
-@extends('layouts.template')
+<x-app>
+    <x-slot name="title">About</x-slot>
 
-@section('name-page')
-    About
-@endsection
-
-@section('content-page')
     <main>
         <!-- Contenido de la portada principal -->
         <div class="Portada-about">
@@ -40,9 +36,4 @@
             </div>
         </div>
     </main>
-@endsection
-
-
-@section('files-js')
-    <script src="/js/style.js"></script>
-@endsection
+</x-app>

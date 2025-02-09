@@ -86,47 +86,12 @@
     {{ $slot }}
 
     <!-- ===========================================FOOTER=========================================== -->
-    <footer> 
-        <div class="div-footer">
-            <div class="area-informacion-footer content-footer">
-                <a href="{{route("home")}}"><img src="/image/logo1.png" alt="Logo del footer"></a>
-                <a href="{{route("home")}}" class="name-footer">Scarpetoss</a>
-                <div>
-                    <a href="#"><i class="fa-solid fa-location-dot"></i> Montemarano, Av. Italia</a>
-                    <a href="mailto:trabajo.nestor@gmail.com"><i class="fa-solid fa-envelope"></i> trabajo.nestor@gmail.com</a>
-                    <a href="tel:+393888683169"><i class="fa-solid fa-phone"></i> +39 388 868 3169</a>
-                </div>
-                
-            </div>
+    <x-footer></x-footer>
 
-            <div class="area-productos-footer content-footer">
-                <p class="title-footer">Productos</p>
-                <ul>
-                    <li><a href="{{route("shopping")}}">Descuentos</a></li>
-                    <li><a href="{{route("shopping", ['genero'=>'mujer'])}}">Damas</a></li>
-                    <li><a href="{{route("shopping", ['genero'=>'hombre'])}}">Caballeros</a></li>
-                    <li><a href="{{route("shopping", ['genero'=>'niño'])}}">Niños</a></li>
-                    <li><a href="{{route("shopping")}}">Moda</a></li>
-                    <li><a href="{{route("shopping")}}">Mas vendidos</a></li>
-                </ul>
-            </div>
+    @isset($script)
+        {{ $script }}
+    @endisset
 
-            <div class="area-enlaces-footer content-footer">
-                <p class="title-footer">Enlaces Legales</p>
-                <ul>
-                    <li><a href="{{route("aviso.legal")}}">Aviso Legal</a></li>
-                    <li><a href="{{route("politica.privacidad")}}">Politica de Privacidad</a></li>
-                    <li><a href="{{route("politica.cookie")}}">Politica de Cookies</a></li>
-                </ul>
-            </div>
-
-        </div>
-
-        <div class="div-pies-footer">
-            <small>© 2024 <b>Scarpetoss</b> - Todos los derechos Reservados</small>
-        </div>
-    </footer>
-
-    {{ $script }}
+    <script src="/js/style.js"></script>
 </body>
 </html>

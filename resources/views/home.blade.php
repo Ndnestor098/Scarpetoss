@@ -87,7 +87,6 @@
     </main>
 
     <x-slot name="script">
-        <script src="/js/style.js"></script>
         <script src="/js/slider.js"></script>
     </x-slot>
 </x-app>
