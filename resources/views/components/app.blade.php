@@ -51,8 +51,8 @@
     <meta name="msapplication-TileImage" content="/image/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
-    @isset($style)
-        {{ $style }}
+    @isset($link)
+        {{ $link }}
     @endisset
 </head>
 <body  @if(!request()->hasCookie('Remember_cookie')) class="no-scroll" @endif>

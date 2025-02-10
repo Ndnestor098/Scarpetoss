@@ -1,14 +1,11 @@
-@extends('layouts.template')
+<x-app>
+    <x-slot name="title">Edit User {{Auth::user()->name}}</x-slot>
 
-@section('name-page')
-    Edit User {{Auth::user()->name}}
-@endsection
+    <x-slot name="link">
+        <script src="https://js.stripe.com/v3/"></script>
+    </x-slot>
 
-@section('link')
-    <script src="https://js.stripe.com/v3/"></script>
-@endsection
 
-@section('content-page')
     <style>
         .error {
             width: 100%;
@@ -19,23 +16,24 @@
             text-align: center;
         }
     </style>
+    
     <main>
         <!-- Contenido de la portada principal -->
-        <div class="Portada-usuario">
-            @include('components.panel')
+        <div class="user-dashboard">
+            <x-panel/>
             
-            <div class="info-cuenta">
-                <div class="saludo">
+            <div class="account-info">
+                <div class="greeting">
                     <h3>Hola, {{Auth::user()->name}}!</h3>
                 </div>
-                <div class="datos">
-                    <div class="contenido-data">
-                        <div class="info-data">
+                <div class="user-data">
+                    <div class="data-container">
+                        <div class="user-info">
                             <div>
                                 <p>Mis datos</p>
                             </div>
-                            <div class="info-usuario" >
-                                <form action="{{route('payment.update')}}" method="POST" autocomplete="off" enctype="application/x-www-form-urlencoded" class="cambiar-info FORMULARIO" id="payment-form">
+                            <div class="data-form">
+                                <form action="{{route('payment.update')}}" method="POST" autocomplete="off" enctype="application/x-www-form-urlencoded" class="FORMULARIO" id="payment-form">
                                     @csrf
                                     <div>
                                         <label for="cardholder_name">Nombre</label>
@@ -60,8 +58,9 @@
                             </div>
                         </div>
                     </div>
+                    
                     <script>
-                        var stripe = Stripe('{{ config('services.stripe.key') }}');
+                        var stripe = Stripe("{{ config('services.stripe.key') }}");
                         var elements = stripe.elements();
                         var card = elements.create('card');
                         card.mount('#card-element');
@@ -99,8 +98,4 @@
             </div>
         </div>
     </main>
-@endsection
-
-@section('files-js')
-    <script src="/js/style.js"></script>
-@endsection
+</x-app>
