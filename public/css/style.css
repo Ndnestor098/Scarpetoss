@@ -909,7 +909,7 @@ main{
         color: #7e7e7e;   
 }
 
-.product-info .opciones{
+.product-info .account-options{
     margin-top: 25px;
     cursor: pointer;
     width: fit-content;
@@ -917,15 +917,15 @@ main{
     gap: 20px;
 }
 
-.opciones i{
+.account-options i{
     color: var(--color-1);
 }
  
-.opciones p{
+.account-options p{
     color: var(--color-1);
 }
 
-.opciones button{
+.account-options button{
     border: none; background-color: var(--color-white)fff; height: 100%; width: 100%; cursor: pointer;
 }
 
@@ -1424,142 +1424,144 @@ main{
     min-height: 590px;
     padding-top: 150px;
     padding-bottom: 40px;
-
     display: flex;
     justify-content: space-between;
+}
 
-    .panel-cuenta{ 
-        height: 100%;
-        width: fit-content;
-        padding: 50px 100px;
-        display: flex;
-        flex-direction: column;
-        gap: 22px;
-        
-        h2{
-            color: var(--color-1);
-            width: 120px;
-        }
-        .opciones{
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
+.account-panel{ 
+    height: 100%;
+    width: fit-content;
+    padding: 50px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
 
-            
-        }
-        .celda-opciones{
-            font-size: 15px;
-        }
+.account-panel h2{
+    color: var(--color-1);
+    width: 120px;
+    font-size: 22px;
+}
+
+.account-panel .account-options{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.account-panel .account-link{
+    font-size: 15px;
+    color: var(--color-1);
+}
+
+
+.info-cuenta{
+    height: 100%;
+    width: 100%;
+    padding: 45px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    
+    h3{
+        color: var(--color-1);
+        font-size: 32px;
+        font-weight: 500;
     }
-
-    .info-cuenta{
-        height: 100%;
-        width: 100%;
-        padding: 45px 10px;
+    .datos{
         display: flex;
         flex-direction: column;
-        gap: 25px;
-        
-        h3{
-            color: var(--color-1);
-            font-size: 32px;
-            font-weight: 500;
-        }
-        .datos{
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        gap: 15px;
 
-            
+        
+    }
+    .contenido-data{
+        display: flex;
+    }
+    .info-data, .cambio-key{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: start;
+        gap: 20px;
+        p{
+            font-size: 22px;
         }
-        .contenido-data{
+        div{
             display: flex;
-        }
-        .info-data, .cambio-key{
-            display: flex;
-            width: 100%;
             flex-direction: column;
-            justify-content: start;
-            gap: 20px;
-            p{
-                font-size: 22px;
+            gap: 10px;
+        }
+        .boton_datos{
+            border: 1px solid var(--color-5);
+            width: fit-content;
+            padding: 5px 15px;
+
+            span{
+                color: var(--color-1);
+                font-size: 15px;
+                font-weight: 600;
             }
+        }
+        .info-usuario{
+            span{
+                font-size: 17px;
+                display: flex;
+                justify-content: center;
+                gap: 5px;
+                width: fit-content;
+
+                i{
+                    color: var(--color-1);
+                    font-size: 20px;
+                    width: 24px;
+                    height: 24px;
+                    text-align: center;
+                }
+            }
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: fit-content;
+
             div{
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
-            }
-            .boton_datos{
-                border: 1px solid var(--color-5);
-                width: fit-content;
-                padding: 5px 15px;
+                gap: 5px;
 
-                span{
-                    color: var(--color-1);
+                label{
                     font-size: 15px;
-                    font-weight: 600;
+                }
+                input{
+                    padding: 10px;
+                    width: 270px;
+                }
+                #customer-email{
+                    color: #7e7e7e;
                 }
             }
-            .info-usuario{
-                span{
-                    font-size: 17px;
-                    display: flex;
-                    justify-content: center;
-                    gap: 5px;
-                    width: fit-content;
-
-                    i{
-                        color: var(--color-1);
-                        font-size: 20px;
-                        width: 24px;
-                        height: 24px;
-                        text-align: center;
-                    }
-                }
+            .error{
+                width: 100%;
+                height: 100%;
+                font-size: 14px;
+                color: #c92c2c;
+                font-weight: 500;
+                text-align: center;
+                max-width: 270px;
             }
-            form{
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                width: fit-content;
-
-                div{
-                    display: flex;
-                    flex-direction: column;
-                    gap: 5px;
-
-                    label{
-                        font-size: 15px;
-                    }
-                    input{
-                        padding: 10px;
-                        width: 270px;
-                    }
-                    #customer-email{
-                        color: #7e7e7e;
-                    }
-                }
-                .error{
-                    width: 100%;
-                    height: 100%;
-                    font-size: 14px;
-                    color: #c92c2c;
-                    font-weight: 500;
-                    text-align: center;
-                    max-width: 270px;
-                }
-                button{
-                    border: none;
-                    padding: 10px 0px;
-                    background-color: var(--color-1);
-                    color: var(--color-2);
-                    font-weight: 500;
-                    cursor: pointer;
-                }
+            button{
+                border: none;
+                padding: 10px 0px;
+                background-color: var(--color-1);
+                color: var(--color-2);
+                font-weight: 500;
+                cursor: pointer;
             }
         }
-
     }
+
 }
 
 /* ===========================================CONTENIDO - Metodo de Pago=========================================== */
@@ -2719,23 +2721,23 @@ main{
 
 /* ===========================================CONTENIDO - USUARIO=========================================== */
     /* ------Menu parte 1 / informacion usuario de la pagina------ */
-    .Portada-usuario .panel-cuenta{ 
+    .Portada-usuario .account-panel{ 
         padding: 10px 10px;
         transition: all .5s;
     }
 
-    .panel-cuenta  h2{
+    .account-panel  h2{
         color: var(--color-1);
         width: 120px;
     }
 
-    .panel-cuenta .opciones{
+    .account-panel .account-options{
         display: flex;
         flex-direction: column;
         gap: 14px;
     }
 
-    .panel-cuenta.celda-opciones{
+    .account-panel.celda-opciones{
         font-size: 15px;
     }
     
@@ -2882,23 +2884,23 @@ main{
         transition: all .5s;
     }
 
-    .Portada-usuario .panel-cuenta{ 
+    .Portada-usuario .account-panel{ 
         padding: 10px 10px;
         transition: all .5s;
     }
 
-    .panel-cuenta h2{
+    .account-panel h2{
         color: var(--color-1);
         width: 120px;
     }
 
-    .panel-cuenta .opciones{
+    .account-panel .account-options{
         display: flex;
         flex-direction: column;
         gap: 14px; 
     }
 
-    .panel-cuenta .celda-opciones{
+    .account-panel .celda-opciones{
         font-size: 15px;
     }
 

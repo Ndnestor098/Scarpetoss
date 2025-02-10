@@ -1,10 +1,6 @@
-@extends('layouts.template')
+<x-app>
+    <x-slot name="title">User {{Auth::user()->name}}</x-slot>
 
-@section('name-page')
-    User {{Auth::user()->name}}
-@endsection
-
-@section('content-page')
     <main>
         <!-- Contenido de la portada principal -->
         <div class="Portada-usuario">
@@ -32,8 +28,6 @@
         </div>
 
     </main>
-@endsection
 
-@section('files-js')
-    <script src="/js/style.js"></script>
-@endsection 
+</x-app>
+    
