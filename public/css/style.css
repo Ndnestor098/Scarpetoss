@@ -2266,13 +2266,13 @@ main{
 
 /* ===========================================CONTENIDO - POLITICA DE PRIVACIDAD=========================================== */
 /* ------Footer parte 1 / Contenido de informacion------ */
-.main-aviso-privacidad{
+.privacy-policy{
     height: 100%;
     width: 100%;
     padding-top: 145px;
 }
 
-.aviso-privacidad{
+.privacy-content{
     height: 100%;
     width: 100%;
     display: flex;
@@ -2280,7 +2280,7 @@ main{
     justify-content: center;
 }
 
-.aviso-privacidad .contenido-privacidad{
+.privacy-content .privacy-section{
     max-width: 1170px;
     margin: 0 auto;
     width: 100%;
@@ -2291,27 +2291,27 @@ main{
     gap: 10px;
 }
 
-.contenido-privacidad h2{
+.privacy-section h2{
     color: var(--color-1);
     margin-bottom: 10px;
 }
 
-.contenido-privacidad ol{
+.privacy-section ol{
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding-left: 25px;
 }
 
-.contenido-privacidad strong{
+.privacy-section strong{
     color: var(--color-1);
 }
 
-.contenido-privacidad li{
+.privacy-section li{
     list-style: decimal;
 }
 
-.dentro-li{
+.privacy-sublist{
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -2319,7 +2319,7 @@ main{
     padding-left: 25px;
 }
 
-.dentro-li li{
+.privacy-sublist li{
     list-style: circle;
 }
 
