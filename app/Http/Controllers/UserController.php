@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
     public function index()
     {   
-        $data = User::paginate(20);
+        if(Cache::has("user_admin")){
+            $data = Cache::get("user_admin");
+        } else {
+            $data = User::paginate(20);
+            
+            Cache::put("user_admin", $data, now()->addMinutes(10));
+        }
 
         return view("admin.users", ['data'=>$data]);
     }
@@ -41,13 +48,16 @@ class UserController extends Controller
         $user->is_admin = true;
         $user->save();
 
+        Cache::forget("user_admin");
+
         return redirect(route('users'));
     }
 
     public function destroy(Request $request)
     {
-        $user = User::find(intval($request->id));
+        $user = User::findOrFail(intval($request->id));
         $user->delete();
+        Cache::forget("user_admin");
 
         return back();
     }

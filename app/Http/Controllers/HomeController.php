@@ -12,9 +12,7 @@ class HomeController extends Controller
     public function __invoke()
     {   
         $carousel = Carousel::getCarousel();
-
-        $cart = 1;
         
-        return view('home', ['carousel'=>$carousel, 'cart' => $cart]);
+        return view('home', ['carousel'=>$carousel]);
     }
 }

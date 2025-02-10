@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Size;
 use App\Services\AdminServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,9 +16,15 @@ class ProductAdminController extends Controller
     //==================================================Area de edicion de Productos====================================================
     public function index()
     {
-        $data = Product::paginate(20);
+        if(Cache::has("product_admin")){
+            $data = Cache::get("product_admin");
+        } else {
+            $data = Product::paginate(20);
 
-        $data->appends(request()->query())->links('vendor.pagination.tailwind');
+            $data->appends(request()->query())->links('vendor.pagination.tailwind'); 
+            
+            Cache::put("product_admin", $data, now()->addMinutes(10));
+        }
 
         return view("admin.product", ['data' => $data]);
     }
@@ -55,6 +62,8 @@ class ProductAdminController extends Controller
                 return redirect()->back()->withErrors([$result["message"]])->withInput();
             }
         }
+
+        Cache::forget("product_admin");
 
         return redirect(route('products'));
     }
@@ -112,6 +121,8 @@ class ProductAdminController extends Controller
         if($result["status"] == 422){
             return redirect()->back()->withErrors([$result["message"]])->withInput();
         }
+        
+        Cache::forget("product_admin");
 
         return redirect(route('products'));
     }
@@ -130,6 +141,8 @@ class ProductAdminController extends Controller
         Cart::where('product_id', $product->id)->delete();
 
         $product->delete();
+
+        Cache::forget("product_admin");
 
         return redirect()->back();
     }

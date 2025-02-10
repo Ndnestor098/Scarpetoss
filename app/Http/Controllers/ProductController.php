@@ -28,11 +28,22 @@ class ProductController extends Controller
                 $product = Cache::get("product_{$slug}");
             } else {
                 // Procesar las imágenes del producto, convirtiendo rutas locales en URLs accesibles
-                $product->images = array_map(function ($item) {
-                    return (str_contains($item, 'https://') || str_contains($item, 'http://')) 
-                        ? $item 
-                        : Storage::url('public/' . $item);
-                }, $product->images);
+                $product->images = collect($product->images)->map(function ($item) {
+                    if (str_contains($item, 'https://') || str_contains($item, 'http://')) {
+                        return $item;
+                    }
+            
+                    // Decodificar JSON
+                    $decoded = json_decode($item, true);
+            
+                    // Si es un array, transformar las rutas
+                    if (is_array($decoded)) {
+                        return array_map(fn($img) => Storage::url('public/' . $img), $decoded);
+                    }
+            
+                    return Storage::url('public/' . $item);
+                })->flatten()->toArray();
+                
 
                 // Guardar el producto en caché durante 60 minutos para mejorar el rendimiento
                 Cache::put("product_{$slug}", $product, now()->addMinutes(60));
