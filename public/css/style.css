@@ -1418,7 +1418,7 @@ main{
 
 /* ===========================================CONTENIDO - USUARIO=========================================== */
 /* ------Menu parte 1 / informacion usuario de la pagina------ */
-.Portada-usuario{
+.user-dashboard{
     height: 100%;
     width: 100%;
     min-height: 590px;
@@ -1454,115 +1454,132 @@ main{
     color: var(--color-1);
 }
 
-
-.info-cuenta{
+.account-info{
     height: 100%;
     width: 100%;
     padding: 45px 10px;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    
-    h3{
-        color: var(--color-1);
-        font-size: 32px;
-        font-weight: 500;
-    }
-    .datos{
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-
-        
-    }
-    .contenido-data{
-        display: flex;
-    }
-    .info-data, .cambio-key{
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-        justify-content: start;
-        gap: 20px;
-        p{
-            font-size: 22px;
-        }
-        div{
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .boton_datos{
-            border: 1px solid var(--color-5);
-            width: fit-content;
-            padding: 5px 15px;
-
-            span{
-                color: var(--color-1);
-                font-size: 15px;
-                font-weight: 600;
-            }
-        }
-        .info-usuario{
-            span{
-                font-size: 17px;
-                display: flex;
-                justify-content: center;
-                gap: 5px;
-                width: fit-content;
-
-                i{
-                    color: var(--color-1);
-                    font-size: 20px;
-                    width: 24px;
-                    height: 24px;
-                    text-align: center;
-                }
-            }
-        }
-        form{
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: fit-content;
-
-            div{
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-
-                label{
-                    font-size: 15px;
-                }
-                input{
-                    padding: 10px;
-                    width: 270px;
-                }
-                #customer-email{
-                    color: #7e7e7e;
-                }
-            }
-            .error{
-                width: 100%;
-                height: 100%;
-                font-size: 14px;
-                color: #c92c2c;
-                font-weight: 500;
-                text-align: center;
-                max-width: 270px;
-            }
-            button{
-                border: none;
-                padding: 10px 0px;
-                background-color: var(--color-1);
-                color: var(--color-2);
-                font-weight: 500;
-                cursor: pointer;
-            }
-        }
-    }
-
 }
+
+.account-info .greeting h3{
+    color: var(--color-1);
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.account-info .user-data{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* .account-info .contenido-data{
+    display: flex;
+} */
+
+.data-container, .account-info .cambio-key{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: start;
+    gap: 20px;
+}
+
+.sub-title{
+    font-size: 18px;
+}
+
+.data-container div, .cambio-key div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.edit-button{
+    height: fit-content;
+    background-color: var(--color-2); 
+    border:1px solid var(--color-1); 
+    border-radius:5px;
+    padding:2px 5px;
+}
+
+.btn-data{
+    border: 1px solid var(--color-5);
+    width: fit-content;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+.btn-data span{
+    color: var(--color-1);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.user-info span{
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    width: fit-content;
+}
+
+.user-info i{
+    color: var(--color-1);
+    font-size: 20px;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+}
+
+.data-container form, .cambio-key form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: fit-content;
+}
+
+.data-container form div, .cambio-key form div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.data-container form div label, .cambio-key form div label{
+    font-size: 15px;
+}
+
+.data-container form div input, .cambio-key form div input{
+    padding: 10px;
+    width: 270px;
+}
+
+.data-container form div #customer-email, .cambio-key form div #customer-email{
+    color: #7e7e7e;
+}
+
+.data-container form .error, .cambio-key form .error{
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    color: #c92c2c;
+    font-weight: 500;
+    text-align: center;
+    max-width: 270px;
+}
+
+.data-container form button, .cambio-key form button{
+    border: none;
+    padding: 10px 0px;
+    background-color: var(--color-1);
+    color: var(--color-2);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
 
 /* ===========================================CONTENIDO - Metodo de Pago=========================================== */
 .Portada-pago{
@@ -2721,7 +2738,7 @@ main{
 
 /* ===========================================CONTENIDO - USUARIO=========================================== */
     /* ------Menu parte 1 / informacion usuario de la pagina------ */
-    .Portada-usuario .account-panel{ 
+    .user-dashboard .account-panel{ 
         padding: 10px 10px;
         transition: all .5s;
     }
@@ -2879,12 +2896,12 @@ main{
     
 /* ===========================================CONTENIDO - USUARIO=========================================== */
 /* ------Menu parte 1 / informacion usuario de la pagina------ */
-    .Portada-usuario{
+    .user-dashboard{
         flex-wrap: wrap;
         transition: all .5s;
     }
 
-    .Portada-usuario .account-panel{ 
+    .user-dashboard .account-panel{ 
         padding: 10px 10px;
         transition: all .5s;
     }
@@ -2904,19 +2921,19 @@ main{
         font-size: 15px;
     }
 
-    .Portada-usuario .info-cuenta{
+    .user-dashboard .account-info{
         padding: 4px 10px;
         transition: all .5s;   
     }
 
-    .info-cuenta .contenido-data{
+    .account-info .contenido-data{
         flex-wrap: wrap;
         justify-content: center;
         gap: 20px;
         transition: all .5s;
     }
 
-    .contenido-data .info-data, .cambio-key {
+    .contenido-data .data-container, .cambio-key {
         align-items: center;
         transition: all .5s;
     }

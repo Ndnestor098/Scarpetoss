@@ -3,30 +3,32 @@
 
     <main>
         <!-- Contenido de la portada principal -->
-        <div class="Portada-usuario">
-            @include('components.panel')
-            <div class="info-cuenta">
-                <div class="saludo">
+        <section class="user-dashboard">
+            <x-panel/>
+
+            <div class="account-info">
+                <div class="greeting">
                     <h3>Hola, {{Auth::user()->name}}!</h3>
                 </div>
-                <div class="datos">
+                <div class="user-data">
                     <div>
-                        <p>Mis datos</p>
+                        <p class="sub-title">Mis datos</p>
                     </div>
-                    <div class="info-data">
-                        <div class="info-usuario" >
+                    <div class="data-container">
+                        <div class="user-info">
                             <span><i class="fa-regular fa-user"></i>{{Auth::user()->name}}</span>
                             <span><i class="fa-solid fa-envelope"></i>{{Auth::user()->email}}</span>
-                            <span><i class="fa-solid fa-location-dot"></i>{{Auth::user()->address}} &nbsp;&nbsp;&nbsp; <a href="{{route('client.details')}}" style="height: fit-content;background-color: #cedebd; border:1px solid #425133; border-radius:5px;padding:2px 5px"> Editar </a></span>
+                            <span><i class="fa-solid fa-location-dot"></i>{{Auth::user()->address}} &nbsp;&nbsp;&nbsp; 
+                                <a href="{{route('client.details')}}" class="edit-button">Editar</a>
+                            </span>
                         </div>
-                        <a href="{{route("client.details")}}" style="width: fit-content;"><div class="boton_datos">
+                        <a href="{{route("client.details")}}" class="btn-data">
                             <span>Mis datos</span>
-                        </div></a>
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-
+        </section>
     </main>
 
 </x-app>
