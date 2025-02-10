@@ -842,7 +842,7 @@ main{
 
 /* ===========================================CONTENIDO - CARRITO=========================================== */
 /* ------Menu parte 1 / Carrito de la pagina------ */
-.Portada-cart{
+.cart-container{
     height: 100%;
     width: 100%;
     padding-top: 165px;
@@ -852,7 +852,7 @@ main{
     justify-content: space-between;
 }
 
-.cantenido-productos-cart{
+.cart-content{
     background-color: var(--color-1);
     height: 100%;
     width: 100%;
@@ -863,13 +863,13 @@ main{
     
 }
 
-.cantenido-productos-cart .area-productos{
-    background-color: var(--color-white)fff;
+.cart-content .cart-items{
+    background-color: var(--color-white);
     height: 100%;
     width: 100%; 
 }
 
-.area-productos .producto{
+.cart-items .cart-item{
     display: flex;
     padding: 40px;
     gap: 20px;
@@ -878,12 +878,12 @@ main{
     box-shadow: 2px 24px 10px -28px var(--color-shadow-1);
 }
 
-.producto .img-producto img{
+.cart-item .product-image img{
     max-width: 200px;
     max-height: 200px;
 }
 
-.producto .product-info{
+.cart-item .product-details{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -891,7 +891,7 @@ main{
     width: 100%;
 }
 
-.product-info .title-producto{
+.product-details .title-producto{
     line-height: 30px;    
 }
 
@@ -904,12 +904,12 @@ main{
     color: #7e7e7e;
 }
 
-.product-info .descripcion-producto p{
+.product-details .product-description p{
         font-size: 15px;
         color: #7e7e7e;   
 }
 
-.product-info .account-options{
+.product-details .product-options{
     margin-top: 25px;
     cursor: pointer;
     width: fit-content;
@@ -917,19 +917,19 @@ main{
     gap: 20px;
 }
 
-.account-options i{
+.product-options i{
     color: var(--color-1);
 }
  
-.account-options p{
+.product-options p{
     color: var(--color-1);
 }
 
-.account-options button{
+.product-options button{
     border: none; background-color: var(--color-white)fff; height: 100%; width: 100%; cursor: pointer;
 }
 
-.producto .precio-producto{
+.cart-item .product-price{
     width: 100%;
     display: flex;
     justify-content: end;
@@ -937,13 +937,13 @@ main{
     padding-right: 10px;
 }
 
-.precio-producto p{
+.product-price p{
     font-size: 20px;
     font-weight: 500;
     color: var(--color-1);
 }
 
-.area-productos .producto-vacio{
+.cart-items .empty-cart{
     height: 400px;
     width: 100%;
     display: flex;
@@ -953,17 +953,17 @@ main{
     gap: 10px;
 }
 
-.area-productos .producto-vacio .title{
+.cart-items .empty-cart .title{
     font-size: 20px;
     font-weight: 500;
     color: var(--color-1);
 }
 
-.area-productos .producto-vacio p{
+.cart-items .empty-cart p{
     font-size: 16px;
 }
 
-.area-productos .deleteAll{
+.cart-items .delete-all{
     height: 100px;
     width: 100%;
     display: flex;
@@ -971,7 +971,7 @@ main{
     justify-content: center;
 }
 
-.area-productos .deleteAll button{
+.cart-items .delete-all button{
     border: 1px solid var(--color-1);
     background-color: var(--color-2);
     color: var(--color-5);
@@ -982,80 +982,93 @@ main{
     cursor: pointer;
 }
 
-.cantenido-pago-cart{
+.cart-payment-content{
     background-color: var(--color-white);
     height: 100%;
     width: 35%;
-    
-
-    .area-pago{
-        background-color: var(--color-white);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 18px 5px;
-        gap: 28.5px;
-        -webkit-box-shadow: 2px 24px 10px -28px var(--color-shadow-1);
-        -moz-box-shadow: 2px 24px 10px -28px var(--color-shadow-1);
-        box-shadow: 2px 24px 10px -28px var(--color-shadow-1);
-
-        .title-pago{
-        
-            p{
-                font-size: 22px;
-                font-weight: 500;
-                color: var(--color-1);
-            }
-        }
-        .resumen-pago{
-            display: flex;
-            width: 100%;
-            font-size: 15px;
-            
-            -webkit-box-shadow: 2px 24px 10px -28px var(--color-shadow-1);
-            -moz-box-shadow: 2px 24px 10px -28px var(--color-shadow-1);
-            box-shadow: 2px 24px 10px -28px var(--color-shadow-1);
-            
-            div{
-                width: 100%;
-                height: 100%;
-                line-height: 30px;
-            }
-        }
-        .iva{
-            display: flex;
-            width: 100%;
-            height: 100%;
-
-            div{
-                height: 100%;
-                width: 100%;
-            }
-        }
-        .button-pagar{
-            height: 50px;
-            width: 100%;
-
-            a{
-                height: 100%;
-                width: 100%;
-                display: flex;
-                align-content: center;
-                justify-content: center;
-                background-color: var(--color-2);
-                flex-wrap: wrap;
-
-            }
-            span{
-                font-size: 18px;
-                font-weight: 700;
-                color: var(--color-1);
-                height:fit-content;
-            }
-        }
-    }
 }
 
+.cart-payment-content .payment-summary{
+    background-color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 18px 5px;
+    gap: 28.5px;
+    -webkit-box-shadow: 2px 24px 10px -28px var(--color-shadow-1);
+    -moz-box-shadow: 2px 24px 10px -28px var(--color-shadow-1);
+    box-shadow: 2px 24px 10px -28px var(--color-shadow-1);
+}
+
+.payment-summary .summary-title p{
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-1);
+}
+
+.payment-summary {
+    display: flex;
+    width: 100%;
+    font-size: 15px;
+    -webkit-box-shadow: 2px 24px 10px -28px var(--color-shadow-1);
+    -moz-box-shadow: 2px 24px 10px -28px var(--color-shadow-1);
+    box-shadow: 2px 24px 10px -28px var(--color-shadow-1);
+}
+
+.summary-details{
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.summary-details .summary-details-title{
+    font-weight: 500;
+}
+
+.summary-details .summary-details-value{
+    font-size: 17px;
+    font-weight: 500;
+    color: #435334;
+}
+
+.payment-summary .total-payment{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
+.payment-summary .total-payment div{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.payment-summary .payment-button{
+    height: 50px;
+    width: 100%;
+}
+
+.payment-summary .payment-button a{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    background-color: var(--color-2);
+    flex-wrap: wrap;
+
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-1);
+}
+
+/* .payment-summary .payment-button span{
+    
+} */
+ 
 /* ===========================================CONTENIDO - SHOPPING=========================================== */
 /* ------Menu parte 1 / Catalago de la pagina------ */
 .shopping-overview{
@@ -2558,24 +2571,24 @@ padding: 10px 0px;
 
 /* ===========================================CONTENIDO - CARRITO=========================================== */
     /* ------Menu parte 1 / Carrito de la pagina------ */
-    .Portada-cart{   
+    .cart-container{   
         flex-wrap: wrap;
     }
 
-    .cantenido-productos-cart .deleteAll{
+    .cart-content .delete-all{
             align-items: center !important;
     }
 
-    .cantenido-productos-cart .producto{
+    .cart-content .cart-item{
         z-index: 2;
         position: relative;
     }
 
-    .producto .precio-producto{
+    .cart-item .product-price{
         justify-content: start;
     }
     
-    .cantenido-pago-cart{
+    .cart-payment-content{
         padding: 10px;
         display: flex;
         align-items: center;
@@ -2583,7 +2596,7 @@ padding: 10px 0px;
         width: 100%;
     }
 
-    .cantenido-pago-cart .area-pago{
+    .cart-payment-content .payment-summary{
         background-color: #fafafa;
     }
 
@@ -2667,7 +2680,7 @@ padding: 10px 0px;
         transition: all .5s;
     }
 
-    .product-info .precio-producto{
+    .product-info .product-price{
         font-size: 15px;
         color: var(--color-1);
         transition: all .5s;
@@ -2891,13 +2904,13 @@ padding: 10px 0px;
     
 /* ===========================================CONTENIDO - CARRITO=========================================== */
     /* ------Menu parte 1 / Carrito de la pagina------ */
-    .cantenido-productos-cart .producto{
+    .cart-content .cart-item{
         z-index: 2;
         position: relative;
         flex-wrap: wrap;
     }
 
-    .producto .precio-producto{
+    .cart-item .product-price{
         justify-content: start;
     }
     

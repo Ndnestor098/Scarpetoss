@@ -38,7 +38,7 @@
                                     <div>
                                         <label for="address">Direccion</label>
                                         <input type="text" name="address" id="address" placeholder="address"
-                                            value="{{ Auth::user()->address }}">
+                                            value="{{ auth()->user()->address }}">
                                     </div>
                                     <span class="error">
                                         @if ($errors->has('address'))
