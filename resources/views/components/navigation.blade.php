@@ -1,3 +1,7 @@
+@php
+    $cart = DB::table('carts')->where("user_id", auth()->user()->id)->count();
+@endphp
+
 <header class="header">
     <!--  ------Menu parte 1 / Navegacion de la pagina------  -->
     <div class="navigation">
@@ -17,14 +21,14 @@
         <div class="user-area register-area">
             @auth
                 <a href="{{route("cart")}}" aria-label="Ir al carrito de compras">
-                    <i id="add-cart" class="fa-solid fa-cart-shopping menu-icon user-icon" id="button-menu-shopping">
+                    <i id="add-cart" class="fa-solid fa-cart-shopping menu-icon menu-toggle-button user-icon" id="button-menu-shopping">
                         @if($cart != 0)
                             <span id="counter-cart">{{ $cart }}</span>
                         @endif
                     </i>
                 </a>
                 <a href="{{route("client")}}" aria-label="Ir al perfil de usuario">
-                    <i class="fa-solid fa-user menu-icon user-icon" id="button-menu-usuario"></i>
+                    <i class="fa-solid fa-user menu-icon menu-toggle-button user-icon" id="button-menu-usuario"></i>
                 </a>
             @endauth
     

@@ -36,7 +36,7 @@ cartForm.addEventListener('submit', function(e) {
                     try {
                         document.getElementById("counter-cart").innerHTML = parseInt(document.getElementById('counter-cart').textContent) + 1;
                     } catch (error) {
-                        document.getElementById("add-cart").innerHTML = `<i id="contador-carrello">1</i>`;
+                        document.getElementById("add-cart").innerHTML = `<span id="counter-cart">1</span>`;
                     }
                 }
 

@@ -127,7 +127,7 @@ body{
     transition: all .5s;
 }
 
-.user-area #counter{
+#counter-cart{
     font-size: 9px;
     font-weight: 600;
     padding: 3px 5px;
@@ -2135,6 +2135,23 @@ main{
 
 .login-form .form-actions{
     margin-top: 20px;
+}
+
+.login-form .privacy{
+    display: flex; 
+    margin: 10px 0; 
+    align-items:center;
+    gap: 10px;
+}
+
+.login-form .privacy label{
+    font-size: 15px;
+}
+
+.login-form .privacy label a{
+    color: var(--color-1);
+    font-weight: 600;
+    font-size: 14px;
 }
 
 .form-container .submit-button {

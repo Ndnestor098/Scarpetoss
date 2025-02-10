@@ -64,6 +64,5 @@
 
     {{ $slot }}
     
-    {{ $script }}
 </body>
 </html>
