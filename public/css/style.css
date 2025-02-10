@@ -2227,13 +2227,13 @@ main{
 
 /* ===========================================CONTENIDO - AVISO LEGAL=========================================== */
 /* ------Footer parte 1 / Contenido de informacion------ */
-.main-aviso-legal{
+.legal-notice{
     height: 700px;
     width: 100%;
     padding-top: 145px;
 }
 
-.aviso-legal{
+.legal-content{
     height: 100%;
     width: 100%;
     display: flex;
@@ -2241,26 +2241,26 @@ main{
     justify-content: center;
 }
 
-.aviso-legal .contenido-legal{
+.legal-content .legal-text{
     max-width: 1170px;
     margin: 0 auto;
     width: 100%;
     padding: 50px;
 }
 
-.contenido-legal h2{
+.legal-text h2{
     color: var(--color-1);
     margin-bottom: 20px;
 }
 
-.contenido-legal ol{
+.legal-text .legal-list{
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 0px 10px;
 }
 
-.contenido-legal ol strong{
+.legal-text .legal-list strong{
     color: var(--color-1);
 }
 
