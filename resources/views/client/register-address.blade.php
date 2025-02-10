@@ -1,20 +1,15 @@
-@extends('layouts.template')
+<x-app>
+    <x-slot name="title">User {{Auth::user()->name}}</x-slot>
 
-@section('name-page')
-    Address
-@endsection
-
-@section('link')
-    {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"> --}}
-    <script src="https://js.stripe.com/v3/"></script>
-@endsection
-
-@section('content-page')
+    <x-slot name="link">
+        <script src="https://js.stripe.com/v3/"></script>
+    </x-slot>
+    
     <main>
         <!-- Contenido de la portada principal -->
-        <div class="Portada-pago">
-            <div class="container">
-                <div class="content-form">
+        <div class="payment-dashboard">
+            <div class="payment-section">
+                <div class="data-form">
                     <h2 class="text-center">Direccion de Envio</h2>
                     <form class="FORMULARIO" action="{{ route('address.add') }}" method="post">
                         @csrf
@@ -30,8 +25,4 @@
             </div>
         </div>
     </main>
-@endsection
-
-@section('files-js')
-    <script src="/js/style.js"></script>
-@endsection 
+</x-app>
