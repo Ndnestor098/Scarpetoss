@@ -19,9 +19,4 @@
             </section>
         </article>
     </main>
-    
-
-    <x-slot name="script">
-        <script src="/js/style.js"></script>
-    </x-slot>
 </x-app>
