@@ -9,7 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SellController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\ShoppingController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UserController;
@@ -86,7 +86,7 @@ Route::middleware(["auth", AdminMiddleware::class])->controller(ProductAdminCont
 });
 
 //=============================================== Area de Administrador / Ventas =================================================
-Route::middleware(["auth", AdminMiddleware::class])->controller(SellController::class)->group(function () {
+Route::middleware(["auth", AdminMiddleware::class])->controller(SalesController::class)->group(function () {
     Route::get("/client/admin/sell", "index")->name("sell");
 });
 
