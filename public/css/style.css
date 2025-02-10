@@ -1064,10 +1064,6 @@ main{
     font-weight: 700;
     color: var(--color-1);
 }
-
-/* .payment-summary .payment-button span{
-    
-} */
  
 /* ===========================================CONTENIDO - SHOPPING=========================================== */
 /* ------Menu parte 1 / Catalago de la pagina------ */
@@ -1496,7 +1492,7 @@ main{
     gap: 20px;
 }
 
-.data-container, .account-info .data-form{
+.data-container, .data-form{
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -1508,7 +1504,7 @@ main{
     font-size: 18px;
 }
 
-.data-container div, .account-info .data-form div{
+.data-container div, .data-form div{
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -1551,33 +1547,33 @@ main{
     text-align: center;
 }
 
-.account-info .data-form form{
+.data-form form{
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: fit-content;
 }
 
-.account-info .data-form form div{
+.data-form form div{
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.account-info .data-form form div label{
+.data-form form div label{
     font-size: 15px;
 }
 
-.account-info .data-form form div input{
+.data-form form div input{
     padding: 10px;
     width: 270px;
 }
 
-.account-info .data-form form div #customer-email{
+.data-form form div #customer-email{
     color: #7e7e7e;
 }
 
-.account-info .data-form form .error{
+.data-form form .error{
     width: 100%;
     height: 100%;
     font-size: 14px;
@@ -1587,7 +1583,7 @@ main{
     max-width: 270px;
 }
 
-.account-info .data-form form button{
+.data-form form button{
     border: none;
     padding: 10px 0px;
     background-color: var(--color-1);
@@ -2181,6 +2177,41 @@ padding: 10px 0px;
     color: var(--color-1);
     font-weight: 600;
 }
+
+/* ===========================================CONTENIDO - PAGOS Y ADDRESS=========================================== */
+.payment-dashboard {
+    padding: 200px 20px 100px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.payment-section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-dashboard .form-control{
+    width: 100%;
+    border-radius: 0.375rem;
+    border: 1px solid var(--color-1);
+    outline: 0;
+    background-color: var(--color-white);
+    padding: 0.75rem 1rem;
+    color: var(--color-5);
+}
+
+.payment-dashboard .text-center{ 
+    width: 100%;
+    text-align: center;
+}
+
 
 /* ===========================================CONTENIDO - AVISO LEGAL=========================================== */
 /* ------Footer parte 1 / Contenido de informacion------ */

@@ -109,13 +109,13 @@ Route::controller(CartController::class)->middleware("auth")->group(function (){
 
 
 //=============================================== Pasarela de Pago / Usuarios =================================================
-Route::controller(StripeController::class)->group(function (){
-    Route::get('/register-card', 'index')->name('stripe.index')->middleware('auth');
-    Route::post('/register-card', 'createPayment')->name('stripe.createPay')->middleware('auth');
-    Route::get('/payment', 'processPayment')->name('payment.process')->middleware('auth');
-    Route::get("/client/details/payment", "edit")->name("payment.edit")->middleware("auth");
-    Route::post('/client/details/update-payment', 'update')->name('payment.update')->middleware("auth");
-    Route::get('/client/details/purchase', 'showPurchase')->name('purchase')->middleware("auth");
+Route::controller(StripeController::class)->middleware("auth")->group(function (){
+    Route::get('/register-card', 'index')->name('stripe.index');
+    Route::post('/register-card', 'createPayment')->name('stripe.createPay');
+    Route::get('/payment', 'processPayment')->name('payment.process');
+    Route::get("/client/details/payment", "edit")->name("payment.edit");
+    Route::post('/client/details/update-payment', 'update')->name('payment.update');
+    Route::get('/client/details/purchase', 'showPurchase')->name('purchase');
 });
 
 //=============================================== Agradecimiento de compra=================================================

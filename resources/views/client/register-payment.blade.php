@@ -1,41 +1,39 @@
-@extends('layouts.template')
+<x-app>
+    <x-slot name="title">User {{Auth::user()->name}}</x-slot>
 
-@section('name-page')
-    User {{Auth::user()->name}}
-@endsection
-
-@section('link')
-    <script src="https://js.stripe.com/v3/"></script>
-@endsection
-
-@section('content-page')
+    <x-slot name="link">
+        <script src="https://js.stripe.com/v3/"></script>
+    </x-slot>
+    
     <main>
         <!-- Contenido de la portada principal -->
-        <div class="Portada-pago">
-            <div class="container">
-                <div class="content-form">
-                <h2 class="text-center">Metodo de pago</h2>
-
-                    <form class="FORMULARIO" action="{{ route('stripe.createPay') }}" method="post" id="payment-form">
-                        @csrf
-                        <div class="form-group">
-                            <label for="cardholder-name">Nombre del titular de la tarjeta</label>
-                            <input type="text" class="form-control" id="cardholder-name" name="cardholder_name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required value="{{auth()->user()->email}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="card-element">Tarjeta de credito o debito</label>
-                            <div id="card-element" class="form-control"></div>
-                        </div>
-                        <div id="card-errors" role="alert"></div>
-                        <button type="submit" class="btn btn-primary mt-3">Agregar Metodo de Pago</button>
-                    </form>
-
+        <div class="payment-dashboard">
+            <div class="payment-section">
+                <div class="container">
+                    <div class="data-form">
+                        <h2 class="text-center">Payment Method</h2>
+            
+                        <form class="payment-form" action="{{ route('stripe.createPay') }}" method="post" id="payment-form">
+                            @csrf
+                            <div class="form-group">
+                                <label for="cardholder-name">Nombre</label>
+                                <input type="text" class="form-control" id="cardholder-name" name="cardholder_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required value="{{ auth()->user()->email }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="card-element">Credit or Debit Card</label>
+                                <div id="card-element" class="form-control"></div>
+                            </div>
+                            <div id="card-errors" role="alert"></div>
+                            <button type="submit" class="btn btn-primary mt-3">Add Payment Method</button>
+                        </form>
+                    </div>
                 </div>
             </div>
+
             <script>
                 var stripe = Stripe('{{ config('services.stripe.key') }}');
                 var elements = stripe.elements();
@@ -73,9 +71,6 @@
             </script>
         </div>
 
-    </main>
-@endsection
 
-@section('files-js')
-    <script src="/js/style.js"></script>
-@endsection 
+    </main>
+</x-app>
