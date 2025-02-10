@@ -1,28 +1,24 @@
-@extends('layouts.template')
+<x-app>
+    <x-slot name="title">Edit User {{Auth::user()->name}}</x-slot>
 
-@section('name-page')
-    Edit User {{ Auth::user()->name }}
-@endsection
-
-@section('content-page')
     <main>
         <!-- Contenido de la portada principal -->
-        <div class="Portada-usuario">
-            @include('components.panel')
+        <section class="user-dashboard">
+            <x-panel/>
 
-            <div class="info-cuenta">
-                <div class="saludo">
+            <div class="account-info">
+                <div class="greeting">
                     <h3>Hola, {{ Auth::user()->name }}!</h3>
                 </div>
-                <div class="datos">
-                    <div class="contenido-data">
-                        <div class="info-data">
+                <div class="user-data">
+                    <div class="data-content">
+                        <div class="data-form">
                             <div>
                                 <p>Mis datos</p>
                             </div>
-                            <div class="info-usuario">
+                            <div class="data-form">
                                 <form action="{{ route('edit.user') }}" method="POST" autocomplete="off"
-                                    enctype="application/x-www-form-urlencoded" class="cambiar-info">
+                                    enctype="application/x-www-form-urlencoded" class="update-info">
                                     @csrf
                                     @method('PUT')
                                     <div>
@@ -63,24 +59,24 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="cambio-key">
+                        <div class="data-form">
                             <div>
                                 <p>Cambiar Clave</p>
                             </div>
-                            <div class="info-usuario">
+                            <div class="user-info">
                                 <form action="{{ route('edit.password', [], true) }}" method="POST"
-                                    enctype="application/x-www-form-urlencoded" class="cambiar-clave">
+                                    enctype="application/x-www-form-urlencoded" class="update-password">
                                     @csrf
                                     @method('PUT')
-
+                
                                     <div>
                                         <label for="password">Clave Actual</label>
-                                        <input type="text" name="password" id="password" required
+                                        <input type="password" name="password" id="password" required
                                             placeholder="Clave Actual">
                                     </div>
                                     <div>
                                         <label for="password_new">Clave Nueva</label>
-                                        <input type="text" name="password_new" id="password_new" required placeholder="Clave Nueva">
+                                        <input type="password" name="password_new" id="password_new" required placeholder="Clave Nueva">
                                         
                                         <span class="error">
                                             @if ($errors->has('password_new'))
@@ -90,7 +86,7 @@
                                     </div>
                                     <div>
                                         <label for="password_new_confirmation">Confirmar Clave Nueva</label>
-                                        <input type="text" name="password_new_confirmation"
+                                        <input type="password" name="password_new_confirmation"
                                             id="password_new_confirmation" required placeholder="Clave Nueva">
                                     </div>
                                     <span class="error">
@@ -103,13 +99,12 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-        </div>
+        </section>
     </main>
-@endsection
 
-@section('files-js')
-    <script src="/js/style.js"></script>
-@endsection
+</x-app>
+        
+    
+

@@ -58,7 +58,7 @@
                             <p class="error-message"></p>
                         @enderror
         
-                        <div class="privacy-policy">
+                        <div class="privacy-policy-check">
                             <input type="checkbox" name="privacy-policy" id="privacy-policy" required>
                             <label for="privacy-policy">Acepto las <a href="{{ route('politica.privacidad') }}">Políticas de Privacidad</a> *</label>
                         </div>

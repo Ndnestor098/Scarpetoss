@@ -524,7 +524,7 @@ main{
     background-color: var(--color-white);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-flow: row nowrap;
     gap: 10px;   
 }
@@ -820,17 +820,17 @@ main{
     color: var(--color-1);
 }
 
-.contact-content .privacy-policy{
+.contact-content .privacy-policy-check{
     font-size: 16px;
 }
 
-.contact-content .privacy-policy label a{
+.contact-content .privacy-policy-check label a{
     color: var(--color-1);
     font-weight: 500;
 
 }
 
-.contact-content .privacy-policy input{
+.contact-content .privacy-policy-check input{
     color: var(--color-1);
     cursor: pointer;
 }
@@ -1170,6 +1170,7 @@ main{
     flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
+    justify-content: space-around;
 }
 
 .catalog .product-card{
@@ -1469,29 +1470,32 @@ main{
     font-weight: 500;
 }
 
-.account-info .user-data{
+.account-info .user-data, .data-info{
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 100%;
 }
 
-/* .account-info .contenido-data{
+.account-info .data-content{
     display: flex;
-} */
+    justify-content: space-between;
+    gap: 20px;
+}
 
-.data-container, .account-info .cambio-key{
+.data-container, .account-info .account-info .data-form{
     display: flex;
     width: 100%;
     flex-direction: column;
     justify-content: start;
-    gap: 20px;
+    gap: 15px;
 }
 
-.sub-title{
+.account-info .sub-title{
     font-size: 18px;
 }
 
-.data-container div, .cambio-key div{
+.data-container div, .account-info .data-form div{
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -1505,20 +1509,20 @@ main{
     padding:2px 5px;
 }
 
-.btn-data{
+.account-info .btn-data{
     border: 1px solid var(--color-5);
     width: fit-content;
     padding: 5px 15px;
     border-radius: 5px;
 }
 
-.btn-data span{
+.account-info .btn-data span{
     color: var(--color-1);
     font-size: 15px;
     font-weight: 600;
 }
 
-.user-info span{
+.account-info .user-info span{
     font-size: 17px;
     display: flex;
     justify-content: center;
@@ -1526,7 +1530,7 @@ main{
     width: fit-content;
 }
 
-.user-info i{
+.account-info .user-info i{
     color: var(--color-1);
     font-size: 20px;
     width: 24px;
@@ -1534,33 +1538,33 @@ main{
     text-align: center;
 }
 
-.data-container form, .cambio-key form{
+.account-info .data-form form{
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: fit-content;
 }
 
-.data-container form div, .cambio-key form div{
+.account-info .data-form form div{
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.data-container form div label, .cambio-key form div label{
+.account-info .data-form form div label{
     font-size: 15px;
 }
 
-.data-container form div input, .cambio-key form div input{
+.account-info .data-form form div input{
     padding: 10px;
     width: 270px;
 }
 
-.data-container form div #customer-email, .cambio-key form div #customer-email{
+.account-info .data-form form div #customer-email{
     color: #7e7e7e;
 }
 
-.data-container form .error, .cambio-key form .error{
+.account-info .data-form form .error{
     width: 100%;
     height: 100%;
     font-size: 14px;
@@ -1570,7 +1574,7 @@ main{
     max-width: 270px;
 }
 
-.data-container form button, .cambio-key form button{
+.account-info .data-form form button{
     border: none;
     padding: 10px 0px;
     background-color: var(--color-1);
@@ -2571,9 +2575,18 @@ main{
     .brands{
         padding: 50px 15px !important;
     }
+
     .brands-list{
         flex-wrap: wrap !important;
         padding: 5px !important;
+    }
+
+    .brand-item{
+        width: min-content;
+    }
+
+    .brand-item figure, .brand-item img{
+        width: 100px !important;
     }
 }
 
@@ -2691,49 +2704,52 @@ main{
 
     }
 
-    .shopping-overview .catalog{
-        .contenido-catalogo{
-            padding: 40px 2px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            transition: all .5s;
+    .catalog .contenido-catalogo{
+        padding: 40px 2px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        transition: all .5s;
 
-        }
-        .carousel-item{
-            width: fit-content;
-            box-shadow: 0 0 5px 3px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            transition: all .5s;
-            
-            .product-image{
-                height: fit-content;
-                width: fit-content;
-                transition: all .5s;
-            }
-            img{
-                width: 172px;
-                height: 200px;
-                transition: all .5s;
-            }
-        }
-        .product-info{
-            gap: 20px;
-            padding: 10px;
-            transition: all .5s;
-            
-            .title-producto{
-                width: 150px;
-                font-size: 14px;
-                transition: all .5s;
-            }
-            .precio-producto{
-                font-size: 15px;
-                color: var(--color-1);
-                transition: all .5s;
-            }
-        }
+    }
+
+    .catalog .carousel-item{
+        width: fit-content;
+        box-shadow: 0 0 5px 3px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        transition: all .5s;
+        max-width: 195px;
+    }
+
+    .carousel-item .product-image{
+        height: fit-content;
+        width: fit-content;
+        transition: all .5s;
+    }
+
+    .product-card img{
+        width: fit-content;
+        height: 200px;
+        transition: all .5s;
+    }
+
+    .catalog .product-info{
+        gap: 20px;
+        padding: 10px;
+        transition: all .5s;
+    }
+
+    .product-info .title-producto{
+        width: 150px;
+        font-size: 14px;
+        transition: all .5s;
+    }
+
+    .product-info .precio-producto{
+        font-size: 15px;
+        color: var(--color-1);
+        transition: all .5s;
     }
 
 /* ===========================================CONTENIDO - USUARIO=========================================== */
@@ -2753,12 +2769,6 @@ main{
         flex-direction: column;
         gap: 14px;
     }
-
-    .account-panel.celda-opciones{
-        font-size: 15px;
-    }
-    
-
 /* ===========================================CONTENIDO - PRODUCTO=========================================== */
     /* ------Menu parte 1 / Producto de la pagina------ */
     .product-detail{
@@ -2784,28 +2794,28 @@ main{
     .submenu-toggle{
         margin-left: 0px !important;
         transition: all .5s;
-        
-        .menu-toggle-button{
-            margin-left: 20px;
-            transition: all .5s;
-        }
-
-        
     }
+
+    .menu-toggle-button{
+        margin-left: 15px !important;
+        transition: all .5s;
+    }
+
     .user-area{
-        gap: 10px !important;
+        gap: 0px !important;
         padding-right: 10px !important;
         transition: all .5s;
+    }
 
-        a{
-            font-size: 12px;
-            transition: all .5s;
-        }
-        #contador-carrello{
-            top: 67px;
-            right: 55px;
-            transition: all .5s;
-        }
+    .user-area a{
+        font-size: 12px;
+        transition: all .5s;
+    }
+
+    .user-area #counter-cart{
+        top: 67px !important;
+        right: 74px !important;
+        transition: all .5s;
     }
 
     /* ------Menu parte 2 / Busquedas rapidas shopping------ */
@@ -2917,25 +2927,20 @@ main{
         gap: 14px; 
     }
 
-    .account-panel .celda-opciones{
-        font-size: 15px;
-    }
-
     .user-dashboard .account-info{
         padding: 4px 10px;
         transition: all .5s;   
     }
 
-    .account-info .contenido-data{
+    .data-content{
         flex-wrap: wrap;
-        justify-content: center;
         gap: 20px;
         transition: all .5s;
+        justify-content: center !important;
     }
 
-    .contenido-data .data-container, .cambio-key {
+    .data-form{
         align-items: center;
-        transition: all .5s;
     }
 
 }
@@ -2977,24 +2982,29 @@ main{
     
 /* ===========================================CONTENIDO - PRODUCTO=========================================== */
     /* ------Menu parte 1 / Producto de la pagina------ */
-    .product-detail .product-gallery img{
-        height: 360px;
-        width: 360px;
-        transition: all .5s;
+    .carousel-item img{
+        width: 159px !important;
     }
         
-    .product-detail .product-info{
+    .product-info{
         width: 100%;
-        padding: 10px 5px;
-        align-items: center;
+        padding: 10px 5px !important;
+    }
+
+    .category-title{
+        font-size: 15px !important;
+    }
+
+    .product-filter .filter-options{
+        gap: 1px !important;
     }
 
     .product-info .product-content{
         width: 362px;
     }
     
-    .product-info .product-price{
-        width: 362px;
+    .catalog-grid{
+        padding: 10px !important;
     }
     
 }

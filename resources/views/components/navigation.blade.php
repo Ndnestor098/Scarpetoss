@@ -56,7 +56,7 @@
     <aside class="submenu">
         <button class="close-submenu-button fa-solid fa-xmark" id="close-submenu-button" aria-label="Cerrar el menú"></button>
 
-        <div class="user-info" style="display:flex; flex-direction:column; align-items:center;">
+        <div class="user-info">
             <i class="fa-solid fa-user user-icon" id="menu"></i>
             <p class="user-name">
                 @auth
