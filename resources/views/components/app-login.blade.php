@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
 
 	<!-- =======================================DESCRIPCION======================================= -->
-    <title>@yield("name-page") - Scarpetoss</title>
+    <title>Scarpetoss - {{ $title }}</title>
     <meta name="description" content="Vendemos zapatos de tu preferencias para que estes comodo y contento con tus elecciones.">
     
     <meta name="product_id" content="102856451">
@@ -59,13 +59,11 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/image/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    {{-- @vite('resources/css/app.css') --}}
 </head>
 <body>
 
-    @yield('content-page')
+    {{ $slot }}
     
-
-    @yield("files-js")
+    {{ $script }}
 </body>
 </html>

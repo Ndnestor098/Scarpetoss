@@ -5,9 +5,10 @@
     </x-slot>
 
     <main>
-        <!-- Contenido de la pagina principal -->
+        <!-- Content -->
         <section class="shopping-overview">
             
+            {{-- Product Info --}}
             <aside class="product-counter">
                 <div class="counter-grid">
                     <a href="{{ request()->fullUrlWithQuery(['gender' => 'hombre']) }}" class="counter-item">
@@ -32,6 +33,7 @@
                 </div>
             </aside>
 
+            {{-- Product Content --}}
             <section class="product-listing">
                 <header>    
                     <form class="product-filter" action="" method="POST">
