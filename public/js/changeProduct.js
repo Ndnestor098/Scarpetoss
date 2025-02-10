@@ -1,13 +1,13 @@
 "use strict";
 
-const imagePrincipal = document.getElementById('principal');
-const allImages = document.querySelectorAll('.alls-images'); 
+const imagePrincipal = document.getElementById('main-image');
+const allImages = document.querySelectorAll('.thumbnail-image'); 
 
 allImages.forEach((item) => {
     if(item.src == imagePrincipal.src){
-        item.classList.add('active-image')
+        item.classList.add('selected-image')
     } else {
-        item.classList.remove('active-image')
+        item.classList.remove('selected-image')
     }
 
 
@@ -17,10 +17,10 @@ allImages.forEach((item) => {
         }
         
         allImages.forEach((img) => {
-            img.classList.remove('active-image'); 
+            img.classList.remove('selected-image'); 
         });
 
         imagePrincipal.src = item.src; 
-        item.classList.add('active-image');
+        item.classList.add('selected-image');
     });
 });

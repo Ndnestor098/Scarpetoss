@@ -99,13 +99,13 @@ Route::middleware(["auth", AdminMiddleware::class])->controller(UserController::
 });
 
 //=============================================== Area de cart / Usuarios =================================================
-Route::controller(CartController::class)->group(function (){
+Route::controller(CartController::class)->middleware("auth")->group(function (){
     Route::get("/cart", "index")->name("cart");
     Route::put("/cart", "create")->name("cart.create");
     Route::delete("/cart/single", "destroy")->name("cart.destroy");
     Route::delete("/cart/allone", "destroyOneAll")->name("cart.destroy.oneAll");
     Route::delete("/cart/all", "destroyAll")->name("cart.destroyAll");
-})->middleware("auth");
+});
 
 
 //=============================================== Pasarela de Pago / Usuarios =================================================

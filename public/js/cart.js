@@ -1,23 +1,23 @@
 "use strict";
-const formularios = document.querySelector(".form-carrello");
+const cartForm = document.getElementById("cart-form");
 
-formularios.addEventListener('submit', function(e) {
-    const select = document.getElementById('sizes');
+cartForm.addEventListener('submit', function(e) {
     e.preventDefault();
+    const select = document.getElementById('sizes');
 
     if (select.value === "") {
-        select.classList.add('alerta-talla');
+        select.classList.add('alert');
     } else {
         if (typeof window.isAuthenticated !== "undefined" && !window.isAuthenticated) {
             window.location.href = "/login";
             return;
         }
         
-        select.classList.remove('alerta-talla');
+        select.classList.remove('alert');
 
-        let data = new FormData(formularios);
-        let method = formularios.getAttribute("method");
-        let action = formularios.getAttribute("action");
+        let data = new FormData(cartForm);
+        let method = cartForm.getAttribute("method");
+        let action = cartForm.getAttribute("action");
 
         let headers = new Headers();
 
@@ -38,11 +38,11 @@ formularios.addEventListener('submit', function(e) {
                     } catch (error) {
                         document.getElementById("add-cart").innerHTML = `<i id="contador-carrello">1</i>`;
                     }
-                } else if (res.status == 401) {
-                    window.location.href = "/login";
+                }
+
+                if (res.status == 401) {
+                    window.location.href = "/login";  // Redirige al login si no está autenticado
                     return;
-                } else {
-                    console.error(res.message);
                 }
             })
             .catch(error => {

@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
 class CartController extends Controller
@@ -52,15 +51,15 @@ class CartController extends Controller
             return response()->json([
                 'status' => 401,
                 'message' => 'No estás autenticado.'
-            ]);
+            ], 401);
         }
 
         // Crear una nueva entrada en la tabla carritos
-        $carrito = new Cart();
-        $carrito->product_id = $request->product_id;
-        $carrito->user_id = auth()->id(); 
-        $carrito->sizes = $request->sizes; 
-        $carrito->save();
+        $cart = new Cart();
+        $cart->product_id = $request->product_id;
+        $cart->user_id = auth()->id(); 
+        $cart->sizes = $request->sizes; 
+        $cart->save();
 
         // Eliminar caché del carrito
         Cache::forget('cart_' . auth()->user()->id);
@@ -74,12 +73,12 @@ class CartController extends Controller
     public function destroy(Request $request)
     {
         // Buscar la entrada del carrito por su ID
-        $entradaCarrito = Cart::where('product_id', $request->product_id)->where('sizes', $request->sizes)->first();
+        $cart = Cart::where('product_id', $request->product_id)->where('sizes', $request->sizes)->first();
 
         // Verificar si la entrada del carrito existe
-        if ($entradaCarrito) {
+        if ($cart) {
             // Eliminar la entrada del carrito
-            $entradaCarrito->delete();
+            $cart->delete();
 
             Cache::forget('cart_' . auth()->user()->id);
         }
@@ -89,10 +88,10 @@ class CartController extends Controller
 
     public function destroyOneAll(Request $request)
     {
-        $entradaCarrito = Cart::where('product_id', $request->product_id)->where('sizes', $request->sizes)->get();
+        $cart = Cart::where('product_id', $request->product_id)->where('sizes', $request->sizes)->get();
 
-        if ($entradaCarrito->isNotEmpty()) {
-            foreach ($entradaCarrito as $item) {
+        if ($cart->isNotEmpty()) {
+            foreach ($cart as $item) {
                 $item->delete();
             }
 
@@ -104,11 +103,11 @@ class CartController extends Controller
 
     public function destroyAll()
     {
-        $entradaCarrito = Cart::where('user_id', Auth::user()->id)->get();
+        $cart = Cart::where('user_id', Auth::user()->id)->get();
 
-        if ($entradaCarrito->isNotEmpty()) {
+        if ($cart->isNotEmpty()) {
             // Eliminar cada entrada del carrito
-            foreach ($entradaCarrito as $item) {
+            foreach ($cart as $item) {
                 $item->delete();
             }
 
