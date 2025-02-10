@@ -1,39 +1,33 @@
-@extends('layouts.template')
+<x-app>
+    <x-slot name="title">User {{Auth::user()->name}}</x-slot>
 
-@section('name-page')
-    Administrator
-@endsection
 
-@section('content-page')
     <main>
         <!-- Contenido de la portada principal -->
-        <div class="Portada-usuario">
-            @include('components.panel')
-            <div class="info-cuenta">
-                <div class="saludo">
+        <div class="user-dashboard">
+            <x-panel/>
+
+            <div class="account-info">
+                <div class="greeting">
                     <h3>Hola, {{Auth::user()->name}}!</h3>
                 </div>
-                <div class="datos">
+                <div class="user-data">
                     <div>
-                        <p>Mis datos</p>
+                        <p class="sub-title">Mis datos</p>
                     </div>
-                    <div class="info-data">
-                        <div class="info-usuario" >
+                    <div class="data-container">
+                        <div class="user-info" >
                             <span><i class="fa-regular fa-user"></i>{{Auth::user()->name}}</span>
                             <span><i class="fa-solid fa-envelope"></i>{{Auth::user()->email}}</span>
                             <span><i class="fa-solid fa-location-dot"></i>Direccion</span>
                         </div>
-                        <a href="{{route("client.details")}}" style="width: fit-content;"><div class="boton_datos">
+                        <a href="{{route("client.details")}}" class="btn-data">
                             <span>Mis datos</span>
-                        </div></a>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
     </main>
-@endsection
-
-@section('files-js')
-    <script src="/js/style.js"></script>
-@endsection 
+</x-app>

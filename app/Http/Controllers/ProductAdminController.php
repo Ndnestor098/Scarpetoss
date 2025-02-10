@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Size;
 use App\Services\AdminServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductAdminController extends Controller
@@ -21,7 +22,7 @@ class ProductAdminController extends Controller
         return view("admin.product", ['data' => $data]);
     }
 
-    public function create(Request $request)
+    public function create()
     {
         $sizes = Size::orderBy('sizes')->get();
         
@@ -31,21 +32,16 @@ class ProductAdminController extends Controller
     public function store(Request $request, AdminServices $requestAdmin)
     {   
         // Validar los datos recibidos en la solicitud utilizando el validador de Laravel
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required|string', // El campo 'name' es requerido y debe ser una cadena de texto
             'description' => 'required|string', // El campo 'description' es requerido y debe ser una cadena de texto
             'price' => 'required', // El campo 'precio' es requerido
             'gender' => 'required', // El campo 'gender' es requerido
             'stock' => 'required', // El campo 'stock' es requerido
             'supplier' => 'required', // El campo 'supplier' es requerido
-            'images' => 'required'
+            'images' => 'required|array', // El campo 'images' no es obligatorio y debe ser una array
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
         ]);
-
-        // Verificar si las validaciones no se cumplen
-        if ($validator->fails()) {
-            // Si las validaciones fallan, redireccionar de nuevo al formulario anterior con un mensaje de error
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
         // Verificar si no se proporciona un nombre de imagen o si se proporciona una nueva imagen
         if ($request->hasFile("images")){
@@ -54,10 +50,10 @@ class ProductAdminController extends Controller
 
             // Llamar al servicio de crear productos
             $result = $requestAdmin->createProduct($request, $image);
-            if($result){
-                return redirect()->back()->withErrors([$result])->withInput();
-            }
 
+            if($result["status"] == 422){
+                return redirect()->back()->withErrors([$result["message"]])->withInput();
+            }
         }
 
         return redirect(route('products'));
@@ -67,6 +63,25 @@ class ProductAdminController extends Controller
     {
         $data = Product::findOrFail($id);
 
+        $data->images = collect($data->images)->flatMap(function ($item) {
+            if (str_contains($item, 'https://') || str_contains($item, 'http://')) {
+                return [$item];
+            }
+    
+            $decoded = json_decode($item, true);
+    
+            if (is_null($decoded)) {
+                return [$item];
+            }
+    
+            if (is_array($decoded)) {
+                return collect($decoded)->map(fn($img) => Storage::url($img))->all();
+            }
+    
+            return [Storage::url($decoded)];
+        });
+    
+
         $sizes = Size::orderBy('sizes')->get();
 
         return view("admin.product_update", ['data' => $data, 'sizes'=>$sizes]);
@@ -75,35 +90,27 @@ class ProductAdminController extends Controller
     public function update(Request $request, $id, AdminServices $requestAdmin)
     {   
         // Validar los datos recibidos en la solicitud utilizando el validador de Laravel
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required|string', // El campo 'name' es requerido y debe ser una cadena de texto
-            'description' => 'required|string', // El campo 'descripcion' es requerido y debe ser una cadena de texto
+            'description' => 'required|string', // El campo 'description' es requerido y debe ser una cadena de texto
             'price' => 'required', // El campo 'precio' es requerido
-            'gender' => 'required', // El campo 'genero' es requerido
+            'gender' => 'required', // El campo 'gender' es requerido
             'stock' => 'required', // El campo 'stock' es requerido
-            'supplier' => 'required', // El campo 'proveedor' es requerido
+            'supplier' => 'required', // El campo 'supplier' es requerido
+            'images' => 'nullable|array', // El campo 'images' no es obligatorio y debe ser una array
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg'
         ]);
-
-        // Verificar si las validaciones no se cumplen
-        if ($validator->fails()) {
-            // Si las validaciones fallan, redireccionar de nuevo al formulario anterior con un mensaje de error
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
         //Vizualizar si hay una imagen en la nueva actualizacion
         if($request->hasFile("images")){
             // Llamar al servicio de crear y pasar una imagen a la carpeta designada
             $imagen = $requestAdmin->SaveImage($request->file('images'));
+        }
 
-            // Llamar al servicio de crear productos
-            if($requestAdmin->updateProduct($request, $id, $imagen)){
-                return redirect()->back()->withErrors(['Error'])->withInput();
-            }
-        }else{
-            // Llamar al servicio de actualizar productos
-            if($requestAdmin->updateProduct($request, $id)){
-                return redirect()->back()->withErrors(['Error'])->withInput();
-            }
+        $result = $requestAdmin->updateProduct($request, $id, isset($imagen) ? $imagen : null);
+
+        if($result["status"] == 422){
+            return redirect()->back()->withErrors([$result["message"]])->withInput();
         }
 
         return redirect(route('products'));
@@ -112,13 +119,12 @@ class ProductAdminController extends Controller
 
     public function destroy(Request $request)
     {
-        $product = Product::find($request->id);
+        $product = Product::findOrFail($request->id);
 
-        try {
-            unlink(public_path($product->imageP));
+        $images = json_decode($product->images, true);  
 
-        } catch (\Throwable $th) {
-            //throw $th;
+        foreach ($images as $item) {
+            Storage::disk('public')->delete($item);
         }
 
         Cart::where('product_id', $product->id)->delete();

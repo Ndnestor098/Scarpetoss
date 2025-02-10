@@ -1,23 +1,22 @@
-@extends('layouts.template')
+<x-app>
+    <x-slot name="title">Administer {{Auth::user()->name}}</x-slot>
+    <x-slot name="link">
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </x-slot> 
 
-@section('name-page')
-    Agregar Administrator
-@endsection
-
-@section('content-page')
     <main>
         <!-- Contenido de la portada principal -->
-        <div class="Portada-usuario" style="padding-bottom: 0">
-            @include('components.panel')
+        <div class="user-dashboard">
+            <x-panel />
 
-            <div class="info-cuenta">
-                <div class="saludo">
+            <div class="account-info">
+                <div class="greeting">
                     <h3>Crear Nuevo Usuario Administrador</h3>
                 </div>
-                <div class="datos">
-                    <div class="info-data">
-                        <div class="info-usuario">
-                            <form action="{{ route('users.store') }}" method="POST" autocomplete="off"enctype="application/x-www-form-urlencoded" class="cambiar-info">
+                <div class="data-container">
+                    <div class="user-info">
+                        <div class="user-data">
+                            <form action="{{ route('users.store') }}" method="POST" autocomplete="off"enctype="application/x-www-form-urlencoded" class="product-edit-form">
                                 @csrf
                                 <div>
                                     <label for="name">Nombre</label>
@@ -52,8 +51,4 @@
             
         </div>
     </main>
-@endsection
-
-@section('files-js')
-    <script src="/js/style.js"></script>
-@endsection 
+</x-app>

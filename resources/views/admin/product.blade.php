@@ -38,11 +38,16 @@
 
                                 <td class="edit" style="font-weight:600;text-align:center;color:#333333"><a href="{{ route('products.edit', ['id'=>$item->id]) }}" type="submit">Editar</a></td>
 
-                                <form action="" method="POST">
+                                
+                                <form action="{{ route('products.delete', $item->id) }}" method="POST">
                                     @csrf
-                                    @method('delete')
-                                    <input type="hidden" name="id" value="{{$item->id}}">
-                                    <td class="delete"><button type="submit">Eleminar</button></td>
+                                    @method('DELETE')
+                                    <td class="delete">
+                                        <button type="submit" onclick="return confirm('¿Estás seguro de eliminar este producto?')">
+                                            Eliminar
+                                        </button>
+                                    </td>
+
                                 </form>
                             </tr>
                         @endforeach

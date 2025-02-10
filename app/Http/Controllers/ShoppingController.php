@@ -26,12 +26,28 @@ class ShoppingController extends Controller
 
         // Procesar imágenes de productos
         $products->getCollection()->map(function ($product) {
-            $product->images = collect($product->images)->map(function ($item) {
-                return (str_contains($item, 'https://') || str_contains($item, 'http://')) 
-                    ? $item 
-                    : Storage::url('public/' . $item);
+            $product->images = collect($product->images)->flatMap(function ($item) {
+                // Si el item es una URL absoluta, se deja tal cual
+                if (str_contains($item, 'https://') || str_contains($item, 'http://')) {
+                    return [$item];
+                }
+        
+                // Intentar decodificar el JSON si está en formato string
+                $decoded = json_decode($item, true);
+        
+                // Si la decodificación falla o devuelve null, dejar el item tal cual
+                if (is_null($decoded)) {
+                    return [$item];
+                }
+        
+                // Si la decodificación es exitosa y devuelve un array
+                if (is_array($decoded)) {
+                    return collect($decoded)->map(fn($img) => Storage::url($img))->all();
+                }
+        
+                return [Storage::url($decoded)];
             });
-
+        
             return $product;
         });
 

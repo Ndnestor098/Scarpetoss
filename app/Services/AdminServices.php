@@ -26,7 +26,7 @@ class AdminServices
         $product->description = $request->description; // Descripción del producto
         $product->price = str_replace(",", ".", $request->price); // Precio del producto
         $product->gender = $request->genero; // Género del producto
-        $product->images = json_encode($images); // Ruta de las imagenes
+        $product->images = $images; // Ruta de las imagenes
         $product->stock = $request->stock; // Stock del producto
         $product->brand = $request->supplier; // Marca o proveedor del producto
 
@@ -39,12 +39,18 @@ class AdminServices
             unlink(public_path($product->imageP));
             $product->delete();
 
-            return 'Size error';
+            return [
+                "status" => 422,
+                "message" => "Sizes are missing"
+            ];
         }
 
         $product->sizes()->sync($sizes);
 
-        return false;
+        return [
+            "status" => 200,
+            "message" => "The product has been updated"
+        ];
     }
 
     /**
@@ -69,9 +75,6 @@ class AdminServices
         
         // Si se proporciona una imagen, actualizar la imagen del producto
         if ($images) {
-            // Eliminar la imagen anterior del producto
-            unlink($product->imageP);
-            
             // Actualizar la imagen principal del producto y la imagen adicional con la nueva imagen
             $product->images = $images;
         }
@@ -82,12 +85,18 @@ class AdminServices
         $sizes = Size::whereIn('sizes', $request->sizes)->pluck('id')->toArray();
 
         if (count($request->sizes) !== count($sizes)) {
-            return 'Size error';
+            return [
+                "status" => 422,
+                "message" => "Sizes are missing"
+            ];
         }
 
         $product->sizes()->sync($sizes);
 
-        return false;
+        return [
+            "status" => 200,
+            "message" => "The product has been updated"
+        ];
     }
 
     /**
@@ -112,16 +121,16 @@ class AdminServices
                 array_push($imagePaths, $path);
             } else {
                 // Si la imagen no es válida, retorna una respuesta JSON con el mensaje de error.
-                return response()->json([
+                return [
                     'message' => 'The image is invalid.',
                     'error' => ['The image is invalid.'],
                     'status' => 422
-                ], 422);
+                ];
             }
         }
 
         // Retorna el array de rutas de las imágenes que se han guardado exitosamente.
-        return $imagePaths;
+        return json_encode($imagePaths);
     }
 
 } 
