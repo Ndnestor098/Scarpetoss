@@ -1,54 +1,44 @@
-@extends('layouts.template')
+<x-app>
+    <x-slot name="title">Administer Buy {{Auth::user()->name}}</x-slot>
 
-@section('name-page')
-    Administrator Producto
-@endsection
-
-@section('content-page')
     <main>
         <!-- Contenido de la portada principal -->
-        <div class="Portada-usuario" style="padding-bottom: 0">
-            @include('components.panel')
+        <div class="user-dashboard">
+            <x-panel/>
 
-            <div class="info-cuenta">
-                <div class="saludo">
+            <div class="account-info">
+                <div class="greeting">
                     <h3>Nuestros Productos</h3>
                 </div>
-                <div class="datos">
-                    <table class="table-estadisticas">
+                <div class="user-data">
+                    <table class="stats-table">
                         <tr>
                             <th>Imagen</th>
                             <th>Producto</th>
                             <th>Count</th>
                             <th>Precio</th>
-                            <th class="none">Talla</th>
+                            <th class="hidden-column">Talla</th>
                             <th>Fecha</th>
                         </tr>
-                        <?php $valor = 1 ?>
+                        <?php $rowVariant = 1 ?>
                         @foreach ($sells as $item)
-                            <tr class="productos_{{$valor}}">
-                                <td class="center"><img src="{{ Storage::url($item->product->imageP) }}" alt="{{$item->product->name}}" height="50px" width="50px"></td>
+                            <tr class="product-row variant-{{$rowVariant}}">
+                                <td class="text-center">
+                                    <img src="{{ Storage::url($item->product->imageP) }}" 
+                                         alt="{{$item->product->name}}" 
+                                         height="50" width="50">
+                                </td>
                                 <td>{{$item->product->name}}</td>
-                                <td class="center">{{$item->count}}</td>
-                                <td class="center">{{$item->price}}</td>
-                                <td class="center none">{{$item->size}}</td>
-                                <td class="center">{{$item->created_at}}</td>
+                                <td class="text-center">{{$item->count}}</td>
+                                <td class="text-center">{{$item->price}}</td>
+                                <td class="text-center hidden-column">{{$item->size}}</td>
+                                <td class="text-center">{{$item->created_at}}</td>
                             </tr>
-                            @if ($valor == 1)
-                                <?php $valor = 0 ?>
-                            @else
-                                <?php $valor = 1 ?>
-                            @endif
+                            <?php $rowVariant = $rowVariant == 1 ? 0 : 1; ?>
                         @endforeach
-                        
-                    </table>
+                    </table>                    
                 </div>
             </div>
-            
         </div>
     </main>
-@endsection
-
-@section('files-js')
-    <script src="/js/style.js"></script>
-@endsection 
+</x-app>

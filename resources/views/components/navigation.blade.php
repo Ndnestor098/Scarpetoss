@@ -1,6 +1,8 @@
-@php
-    $cart = DB::table('carts')->where("user_id", auth()->user()->id)->count();
-@endphp
+@auth
+    @php
+        $cart = DB::table('carts')->where("user_id", auth()->user()->id)->count();
+    @endphp
+@endauth
 
 <header class="header">
     <!--  ------Menu parte 1 / Navegacion de la pagina------  -->

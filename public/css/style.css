@@ -1483,7 +1483,7 @@ main{
     gap: 20px;
 }
 
-.data-container, .account-info .account-info .data-form{
+.data-container, .account-info .data-form{
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -1585,144 +1585,63 @@ main{
 
 
 
-/* ===========================================CONTENIDO - Metodo de Pago=========================================== */
-.Portada-pago{
+/* =========================================== TABLES =========================================== */
+.stats-table tr:nth-child(odd) {
+        background-color: #cfcfcf96;
+}
+
+.stats-table td{
+    padding: 3px 2px;
+}
+
+.stats-table button{
+    border: none;
+    background-color: #00000000;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-5);
+    text-align: center;
     height: 100%;
     width: 100%;
-    min-height: 590px;
-    padding-top: 150px;
-    padding-bottom: 40px;
-
-    display: flex;
-    
-
-    .container{
-        height: 100%;
-        width: 100%;
-        padding: 45px 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 25px;
-        
-        
-        .content-form{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
-
-            h2{
-                color: var(--color-1);
-                font-size: 32px;
-                font-weight: 500;   
-                align-items: center;
-            }
-
-            form{
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-                width: fit-content;
-
-                div{
-                    display: flex;
-                    flex-direction: column;
-                    gap: 5px;
-
-                    label{
-                        font-size: 15px;
-                    }
-                    input{
-                        padding: 5px;
-                        width: 270px;
-                    }
-                    .form-control{
-                        border: 1px solid var(--color-black);
-                        padding: 8px;
-                    }
-                }
-                #card-errors{
-                    width: 100%;
-                    height: 100%;
-                    font-size: 14px;
-                    color: #c92c2c;
-                    font-weight: 500;
-                    text-align: center;
-                }
-                button{
-                    border: none;
-                    padding: 10px 0px;
-                    background-color: var(--color-1);
-                    color: var(--color-2);
-                    font-weight: 500;
-                    font-size: 14px;
-                    cursor: pointer;
-                }
-            }
-        }
-
-    }
 }
 
-/* ===========================================CONTENIDO - Ad=========================================== */
-.table-estadisticas{
-    tr:nth-child(odd) {
-        background-color: #cfcfcf96;
-    }
-    tr{   
-        td{
-            padding: 3px 2px;
-        }
-
-        button{
-            border: none;
-            background-color: #00000000;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--color-5);
-            text-align: center;
-            height: 100%;
-            width: 100%;
-        }
-        .delete{
-            background-color: #e97878ea;
-        }
-
-        .edit{
-            background-color: #8ea6eed5;
-        }
-
-        .center{
-            text-align: center;
-        }
-    }
-    th{
-        background-color: var(--color-2);
-        color: var(--color-1);
-        text-align: center;
-        padding: 10px 0px;
-        
-    }
+.stats-table .delete{
+    background-color: #e97878ea;
 }
+
+.stats-table .edit{
+    background-color: #8ea6eed5;
+}
+
+.stats-table .center{
+    text-align: center;
+}
+
+.stats-table th{
+background-color: var(--color-2);
+color: var(--color-1);
+text-align: center;
+padding: 10px 0px;
+
+}
+
 
 .area-button{
     display: flex;
     justify-content: center;
     align-items: center;
     padding-bottom: 20px;
+}
 
-    .add{
-        padding: 7px 12px;
-        background-color: var(--color-2);
-        color: var(--color-1);
-        border: 1px solid var(--color-1);
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-    }
+.area-button .add{
+    padding: 7px 12px;
+    background-color: var(--color-2);
+    color: var(--color-1);
+    border: 1px solid var(--color-1);
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .edit-product{
@@ -1730,97 +1649,96 @@ main{
     display: flex;
     flex-direction: column;
     gap: 10px;
-
-    
-    .div{
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-
-        textarea{
-            resize: none;
-            padding: 5px 5px;
-            font-size: 14px;
-        }
-
-        p{
-            font-size: 14px;
-            color: var(--color-5);
-        }
-
-        input{
-            padding: 5px 5px;
-            font-size: 15px;
-        }
-
-        select{
-            padding: 5px 5px;
-            font-size: 15px;
-        }
-    }
-
-    
-    
-    label{
-        font-size: 19px;
-        font-size: 500;
-        color: var(--color-5);
-    }
-
-    .error{
-        text-align: center;
-        font-size: 15px;
-        font-weight: 600;
-        color: #c92c2c;
-        height: 17px;
-    }
-    
-    button{
-        background-color: var(--color-2);
-        color: var(--color-5);
-        border: 1px solid var(--color-5)86;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: 600;
-        padding: 5px 10px;
-    }
 }
 
-.checklist{
-    margin: 10px 0px;
-    
-    .checkbox-wrapper-13{
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
+.edit-product .div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
-        div{
-            margin: 5px;
-            display: flex;
-            align-items: center;
-        }
-    }
-    @supports (-webkit-appearance: none) or (-moz-appearance: none) {
-        .checkbox-wrapper-13 input[type=checkbox] {
-            --active: #275EFE;
-            --active-inner: var(--color-white);
-            --focus: 2px rgba(39, 94, 254, .3);
-            --border: #BBC1E1;
-            --border-hover: #275EFE;
-            --background: var(--color-white);
-            --disabled: #F6F8FF;
-            --disabled-inner: #E1E6F9;
-            height: 21px;
-            outline: none;
-            display: inline-block;
-            vertical-align: top;
-            position: relative;
-            margin: 0;
-            cursor: pointer;
-            border: 1px solid var(--bc, var(--border));
-            background: var(--b, var(--background));
-            transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+.edit-product .div textarea{
+    resize: none;
+    padding: 5px 5px;
+    font-size: 14px;
+}
+
+.edit-product .div p{
+    font-size: 14px;
+    color: var(--color-5);
+}
+
+.edit-product .div input{
+    padding: 5px 5px;
+    font-size: 15px;
+}
+
+.edit-product .div select{
+    padding: 5px 5px;
+    font-size: 15px;
+}
+
+.edit-product label{
+    font-size: 19px;
+    font-size: 500;
+    color: var(--color-5);
+}
+
+.edit-product .error{
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #c92c2c;
+    height: 17px;
+}
+
+.edit-product button{
+    background-color: var(--color-2);
+    color: var(--color-5);
+    border: 1px solid var(--color-5)86;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px 10px;
+}
+
+.edit-product .checklist{
+    margin: 10px 0px;
+}
+
+.checklist .checkbox-wrapper-13{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.checkbox-wrapper-13 div{
+    margin: 5px;
+    display: flex;
+    align-items: center;
+}
+
+@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+    .checkbox-wrapper-13 input[type=checkbox] {
+        --active: #275EFE;
+        --active-inner: var(--color-white);
+        --focus: 2px rgba(39, 94, 254, .3);
+        --border: #BBC1E1;
+        --border-hover: #275EFE;
+        --background: var(--color-white);
+        --disabled: #F6F8FF;
+        --disabled-inner: #E1E6F9;
+        height: 21px;
+        outline: none;
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
+        margin: 0;
+        cursor: pointer;
+        border: 1px solid var(--bc, var(--border));
+        background: var(--b, var(--background));
+        transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
     }
     .checkbox-wrapper-13 input[type=checkbox]:after {
         content: "";
@@ -1894,9 +1812,7 @@ main{
     .checkbox-wrapper-13 *:after {
         box-sizing: inherit;
     }
-    }
 }
-
 
 /* ===========================================CONTENIDO - COOKIE=========================================== */
 /* ------Menu parte 1 / Cookie de la pagina------ */

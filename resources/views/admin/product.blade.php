@@ -1,25 +1,20 @@
-@extends('layouts.template')
+<x-app>
+    <x-slot name="title">Administer {{Auth::user()->name}}</x-slot>
+    <x-slot name="link">
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </x-slot>
 
-@section('name-page')
-    Administrator Producto
-@endsection
-
-@section('link')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-@endsection
-
-@section('content-page')
     <main>
         <!-- Contenido de la portada principal -->
-        <div class="Portada-usuario" style="padding-bottom: 0">
-            @include('components.panel')
+        <div class="user-dashboard">
+            <x-panel/>
 
-            <div class="info-cuenta">
-                <div class="saludo">
+            <div class="account-info">
+                <div class="greeting">
                     <h3>Nuestros Productos</h3>
                 </div>
-                <div class="datos">
-                    <table class="table-estadisticas">
+                <div class="user-data">
+                    <table class="stats-table">
                         <tr>
                             <th>Nombre</th>
                             <th class="none">descripcion</th>
@@ -57,6 +52,8 @@
             </div>
             
         </div>
+
+
         <div class="area-button">
             <form action="{{route("products.create")}}" method="GET">
                 @csrf
@@ -67,8 +64,4 @@
             {{$data->links()}}
         </div>
     </main>
-@endsection
-
-@section('files-js')
-    <script src="/js/style.js"></script>
-@endsection 
+</x-app>
