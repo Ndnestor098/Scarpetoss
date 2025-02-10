@@ -1,5 +1,5 @@
 <x-app>
-    <x-slot name="title">Administer Buy {{Auth::user()->name}}</x-slot>
+    <x-slot name="title">Manage Purchases {{Auth::user()->name}}</x-slot>
 
     <main>
         <!-- Contenido de la portada principal -->

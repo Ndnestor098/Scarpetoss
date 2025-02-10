@@ -1,25 +1,19 @@
-@extends('layouts.template')
-
-@section('name-page')
-    Administrator usuarios
-@endsection
-
-@section('link')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-@endsection
-
-@section('content-page')
+<x-app>
+    <x-slot name="title">Administer {{Auth::user()->name}}</x-slot>
+    <x-slot name="link">
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </x-slot>
     <main>
         <!-- Contenido de la portada principal -->
-        <div class="Portada-usuario" style="padding-bottom: 0">
-            @include('components.panel')
+        <div class="user-dashboard">
+            <x-panel/>
 
-            <div class="info-cuenta">
-                <div class="saludo">
+            <div class="account-info">
+                <div class="greeting">
                     <h3>Nuestros Usuarios</h3>
                 </div>
-                <div class="datos">
-                    <table class="table-estadisticas">
+                <div class="user-data">
+                    <table class="stats-table">
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
@@ -58,8 +52,4 @@
             {{$data->links()}}
         </div>
     </main>
-@endsection
-
-@section('files-js')
-    <script src="/js/style.js"></script>
-@endsection 
+</x-app>
