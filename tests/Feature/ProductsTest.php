@@ -21,10 +21,12 @@ test('Shopping', function () {
     $image = Storage::url($image[0]);
 
     $response->assertStatus(200)
+        // Page Test Content
         ->assertSee("Unisex")
         ->assertSee($image)
         ->assertSee($product->name)
         ->assertSee($product->price)
+
         ->assertSee("Damas") // Test Menu
         ->assertSee("Todos los derechos reservados"); // Test footer;
 });
@@ -46,10 +48,12 @@ test('Shopping_Filter', function () {
     $image = Storage::url($image[0]);
 
     $response->assertStatus(200)
+        // Page Test Content
         ->assertSee("Unisex")
         ->assertSee($image)
         ->assertSee($product->name)
         ->assertSee($product->price)
+
         ->assertSee("Damas") // Test Menu
         ->assertSee("Todos los derechos reservados"); // Test footer;
 });
@@ -72,10 +76,12 @@ test('Shopping_Filter_BestSeller', function () {
     $image = Storage::url($image[0]);
 
     $response->assertStatus(200)
+        // Page Test Content
         ->assertSee("Unisex")
         ->assertSee($image)
         ->assertSee($product->name)
         ->assertSee($product->price)
+
         ->assertSee("Damas") // Test Menu
         ->assertSee("Todos los derechos reservados"); // Test footer;
 });
@@ -98,6 +104,7 @@ test('Product', function () {
     $this->assertNotNull($carousel);
 
     $response->assertStatus(200)
+        // Page Test Content
         ->assertSee($product->gender)
         ->assertSee($images[0])
         ->assertSee($images[1])
@@ -106,6 +113,7 @@ test('Product', function () {
         ->assertSee($product->price)
         ->assertSee($product->brand)
 
+        // Carousel Test Content
         ->assertSee($carousel->images[0])
         ->assertSee($carousel->name)
         ->assertSee($carousel->price)

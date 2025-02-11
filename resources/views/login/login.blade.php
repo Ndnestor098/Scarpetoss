@@ -19,25 +19,32 @@
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Email *" value="{{ old('email') }}" required>
+                    @error('email')
+                        <p class="error-message">
+                            {{ $error }}
+                        </p>
+                    @enderror
                 </div>
     
                 <!-- Password Input -->
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Password *" required>
+                    @error('password')
+                        <p class="error-message">
+                            {{ $error }}
+                        </p>
+                    @enderror
                 </div>
     
                 <!-- Error Message and Forgot Password -->
                 <div class="form-actions">
-                    @if ($errors->any())
+                    @error('error_login')
                         <p class="error-message">
-                            @foreach ($errors->all() as $error)
-                                {{ $error }}
-                                @break
-                            @endforeach
+                            {{ $error }}
                         </p>
-                    @endif
-                    
+                    @enderror
+
                     <div class="forgot-password">
                         <a href="#" class="forgot-password-link" rel="noopener noreferrer">Forgot Password?</a>
                     </div>

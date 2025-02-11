@@ -134,16 +134,12 @@ class LoginController extends Controller
      */
     public function register(Request $request)
     { 
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'terms' => 'required|accepted',
         ]);
-
-        if ($validator->fails()) {
-            return redirect(route("register"))->withErrors($validator)->withInput();
-        }
 
         User::create([
             'name' => $request->input('name'),
@@ -167,14 +163,10 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         // Validar los datos del formulario de inicio de sesión
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        
-        if ($validator->fails()) {
-            return redirect(route("register"))->withErrors($validator);
-        }
 
         // Intentar autenticar al usuario y establecer la cookie "remember me"
         $credentials = $request->only('email', 'password');
@@ -188,7 +180,9 @@ class LoginController extends Controller
         }
         
         // Si el inicio de sesión falla, redirigir de vuelta al formulario de inicio de sesión con un mensaje de error
-        return redirect(route("login"))->withErrors(['Las credenciales proporcionadas son incorrectas.'])->withInput();
+        return redirect()->route("login")
+            ->withErrors(['login' => 'Las credenciales proporcionadas son incorrectas.'])
+            ->withInput();
     }
 
     /**
