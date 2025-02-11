@@ -50,18 +50,6 @@ Scarpetoss es una tienda en línea construida con Laravel que permite a los usua
     composer install
     ```
 
-    ```bash
-    composer require laravel/socialite
-    ```
-
-    ```bash
-    composer require laravel-lang/common
-    ```
-
-    ```bash
-    composer require stripe/stripe-php
-    ```
-
 3. Instala las dependencias de Node.js:
 
     ```bash
@@ -69,10 +57,6 @@ Scarpetoss es una tienda en línea construida con Laravel que permite a los usua
     ```
 
 4. Compila los activos de front-end:
-
-    ```bash
-    npm run build
-    ```
 
     ```bash
     npm run dev
@@ -107,6 +91,12 @@ Scarpetoss es una tienda en línea construida con Laravel que permite a los usua
     php artisan migrate:fresh --seed
     ```
 
+9. Inicia el servidor:
+
+    ```bash
+    php artisan serve
+    ```
+
 ## Configuración
 
 1. Configura las claves de Stripe en el archivo `.env`:
@@ -130,6 +120,12 @@ Scarpetoss es una tienda en línea construida con Laravel que permite a los usua
     GITHUB_CLIENT_ID=tu_id_github
     GITHUB_CLIENT_SECRET=tu_secret_github
     GITHUB_REDIRECT_URL=${APP_NAME}/auth/github/callback
+    ```
+
+1. Para comprobar que todo esté funcionando correctamente, ejecuta:
+
+    ```bash
+    php artisan test
     ```
 
 ## Uso
