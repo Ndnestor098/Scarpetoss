@@ -12,30 +12,6 @@
             </div>
         </section>
 
-        {{-- <div class="content-contact">
-            <div class="contactar">
-                <!-- ------------Formulario------------ -->
-                <div class="area-contacto">
-                    <form action="./php/correo.php" method="post" enctype="application/x-www-form-urlencoded" class='FORMULARIOS'>
-                        <h2 style="color: #435334;">Contactanos</h2>
-                        <input class="input-info" required type="text" name="name" id="name" placeholder="Nombre y Apellido *">
-                        <input class="input-info" required type="email" name="email" id="email" placeholder="Email *">
-                        <textarea class="input-mensaje" name="message" id="message" cols="30" rows="10" placeholder="Mensaje *"></textarea>
-                        <p class="error"></p>
-                        
-                        <div style="flex-direction: row;" class="politica-privacidad">
-                            <input type="checkbox" name="politica-privacidad-check" id="politica-privacidad-check" style="padding: 0px 0px; box-shadow: none;" required>
-                            <label for="politica-privacidad-check">Aceptar las <a href="{{route("politica.privacidad")}}">Politicas de Privacidad</a> *</label>
-                        </div>
-                        <!-- <div class="g-recaptcha" data-sitekey="6LeDlrQpAAAAACDqENvlAuh4ShInnMaezlU_u06O"></div> -->
-                        <button class="enviar" type="submit">Enviar Mensaje</button>
-                    </form>
-                </div>
-
-                
-            </div>
-        </div> --}}
-
         <section class="contact-container">
             <div class="contact-content">
                 <!-- Formulario de contacto -->
