@@ -141,8 +141,8 @@
                                         </div>
                                     </a>
                                     <div class="product-description">
-                                        <p>Quantity: {{$item->count_total}}</p>
-                                        <p>Size: {{$item->sizes}}</p>
+                                        <p>Cantidad: {{$item->count_total}}</p>
+                                        <p>Talla del Producto: {{$item->sizes}}</p>
                                     </div>
                                     <div class="product-options">
                                         <form action="{{route('cart.destroy')}}" method="POST">
@@ -150,14 +150,14 @@
                                             @method("delete")
                                             <input type="hidden" name="product_id" value="{{$item->product->id}}">
                                             <input type="hidden" name="sizes" value="{{$item->sizes}}">
-                                            <button type="submit"><i class="fa-solid fa-trash"></i> Remove</button>
+                                            <button type="submit"><i class="fa-solid fa-trash"></i> Elimina</button>
                                         </form>
                                         <form action="{{route('cart.destroy.oneAll')}}" method="POST">
                                             @csrf
                                             @method("delete")
                                             <input type="hidden" name="product_id" value="{{$item->product->id}}">
                                             <input type="hidden" name="sizes" value="{{$item->sizes}}">
-                                            <button type="submit"><i class="fa-solid fa-trash"></i> Remove All</button>
+                                            <button type="submit"><i class="fa-solid fa-trash"></i> Elimina Todos</button>
                                         </form>
                                     </div>
                                 </div>
@@ -170,7 +170,7 @@
                             <form action="{{route('cart.destroyAll')}}" method="POST">
                                 @csrf
                                 @method("delete")
-                                <button type="submit">Remove All Products</button>
+                                <button type="submit">Eliminar Todos Los Productos</button>
                             </form>
                         </div>
                     @else
@@ -220,12 +220,15 @@
                         <div class="payment-button">
                             @if (auth()->user()->address)
                                 @if (auth()->user()->card_last_four)
-                                    <a href="{{route('payment.process', ['amount'=>$total])}}">COMPRAR</a>
+                                    <form id="payment-form" action="{{ route('payment.process') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn-payment" style="border: none; height:50px;cursor: pointer;">COMPRAR</button>
+                                    </form>
                                 @else
-                                    <a href="{{route("stripe.index")}}">AGREGAR METODO DE PAGO</a>
+                                    <a href="{{route("stripe.index")}}" class="btn-payment">AGREGAR METODO DE PAGO</a>
                                 @endif
                             @else
-                                <a href="{{route("client.details")}}">AGREGAR DIRECCION</a>
+                                <a href="{{route("client.details")}}" class="btn-payment">AGREGAR DIRECCION</a>
                             @endif
                         </div>
                     @else

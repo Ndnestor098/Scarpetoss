@@ -36,7 +36,7 @@ Route::post("/shopping", [ShoppingController::class, 'search'])->name("shopping.
 Route::get("/products/{slug}", ProductController::class)->name("products.show");
 
 
-//==========================================Area de Login del usuario============================================
+//==========================================Area de LOGIN============================================
 Route::controller(LoginController::class)->group(function(){
     Route::get("/login", "index")->name("login")->middleware('guest');
 
@@ -59,14 +59,14 @@ Route::controller(LoginController::class)->group(function(){
 });
 
 //===============================================Area de usuario=================================================
-Route::controller(ClientController::class)->group(function(){
-    Route::get("/client", "index")->name("client")->middleware("auth");
+Route::controller(ClientController::class)->middleware("auth")->group(function(){
+    Route::get("/client", "index")->name("client");
 
-    Route::get("/client/details", "details")->name("client.details")->middleware("auth");
+    Route::get("/client/details", "details")->name("client.details");
 
-    Route::put("/client/details/email", "editUser")->name("edit.user")->middleware("auth");
+    Route::put("/client/details/email", "editUser")->name("edit.user");
 
-    Route::put("/client/details/password", "editPassword")->name("edit.password")->middleware("auth");
+    Route::put("/client/details/password", "editPassword")->name("edit.password");
 
 });
 
@@ -112,7 +112,7 @@ Route::controller(CartController::class)->middleware("auth")->group(function (){
 Route::controller(StripeController::class)->middleware("auth")->group(function (){
     Route::get('/register-card', 'index')->name('stripe.index');
     Route::post('/register-card', 'createPayment')->name('stripe.createPay');
-    Route::get('/payment', 'processPayment')->name('payment.process');
+    Route::post('/payment', 'processPayment')->name('payment.process');
     Route::get("/client/details/payment", "edit")->name("payment.edit");
     Route::post('/client/details/update-payment', 'update')->name('payment.update');
     Route::get('/client/details/purchase', 'showPurchase')->name('purchase');

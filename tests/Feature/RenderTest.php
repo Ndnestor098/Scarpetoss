@@ -112,5 +112,5 @@ test("Render_Thanks", function () {
 test("Render_Thanks_Redirect", function () {
     $response = $this->get(route("thanks"));
 
-    $response->assertStatus(301)->assertRedirect(route("login"));
+    $response->assertStatus(302)->assertRedirect(route("login"));
 });

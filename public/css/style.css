@@ -1051,7 +1051,7 @@ main{
     width: 100%;
 }
 
-.payment-summary .payment-button a{
+.payment-summary .payment-button .btn-payment{
     height: 100%;
     width: 100%;
     display: flex;

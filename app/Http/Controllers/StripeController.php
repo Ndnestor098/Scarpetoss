@@ -11,6 +11,7 @@ use Stripe\Charge;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class StripeController extends Controller
 {
@@ -24,7 +25,7 @@ class StripeController extends Controller
         // Validar la solicitud
         $request->validate([
             'cardholder_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email|max:255|exists:users,email',
             'stripeToken' => 'required|string',
         ]);
 
@@ -46,31 +47,36 @@ class StripeController extends Controller
         return redirect()->route('cart');
     }
 
-    public function processPayment(Request $request)
+    public function processPayment()
     {
-        // Validar la solicitud
-        $request->validate([
-            'amount' => 'required|numeric|min:0.01', // Validar que el monto sea un número válido
-        ]);
-
         // Obtener productos en el carrito del usuario autenticado
         $products = Cart::with('product') // Carga los productos relacionados con los carritos
             ->select('product_id', 'user_id', 'sizes', DB::raw('COUNT(*) as count_total')) // Selecciona los campos necesarios y cuenta las filas agrupadas
             ->groupBy('product_id', 'user_id', 'sizes') // Agrupa por product_id, user_id y sizes
             ->where('user_id', auth()->user()->id)
             ->get(); // Ejecuta la consulta y obtiene los resultados
-
+        
         // Verificar si hay productos en el carrito
         if ($products->isEmpty()) {
-            return redirect()->route('cart')->with('error', 'No hay productos en el carrito.');
+            return redirect()->route("cart")
+            ->withErrors(['cart_empty' => 'No hay productos en el carrito.'])
+            ->withInput();
+        }
+
+        $amount = 0;
+
+        foreach($products as $item){
+            $amount += $item->product->price * $item->count_total;
         }
 
         // Convertir el monto a centavos
-        $amountInCents = intval(round($request->amount * 100)); // Redondear para evitar problemas con decimales
+        $amountInCents = intval(round($amount * 100)); // Redondear para evitar problemas con decimales
 
         // Validar que el monto en centavos sea mayor o igual a 1
         if ($amountInCents < 1) {
-            return redirect()->route('stripe.createPayment')->with('error', 'El monto debe ser al menos $0.01.');
+            return redirect()->route("cart")
+                ->withErrors(['amount_error' => 'El monto debe ser al menos $0.01.'])
+                ->withInput();
         }
 
         // Configurar la clave secreta de Stripe
@@ -82,7 +88,7 @@ class StripeController extends Controller
 
         // Crear un cargo
         try {
-            $charge = Charge::create([
+            Charge::create([
                 'customer' => $customerId,
                 'amount' => $amountInCents, // Monto en centavos
                 'currency' => 'usd',
@@ -103,8 +109,11 @@ class StripeController extends Controller
             // Vaciar el carrito del usuario
             Cart::where('user_id', Auth::id())->delete();
         } catch (\Exception $e) {
-            // Manejar errores de Stripe
-            return redirect()->route('stripe.createPayment')->with('error', 'Hubo un problema al procesar el pago: ' . $e->getMessage());
+            Log::info($e->getMessage());
+            Log::info("Entro aqui");
+            return redirect()->route("cart")
+                ->withErrors(['error' => 'Hubo un problema al procesar el pago: ' . $e->getMessage()])
+                ->withInput();
         }
 
         // Redirigir a la página de agradecimiento
@@ -120,7 +129,8 @@ class StripeController extends Controller
     {
         // Validar la solicitud
         $request->validate([
-            'password' => 'required|string|min:8',
+            'password' => 'required|string',
+            'stripeToken' => 'required|string',
         ]);
 
         $user = User::find(Auth::user()->id);
@@ -132,7 +142,7 @@ class StripeController extends Controller
 
             // Crear un cliente en Stripe
             $customer = Customer::create([
-                'email' => $request->email,
+                'email' => $user->email,
                 'source' => $request->stripeToken,
             ]);
 
