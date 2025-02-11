@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Product;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Services\CarouselService;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,12 +13,16 @@ test('Shopping', function () {
     $response = $this->get(route("shopping"));
 
     $product = Product::find(1);
-    if ($product === null) {
-        $this->fail('Product not found in the database.');
-    }
+
+    $this->assertNotNull($product);
+
+    $image = json_decode($product->images);
+
+    $image = Storage::url($image[0]);
 
     $response->assertStatus(200)
         ->assertSee("Unisex")
+        ->assertSee($image)
         ->assertSee($product->name)
         ->assertSee($product->price)
         ->assertSee("Damas") // Test Menu
@@ -32,15 +36,18 @@ test('Shopping_Filter', function () {
     ]));
 
     $product = Product::where('gender', 'hombre')
-        ->orderBY('name', 'asc')
+        ->orderBy('name', 'asc')
         ->first();
 
-    if ($product === null) {
-        $this->fail('Product not found in the database.');
-    }
+    $this->assertNotNull($product);
+
+    $image = json_decode($product->images);
+
+    $image = Storage::url($image[0]);
 
     $response->assertStatus(200)
         ->assertSee("Unisex")
+        ->assertSee($image)
         ->assertSee($product->name)
         ->assertSee($product->price)
         ->assertSee("Damas") // Test Menu
@@ -58,9 +65,7 @@ test('Shopping_Filter_BestSeller', function () {
         ->orderBy('sell', 'ASC')
         ->first();
 
-    if ($product === null) {
-        $this->fail('Product not found in the database.');
-    }
+    $this->assertNotNull($product);
 
     $image = json_decode($product->images);
 
@@ -74,3 +79,38 @@ test('Shopping_Filter_BestSeller', function () {
         ->assertSee("Damas") // Test Menu
         ->assertSee("Todos los derechos reservados"); // Test footer;
 });
+
+test('Product', function () {
+    $product = Product::find(1);
+
+    $this->assertNotNull($product);
+
+    $response = $this->get(route("products.show", [
+        'slug' => $product->slug
+    ]));
+
+    $decoded = json_decode($product->images);
+
+    $images = collect($decoded)->map(fn($item)=>Storage::url($item));
+
+    $carousel = CarouselService::getCarousel()[0];
+
+    $this->assertNotNull($carousel);
+
+    $response->assertStatus(200)
+        ->assertSee($product->gender)
+        ->assertSee($images[0])
+        ->assertSee($images[1])
+        ->assertSee($images[2])
+        ->assertSee($product->name)
+        ->assertSee($product->price)
+        ->assertSee($product->brand)
+
+        ->assertSee($carousel->images[0])
+        ->assertSee($carousel->name)
+        ->assertSee($carousel->price)
+
+        ->assertSee("Damas") // Test Menu
+        ->assertSee("Todos los derechos reservados"); // Test footer;
+});
+

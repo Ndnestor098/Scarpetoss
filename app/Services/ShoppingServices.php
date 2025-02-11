@@ -29,24 +29,6 @@ class ShoppingServices
             return redirect()->route('shopping', array_merge($request->except('page'), ['page' => 1]));
         }
 
-        // Si el modo de tendencia está activado, obtener productos en tendencia
-        if ($request->moda == 'true') {
-            $trendings = Trending::with(['product'=>function ($query) use ($request){
-                    if($request->gender){
-                        $query->gender($request->gender);
-                    }
-                }])
-                ->whereHas('product', function ($query) use ($request) {
-                    if ($request->gender) {
-                        $query->gender($request->gender);
-                    }
-                })
-                ->get()
-                ->pluck('product');
-
-            $products = $this->paginateCollection($trendings, 20, $page);
-        }
-
         // Si el modo de ventas más vistas está activado, obtener productos más vendidos
         if ($request->msv == 'true') {
             $mostSold = Sell::with('product')

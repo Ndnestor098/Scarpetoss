@@ -5,14 +5,13 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
-class Carousel
+class CarouselService
 {
     static public function getCarousel()
     {
-         // Si el carrusel ya está en caché, retornarlo
-        // if (Cache::has('carousel')) {
-        //     return Cache::get('carousel');
-        // }
+        if (Cache::has('carousel')) {
+            return Cache::get('carousel');
+        }
 
         // Obtener productos en orden aleatorio con stock disponible (máximo 8)
         $carousel = Product::where('stock', '>', 0)
@@ -41,8 +40,6 @@ class Carousel
             return $carousel;
         });
         
-        
-
         // Guardar en caché por 60 minutos
         Cache::put('carousel', $carousel, now()->addMinutes(60));
 

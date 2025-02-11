@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Services\Carousel;
+use App\Services\CarouselService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,7 +17,7 @@ class ProductController extends Controller
         // Si el producto existe, procedemos con la lógica
         if ($product) {
             // Obtener los datos del carrusel para la vista
-            $carousel = Carousel::getCarousel();
+            $carousel = CarouselService::getCarousel();
 
             // Incrementar el contador de visitas directamente en la base de datos
             $product->increment('visited');

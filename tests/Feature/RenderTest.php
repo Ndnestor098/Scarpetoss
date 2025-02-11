@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Testing\RefreshDatabaseState;
+use App\Services\CarouselService;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 
 beforeEach(function () {
     Artisan::call('migrate --seed'); // Asegura que las migraciones y semillas se ejecuten
@@ -10,9 +11,17 @@ beforeEach(function () {
 test('Render_Home', function () {
     $response = $this->get(route("home"));
 
+    $carousel = CarouselService::getCarousel()[0];
+
+    $this->assertNotNull($carousel);
+
     $response->assertStatus(200)
         ->assertSee("SHOES FOR YOU")
-        ->assertSee("View Product")
+
+        ->assertSee($carousel->images[0])
+        ->assertSee($carousel->name)
+        ->assertSee($carousel->price)
+
         ->assertSee("Damas") // Test Menu
         ->assertSee("Todos los derechos reservados"); // Test footer
 });
