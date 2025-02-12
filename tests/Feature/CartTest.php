@@ -8,7 +8,7 @@ beforeEach(function () {
     Artisan::call('migrate --seed'); // Asegura que las migraciones y semillas se ejecuten
 });
 
-test("Render_Cart", function () {
+test("Render_Cart_Page_Valid", function () {
     $user = User::find(2);
 
     $this->actingAS($user);
@@ -16,12 +16,6 @@ test("Render_Cart", function () {
     $response = $this->get(route("cart"));
 
     $response->assertStatus(200);
-});
-
-test("Render_Cart_Invalid", function () {
-    $response = $this->get(route("cart"));
-
-    $response->assertStatus(302);
 });
 
 test("Item_Cart_Delete_Valid", function () {
@@ -93,6 +87,12 @@ test("Item_Cart_Delete_All_Valid", function () {
         'product_id' => $product->id,
         'sizes' => $product->sizes[0]->sizes,
     ]);
+});
+
+test("Render_Cart_Invalid", function () {
+    $response = $this->get(route("cart"));
+
+    $response->assertStatus(302);
 });
 
 test("Item_Cart_Create_Invalid_Size", function () {

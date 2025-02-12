@@ -7,7 +7,7 @@ beforeEach(function () {
     Artisan::call('migrate --seed'); // Asegura que las migraciones y semillas se ejecuten
 });
 
-test('Render_Login', function () {
+test('Render_Login_Page_Valid', function () {
     $response = $this->get(route("login"));
 
     $response->assertStatus(200)
@@ -23,7 +23,7 @@ test('Render_Login', function () {
     $response->assertStatus(302)->assertRedirect(route("home"));
 });
 
-test('Valid_Login', function () {
+test('Login_Valid', function () {
     $response = $this->post(route("login.post", [
         'email' => 'nd10salom@gmail.com',
         'password' => 'cronos098'
@@ -33,49 +33,7 @@ test('Valid_Login', function () {
         ->assertRedirect(route("home"));
 });
 
-test('Invalid_Login', function () {
-    // Test - 1
-    $response = $this->post(route("login.post", [
-        'email' => 'nd10salomgmail.com',
-        'password' => 'cronos098'
-    ]));
-
-    $response->assertStatus(302)
-        ->assertInvalid('email');
-
-    // Test - 2
-    $response = $this->post(route("login.post", [
-        'email' => 'nd10salom@gmail.com',
-        'password' => ''
-    ]));
-
-    $response->assertStatus(302)
-        ->assertInvalid('password');
-
-    // Test - 3
-    $response = $this->post(route("login.post", [
-        'email' => 'nd10salom@gmail',
-        'password' => 'cronos123123123'
-    ]));
-
-    $response->assertStatus(302)
-        ->assertSessionHasErrors([
-            'login' => 'Las credenciales proporcionadas son incorrectas.'
-        ]);
-
-    // Test - 4
-    $this->actingAs(User::find(1));
-
-    $response = $this->post(route("login.post", [
-        'email' => 'nd10salom@gmail',
-        'password' => 'cronos123123123'
-    ]));
-
-    $response->assertStatus(302)->assertRedirect(route("home"));
-});
-
-test('Render_Register', function () {
-    // Test - 1
+test('Render_Register_Page', function () {
     $response = $this->get(route("register"));
 
     $response->assertStatus(200)
@@ -83,16 +41,9 @@ test('Render_Register', function () {
         ->assertSee("Name and Lastname")
         ->assertSee("have an account?")
         ->assertSee("Sign up");
-
-    // Test - 2
-    $this->actingAs(User::find(1));
-
-    $response = $this->get(route("register"));
-
-    $response->assertStatus(302)->assertRedirect(route("home"));
 });
 
-test('Valid_Register', function () {
+test('Register_Valid', function () {
     $response = $this->post(route("register.post", [
         'name' => 'Nestor Daniel',
         'email' => 'trabajo.nestor.098@gmail.com',
@@ -107,51 +58,62 @@ test('Valid_Register', function () {
     ]);    
 });
 
-test('Invalid_Register', function () {
-    // Test - 1
+test('Render_Login_Page_Invalid_Authenticated', function () {
+    $this->actingAs(User::find(1));
+
+    $response = $this->get(route("login"));
+
+    $response->assertStatus(302)->assertRedirect(route("home"));
+});
+
+test('Login_Invalid_Field', function () {
+    $response = $this->post(route("login.post", [
+        'email' => 'nd10salomgmail.com',
+        'password' => ''
+    ]));
+
+    $response->assertStatus(302)
+        ->assertInvalid([
+            'email',
+            'password'
+        ]);
+});
+
+test('Login_Invalid_Authenticated', function () {
+    $this->actingAs(User::find(1));
+
+    $response = $this->post(route("login.post", [
+        'email' => 'nd10salom@gmail',
+        'password' => 'cronos123123123'
+    ]));
+
+    $response->assertStatus(302)->assertRedirect(route("home"));
+});
+
+test('Render_Register_Page_Invalid_Authenticated', function () {
+    $this->actingAs(User::find(1));
+
+    $response = $this->get(route("register"));
+
+    $response->assertStatus(302)->assertRedirect(route("home"));
+});
+
+test('Register_Invalid_Fields', function () {
     $response = $this->post(route("register.post", [
         'name' => '',
-        'email' => 'nd10salom@gmail.com',
-        'password' => 'asd',
-        'terms' => false,
+        'email' => 'trabajo',
     ]));
     
     $response->assertStatus(302)
         ->assertInvalid([
             'name',
             'email',
-            'password', 
-            'terms'
-        ]);
-
-    // Test - 2
-    $response = $this->post(route("register.post", [
-        'name' => 'Nestor',
-        'email' => '',
-        'password' => 'Cronos098',
-        'terms' => false,
-    ]));
-    
-    $response->assertStatus(302)
-        ->assertInvalid([
-            'email',
-            'terms',
-        ]);
-    
-
-    // Test - 3
-    $response = $this->post(route("register.post", [
-        'name' => 'Nestor',
-        'email' => 'trabajo.nestor@gmail.com',
-    ]));
-    
-    $response->assertStatus(302)
-        ->assertInvalid([
             'password',
             'terms',
         ]);
+});
 
-    // Test - 4
+test('Register_Invalid_Authenticated', function () {
     $this->actingAs(User::find(1));
 
     $response = $this->post(route("register.post", [

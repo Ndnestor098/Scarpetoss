@@ -8,7 +8,7 @@ beforeEach(function () {
     Artisan::call('migrate --seed'); // Asegura que las migraciones y semillas se ejecuten
 });
 
-test('Render_List_Products_Page', function () {
+test('Render_List_Products_Page_Valid', function () {
     $this->actingAs(User::find(1)); // Crea usuario de prueba
 
     $response = $this->get(route("products"));
@@ -20,7 +20,7 @@ test('Render_List_Products_Page', function () {
         ->assertSee("Proveedor");
 });
 
-test('Render_Create_Product_Page', function () {
+test('Render_Create_Product_Page_Valid', function () {
     $this->actingAs(User::find(1));
 
     $response = $this->get(route("products.create"));
@@ -32,7 +32,7 @@ test('Render_Create_Product_Page', function () {
         ->assertSee("Crear");
 });
 
-test('Render_Edit_Product_Page', function () {
+test('Render_Edit_Product_Page_Valid', function () {
     $this->actingAs(User::find(1));
 
     $product = Product::find(1);
@@ -46,32 +46,7 @@ test('Render_Edit_Product_Page', function () {
         ->assertSee($product->brand);
 });
 
-test('Render_List_Products_Page_Invalid', function () {
-    $response = $this->get(route("products"));
-
-    $response->assertStatus(302)
-        ->assertSee(route("home"));
-});
-
-test('Render_Create_Product_Page_Invalid', function () {
-    $response = $this->get(route("products.create"));
-
-    $response->assertStatus(302)
-        ->assertSee(route("home"));
-});
-
-test('Render_Edit_Product_Page_Invalid', function () {
-    $product = Product::find(1);
-
-    $response = $this->get(route("products.edit", [
-        "id" => $product->id,
-    ]));
-
-    $response->assertStatus(302)
-        ->assertSee(route("home"));;
-});
-
-test('Render_List_Users_Page', function () {
+test('Render_List_Users_Page_Valid', function () {
     $this->actingAs(User::find(1)); // Crea usuario de prueba
 
     $response = $this->get(route("users"));
@@ -83,7 +58,7 @@ test('Render_List_Users_Page', function () {
         ->assertSee("Creado");
 });
 
-test('Render_Create_User_Page', function () {
+test('Render_Create_User_Page_Valid', function () {
     $this->actingAs(User::find(1));
 
     $response = $this->get(route("users.create"));
@@ -93,21 +68,6 @@ test('Render_Create_User_Page', function () {
         ->assertSee("Clave")
         ->assertSee("Nombre")
         ->assertSee("Crear");
-});
-
-test('Render_List_Users_Page_Invalid', function () {
-    $response = $this->get(route("users"));
-
-    $response->assertStatus(302)
-        ->assertSee(route("home"));
-});
-
-test('Render_Create_User_Page_Invalid', function () {
-
-    $response = $this->get(route("users.create"));
-
-    $response->assertStatus(302)
-        ->assertSee(route("home"));
 });
 
 test('Craete_User_Valid', function () {
@@ -127,36 +87,6 @@ test('Craete_User_Valid', function () {
         'name' => "Test_1",
         'email' => "test@gmail.com",
     ]);
-});
-
-test('Create_User_Invalid', function () {
-    // ================ Test - 1 ================
-    $response = $this->post(route("users.store"), [
-        'name' => "New User",
-        'email' => "newuser@example.com",
-        'password' => "password123",
-        'password_confirmation' => "password123",
-    ]);
-    $response->assertStatus(302)
-        ->assertRedirect(route("home"));
-
-    
-    // ================ Test - 2 ================
-    $this->actingAs(User::find(1));  
-
-    $response = $this->post(route("users.store"), [
-        'name' => "",  
-        'email' => "test123@", 
-        'password' => "t",  
-    ]);
- 
-    $response->assertSessionHasErrors([
-        'name', 
-        'email',  
-        'password', 
-    ]);
-
-    
 });
 
 test('Delete_User_Valid', function () {
@@ -189,16 +119,82 @@ test('Delete_User_Valid', function () {
     ]);
 });
 
-test('Delete_User_Inalid', function () {
-    // ================ Test - 1 ================
+test('Render_List_Products_Page_Invalid_Unauthenticated', function () {
+    $response = $this->get(route("products"));
+
+    $response->assertStatus(302)
+        ->assertSee(route("home"));
+});
+
+test('Render_Create_Product_Page_Invalid_Unauthenticated', function () {
+    $response = $this->get(route("products.create"));
+
+    $response->assertStatus(302)
+        ->assertSee(route("home"));
+});
+
+test('Render_Edit_Product_Page_Invalid_Unauthenticated', function () {
+    $product = Product::find(1);
+
+    $response = $this->get(route("products.edit", [
+        "id" => $product->id,
+    ]));
+
+    $response->assertStatus(302)
+        ->assertSee(route("home"));;
+});
+
+test('Render_List_Users_Page_Invalid_Unauthenticated', function () {
+    $response = $this->get(route("users"));
+
+    $response->assertStatus(302)
+        ->assertSee(route("home"));
+});
+
+test('Render_Create_User_Page_Invalid_Unauthenticated', function () {
+    $response = $this->get(route("users.create"));
+
+    $response->assertStatus(302)
+        ->assertSee(route("home"));
+});
+
+test('Create_User_Invalid_Unauthenticated', function () {
+    $response = $this->post(route("users.store"), [
+        'name' => "New User",
+        'email' => "newuser@example.com",
+        'password' => "password123",
+        'password_confirmation' => "password123",
+    ]);
+    $response->assertStatus(302)
+        ->assertRedirect(route("home"));
+});
+
+test('Create_User_Invalid_Field', function () {
+    $this->actingAs(User::find(1));  
+
+    $response = $this->post(route("users.store"), [
+        'name' => "",  
+        'email' => "test123@", 
+        'password' => "t",  
+    ]);
+ 
+    $response->assertSessionHasErrors([
+        'name', 
+        'email',  
+        'password', 
+    ]);
+});
+
+test('Delete_User_Invalid_Unauthenticated', function () {
     $response = $this->delete(route("users.delete", [
         'id' => 1,
     ]));
     
     $response->assertStatus(302)
         ->assertRedirect(route('home'));
+});
 
-    // ================ Test - 2 ================
+test('Delete_User_Invalid_Field', function () {
     $this->actingAs(User::find(1));
 
     $response = $this->delete(route("users.delete", [

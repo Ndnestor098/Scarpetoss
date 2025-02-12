@@ -59,6 +59,20 @@ test('Render_Client_Purchase_Valid', function () {
         ->assertSee("Fecha");
 });
 
+test("Render_Thanks_Page", function () {
+    $user = User::find(1);
+    
+    $this->actingAs($user);
+
+    $response = $this->get(route("thanks"));
+
+    $response->assertStatus(200)
+        // Page Test Content
+        ->assertSee("/image/logo1.png")
+        ->assertSee("Gracias")
+        ->assertSee("CONTINUAR COMPRANDO");
+});
+
 test('Render_Client_Index_Invalid_Unauthenticated', function () {
     $response = $this->get(route("client"));
     $response->assertStatus(302)->assertRedirect(route('login'));
@@ -77,4 +91,10 @@ test('Render_Client_Payment_Invalid_Unauthenticated', function () {
 test('Render_Client_Purchase_Invalid_Unauthenticated', function () {
     $response = $this->get(route("purchase"));
     $response->assertStatus(302)->assertRedirect(route('login'));
+});
+
+test("Render_Thanks_Page_Invalid", function () {
+    $response = $this->get(route("thanks"));
+
+    $response->assertStatus(302)->assertRedirect(route("login"));
 });

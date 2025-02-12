@@ -64,7 +64,7 @@
                                 </select>
                             </div>
         
-                            <p class="product-count">Resultados: {{$totals->products}}</p>
+                            <p class="product-count">Resultados: {{$products->count()}}</p>
         
                             <button type="submit" class="search-button">Buscar</button>
                         @endif

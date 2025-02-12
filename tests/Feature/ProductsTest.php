@@ -9,7 +9,7 @@ beforeEach(function () {
     Artisan::call('migrate --seed'); // Asegura que las migraciones y semillas se ejecuten
 });
 
-test('Shopping', function () {
+test('Render_Shopping_Page', function () {
     $response = $this->get(route("shopping"));
 
     $product = Product::find(1);
@@ -31,7 +31,7 @@ test('Shopping', function () {
         ->assertSee("Todos los derechos reservados"); // Test footer;
 });
 
-test('Shopping_Filter', function () {
+test('Render_Shopping_Page_Filter', function () {
     $response = $this->get(route("shopping", [
         'orderBy' => 'name_asc',
         'gender' => "hombre"
@@ -58,7 +58,7 @@ test('Shopping_Filter', function () {
         ->assertSee("Todos los derechos reservados"); // Test footer;
 });
 
-test('Shopping_Filter_BestSeller', function () {
+test('Render_Shopping_Page_Filter_BestSeller', function () {
     $response = $this->get(route("shopping", [
         'bestSellers' => 'name_asc',
         'gender' => "mujer"
@@ -86,7 +86,7 @@ test('Shopping_Filter_BestSeller', function () {
         ->assertSee("Todos los derechos reservados"); // Test footer;
 });
 
-test('Product', function () {
+test('Render_Product_Page_Valid', function () {
     $product = Product::find(1);
 
     $this->assertNotNull($product);
@@ -122,3 +122,11 @@ test('Product', function () {
         ->assertSee("Todos los derechos reservados"); // Test footer;
 });
 
+test('Render_Product_Page_Invalid', function () {
+    $response = $this->get(route("products.show", [
+        'slug' => 'test'
+    ]));
+
+    $response->assertStatus(302)
+        ->assertRedirect(route("home"));
+});

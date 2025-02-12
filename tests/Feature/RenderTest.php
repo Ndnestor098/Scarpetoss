@@ -10,7 +10,7 @@ beforeEach(function () {
     Artisan::call('migrate --seed'); // Asegura que las migraciones y semillas se ejecuten
 });
 
-test('Render_Home', function () {
+test('Render_Home_Page', function () {
     $response = $this->get(route("home"));
 
     $carousel = CarouselService::getCarousel()[0];
@@ -30,7 +30,7 @@ test('Render_Home', function () {
         ->assertSee("Todos los derechos reservados"); // Footer Test
 });
 
-test("Render_About", function () {
+test("Render_About_Page", function () {
     $response = $this->get(route("about"));
 
     $response->assertStatus(200)
@@ -43,7 +43,7 @@ test("Render_About", function () {
         ->assertSee("Todos los derechos reservados"); // Footer Test
 });
 
-test("Render_Contact", function () {
+test("Render_Contact_Page", function () {
     $response = $this->get(route("contact"));
 
     $response->assertStatus(200)
@@ -56,7 +56,7 @@ test("Render_Contact", function () {
         ->assertSee("Todos los derechos reservados"); // Footer Test
 });
 
-test("Render_Policy_Cookie", function () {
+test("Render_Policy_Cookie_Page", function () {
     $response = $this->get(route("politica.cookie"));
 
     $response->assertStatus(200)
@@ -69,7 +69,7 @@ test("Render_Policy_Cookie", function () {
         ->assertSee("Todos los derechos reservados"); // Footer Test
 });
 
-test("Render_Legal_Notice", function () {
+test("Render_Legal_Notice_Page", function () {
     $response = $this->get(route("aviso.legal"));
 
     $response->assertStatus(200)
@@ -82,7 +82,7 @@ test("Render_Legal_Notice", function () {
         ->assertSee("Cualquier compra dentro del sitio web no es válida."); // Footer Test
 });
 
-test("Render_Privacy_Policy", function () {
+test("Render_Privacy_Policy_Page", function () {
     $response = $this->get(route("politica.privacidad"));
 
     $response->assertStatus(200)
@@ -93,24 +93,4 @@ test("Render_Privacy_Policy", function () {
 
         ->assertSee("Damas") // Menu Test
         ->assertSee("Todos los derechos reservados"); // Footer Test
-});
-
-test("Render_Thanks", function () {
-    $user = User::find(1);
-    
-    $this->actingAs($user);
-
-    $response = $this->get(route("thanks"));
-
-    $response->assertStatus(200)
-        // Page Test Content
-        ->assertSee("/image/logo1.png")
-        ->assertSee("Gracias")
-        ->assertSee("CONTINUAR COMPRANDO");
-});
-
-test("Render_Thanks_Redirect", function () {
-    $response = $this->get(route("thanks"));
-
-    $response->assertStatus(302)->assertRedirect(route("login"));
 });

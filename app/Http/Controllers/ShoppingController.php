@@ -54,7 +54,6 @@ class ShoppingController extends Controller
         // Cachear totales si no existen
         $totals = Cache::remember('totals', now()->addMinutes(60), function () {
             return Product::where('stock', '!=', 0)
-                ->selectRaw("COUNT(*) as products")
                 ->selectRaw("SUM(gender = 'niño') as niño")
                 ->selectRaw("SUM(gender = 'hombre') as hombre")
                 ->selectRaw("SUM(gender = 'mujer') as mujer")

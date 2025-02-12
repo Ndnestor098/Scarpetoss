@@ -19,7 +19,7 @@ test("Payment_Valid", function () {
         $customer = Customer::create([
             'email' => $user->email,
             'name' => $user->name,
-            'source' => 'tok_visa' // Token de prueba de Stripe
+            'source' => 'tok_visa'
         ]);
         $user->stripe_customer_id = $customer->id;
         $user->save();
@@ -53,16 +53,15 @@ test("Payment_Valid", function () {
             ->assertRedirect(route("thanks"));
 });
 
-test("Payment_Invalid", function () {
-    // ============== Test - 1 ==============
-    $user = User::find(2);
-
-    // No hay un cliente stripe registrado
+test("Payment_Invalid_Unauthenticated", function () {
     $response = $this->post(route("payment.process"));
+    
     $response->assertStatus(302)
         ->assertRedirect(route("login"));
+});
 
-    // ============== Test - 2 ==============
+test("Payment_Invalid_Empty_Cart", function () {
+    $user = User::find(2);
     $this->actingAs($user);
 
     if (!$user->stripe_customer_id) {
@@ -76,10 +75,14 @@ test("Payment_Invalid", function () {
     }
 
     $response = $this->post(route("payment.process"));
+    
     $response->assertSessionHasErrors('cart_empty');
+});
 
-    // ============== Test - 3 ==============
-    // Crear producto con precio negativo
+test("Payment_Invalid_Negative_Price", function () {
+    $user = User::find(2);
+    $this->actingAs($user);
+
     $product = Product::create([
         "name" => "Test",
         "description" => "Test",
@@ -90,10 +93,8 @@ test("Payment_Invalid", function () {
         "brand" => "Nike",
     ]);
 
-    // Asociar los tamaños al producto
     $product->sizes()->sync([8, 10]);
 
-    // Agregar producto al carrito con tamaño correcto
     $response = $this->put(route("cart.create"), [
         "sizes" => 44, 
         "product_id" => $product->id
