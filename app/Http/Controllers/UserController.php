@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {   
-        if(Cache::has("user_admin")){
-            $data = Cache::get("user_admin");
+        $CacheName = "user_admin_ " . Auth::user()->id . "_page_" . $request->page;
+
+        if(Cache::has($CacheName)){
+            $data = Cache::get($CacheName);
         } else {
             $data = User::paginate(20);
             
-            Cache::put("user_admin", $data, now()->addMinutes(10));
+            Cache::put($CacheName, $data, now()->addMinutes(10));
         }
 
         return view("admin.users", ['data'=>$data]);
@@ -28,17 +32,12 @@ class UserController extends Controller
     
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
-
-        if ($validator->fails()) {
-            // Validación fallida
-            return back()->withErrors($validator)->withInput();
-        }
-
+        
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -48,17 +47,21 @@ class UserController extends Controller
         $user->is_admin = true;
         $user->save();
 
-        Cache::forget("user_admin");
+        Cache::flush();
 
         return redirect(route('users'));
     }
 
     public function destroy(Request $request)
-    {
-        $user = User::findOrFail(intval($request->id));
+    {   
+        $user = User::findOrFail($request->id);
+        
+        Cart::where("user_id", $user->id)->delete();
+        
         $user->delete();
-        Cache::forget("user_admin");
+        
+        Cache::flush();
 
-        return back();
+        return redirect(route('users'));
     }
 }

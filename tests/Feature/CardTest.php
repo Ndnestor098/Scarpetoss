@@ -10,7 +10,7 @@ beforeEach(function () {
 test("Render_Register_Card_Valid", function () {
     $user = User::find(2);
 
-    $this->actingAS($user);
+    $this->actingAs($user);
 
     $response = $this->get(route("stripe.index"));
 
@@ -34,7 +34,7 @@ test("Render_Register_Card_Invalid", function () {
 test("Register_Card_Valid", function () {
     $user = User::find(2);
 
-    $this->actingAS($user);
+    $this->actingAs($user);
 
     $response = $this->post(route("stripe.createPay"), [
         'cardholder_name' => $user->name,
@@ -62,7 +62,7 @@ test("Register_Card_Invalid", function () {
     // ============== Test - 2 ==============
     $user = User::find(2);
 
-    $this->actingAS($user);
+    $this->actingAs($user);
 
     $response = $this->post(route("stripe.createPay"), [
         'cardholder_name' => "",
@@ -82,7 +82,7 @@ test("Register_Card_Invalid", function () {
 test("Update_Card_Valid", function () {
     $user = User::find(1);
 
-    $this->actingAS($user);
+    $this->actingAs($user);
 
     $response = $this->post(route('payment.update'),[
         'password' => 'cronos098',
@@ -104,7 +104,7 @@ test("Update_Card_Invalid", function () {
     $response->assertStatus(302)
         ->assertRedirect(route('login'));
 
-    $this->actingAS($user);
+    $this->actingAs($user);
 
     $response = $this->post(route('payment.update'));
 

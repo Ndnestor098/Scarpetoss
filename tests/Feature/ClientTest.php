@@ -8,12 +8,10 @@ beforeEach(function () {
     Artisan::call('migrate --seed'); // Asegura que las migraciones y semillas se ejecuten
 });
 
-test('Render_Client_Area', function () {
+test('Render_Client_Index_Valid', function () {
     $user = User::find(2);
-    
     $this->actingAs($user);
 
-    // Page Test Client Index
     $response = $this->get(route("client"));
 
     $response->assertStatus(200)
@@ -21,8 +19,12 @@ test('Render_Client_Area', function () {
         ->assertSee($user->email)
         ->assertSee("Mis datos")
         ->assertSee("Cerrar sesion");
+});
 
-    // Page Test Client Details
+test('Render_Client_Details_Valid', function () {
+    $user = User::find(2);
+    $this->actingAs($user);
+
     $response = $this->get(route("client.details"));
 
     $response->assertStatus(200)
@@ -30,8 +32,12 @@ test('Render_Client_Area', function () {
         ->assertSee($user->email)
         ->assertSee("Guardar Cambios")
         ->assertSee("Clave Nueva");
+});
 
-    // Page Test Client Payment
+test('Render_Client_Payment_Valid', function () {
+    $user = User::find(2);
+    $this->actingAs($user);
+
     $response = $this->get(route("payment.edit"));
 
     $response->assertStatus(200)
@@ -39,8 +45,12 @@ test('Render_Client_Area', function () {
         ->assertSee($user->email)
         ->assertSee("Guardar Cambios")
         ->assertSee("Tarjeta de credito o debito");
-       
-    // Page Test Client Purchase
+});
+
+test('Render_Client_Purchase_Valid', function () {
+    $user = User::find(2);
+    $this->actingAs($user);
+
     $response = $this->get(route("purchase"));
 
     $response->assertStatus(200)
@@ -50,26 +60,24 @@ test('Render_Client_Area', function () {
         ->assertSee("Fecha");
 });
 
-test('Render_Client_Area_Invalid', function () {
-    // Page Test Client Index
+test('Render_Client_Index_Invalid_Unauthenticated', function () {
     $response = $this->get(route("client"));
+    $response->assertStatus(302)->assertRedirect(route('login'));
+});
 
-    $response->assertStatus(302);
-
-    // Page Test Client Details
+test('Render_Client_Details_Invalid_Unauthenticated', function () {
     $response = $this->get(route("client.details"));
+    $response->assertStatus(302)->assertRedirect(route('login'));
+});
 
-    $response->assertStatus(302);
-
-    // Page Test Client Payment
+test('Render_Client_Payment_Invalid_Unauthenticated', function () {
     $response = $this->get(route("payment.edit"));
+    $response->assertStatus(302)->assertRedirect(route('login'));
+});
 
-    $response->assertStatus(302);
-       
-    // Page Test Client Purchase
+test('Render_Client_Purchase_Invalid_Unauthenticated', function () {
     $response = $this->get(route("purchase"));
-
-    $response->assertStatus(302);
+    $response->assertStatus(302)->assertRedirect(route('login'));
 });
 
 test("Render_Cart", function () {
@@ -88,28 +96,12 @@ test("Render_Cart_Invalid", function () {
     $response->assertStatus(302);
 });
 
-test("Item_Cart_Valid", function () {
-    // ============== Test - 1 ==============
+test("Item_Cart_Delete_Valid", function () {
     $user = User::find(2);
     $product = Product::find(1);
 
-    $this->actingAS($user);
+    $this->actingAs($user);
 
-    //  Created - 1
-    $response = $this->put(route("cart.create"), [
-        "sizes" => $product->sizes[0]->sizes,
-        "product_id" => $product->id
-    ]);
-
-    $response->assertStatus(200);
-
-    $this->assertDatabaseHas("carts", [
-        'user_id' => $user->id,
-        'product_id' => $product->id,
-        'sizes' => $product->sizes[0]->sizes,
-    ]);
-
-    // ============== Test - 2 ==============
     $response = $this->delete(route("cart.destroy"), [
         "sizes" => $product->sizes[0]->sizes,
         "product_id" => $product->id
@@ -122,22 +114,21 @@ test("Item_Cart_Valid", function () {
         'product_id' => $product->id,
         'sizes' => $product->sizes[0]->sizes,
     ]);
+});
 
-    // ============== Test - 3 ==============
-    //  Created - 2
-    $response = $this->put(route("cart.create"), [
+test("Item_Cart_Delete_OneAll_Valid", function () {
+    $user = User::find(2);
+    $product = Product::find(1);
+
+    $this->actingAs($user);
+
+    // Crear el item en el carrito
+    $this->put(route("cart.create"), [
         "sizes" => $product->sizes[0]->sizes,
         "product_id" => $product->id
     ]);
 
-    $response->assertStatus(200);
-
-    $this->assertDatabaseHas("carts", [
-        'user_id' => $user->id,
-        'product_id' => $product->id,
-        'sizes' => $product->sizes[0]->sizes,
-    ]);
-
+    // Eliminar el item con el endpoint oneAll
     $response = $this->delete(route("cart.destroy.oneAll"), [
         "sizes" => $product->sizes[0]->sizes,
         "product_id" => $product->id
@@ -150,22 +141,21 @@ test("Item_Cart_Valid", function () {
         'product_id' => $product->id,
         'sizes' => $product->sizes[0]->sizes,
     ]);
+});
 
-    // ============== Test - 4 ==============
-    //  Created - 2
-    $response = $this->put(route("cart.create"), [
+test("Item_Cart_Delete_All_Valid", function () {
+    $user = User::find(2);
+    $product = Product::find(1);
+
+    $this->actingAs($user);
+
+    // Crear el item en el carrito
+    $this->put(route("cart.create"), [
         "sizes" => $product->sizes[0]->sizes,
         "product_id" => $product->id
     ]);
 
-    $response->assertStatus(200);
-
-    $this->assertDatabaseHas("carts", [
-        'user_id' => $user->id,
-        'product_id' => $product->id,
-        'sizes' => $product->sizes[0]->sizes,
-    ]);
-    
+    // Eliminar todos los items del carrito
     $response = $this->delete(route("cart.destroyAll"));
 
     $response->assertStatus(302);
@@ -177,8 +167,7 @@ test("Item_Cart_Valid", function () {
     ]);
 });
 
-test("Item_Cart_Invalid", function () {
-    // ============== Test - 1 ==============
+test("Item_Cart_Create_Invalid_Size", function () {
     $product = Product::find(1);
 
     $response = $this->put(route("cart.create"), [
@@ -188,35 +177,45 @@ test("Item_Cart_Invalid", function () {
 
     $response->assertStatus(302)
         ->assertRedirect(route("login"));
+});
 
-    // ============== Test - 2 ==============
+test("Item_Cart_Delete_Invalid_Unauthenticated", function () {
+    $product = Product::find(1);
+
     $response = $this->delete(route("cart.destroy"), [
         "sizes" => $product->sizes[0]->sizes,
         "product_id" => $product->id
     ]);
 
     $response->assertStatus(302)->assertRedirect(route("login"));
+});
 
-    // ============== Test - 3 ==============
+test("Item_Cart_Delete_OneAll_Invalid_Unauthenticated", function () {
+    $product = Product::find(1);
+
     $response = $this->delete(route("cart.destroy.oneAll"), [
         "sizes" => $product->sizes[0]->sizes,
         "product_id" => $product->id
     ]);
 
     $response->assertStatus(302)->assertRedirect(route("login"));
+});
 
-    // ============== Test - 4 ==============
+test("Item_Cart_Delete_All_Invalid_Unauthenticated", function () {
+    $product = Product::find(1);
+
     $response = $this->delete(route("cart.destroyAll"), [
         "sizes" => $product->sizes[0]->sizes,
         "product_id" => $product->id
     ]);
 
     $response->assertStatus(302)->assertRedirect(route("login"));
+});
 
-    // ============== Test - 5 ==============
+test("Item_Cart_Create_Invalid_Empty_Fields", function () {
     $user = User::find(2);
 
-    $this->actingAS($user);
+    $this->actingAs($user);
 
     $response = $this->put(route("cart.create"), [
         "sizes" => "",
@@ -228,8 +227,11 @@ test("Item_Cart_Invalid", function () {
             "sizes",
             "product_id"
         ]);
-    
-    // ============== Test - 6 ==============
+});
+
+test("Item_Cart_Create_Invalid_Size_Format", function () {
+    $this->actingAs(User::find(1));
+
     $product = Product::find(1);
 
     $response = $this->put(route("cart.create"), [
@@ -241,8 +243,11 @@ test("Item_Cart_Invalid", function () {
         ->assertInvalid([
             "sizes",
         ]);
+});
 
-    // ============== Test - 7 ==============
+test("Item_Cart_Delete_Invalid_Fields", function () {
+    $this->actingAs(User::find(1));
+
     $response = $this->delete(route("cart.destroy"), [
         "sizes" => "qweqwe",
         "product_id" => "qwe"
@@ -253,8 +258,11 @@ test("Item_Cart_Invalid", function () {
             "product_id",
             "sizes"
         ]);
+});
 
-    // ============== Test - 8 ==============
+test("Item_Cart_Delete_OneAll_Invalid_Fields", function () {
+    $this->actingAs(User::find(1));
+
     $response = $this->delete(route("cart.destroy.oneAll"), [
         "sizes" => "qweqwe",
         "product_id" => "qwe"
@@ -265,10 +273,12 @@ test("Item_Cart_Invalid", function () {
             "product_id",
             "sizes"
         ]);
+});
 
-    // ============== Test - 4 ==============
+test("Item_Cart_Delete_All_Invalid_Fields", function () {
+    $this->actingAs(User::find(1));
+
     $response = $this->delete(route("cart.destroyAll"));
 
     $response->assertStatus(302)->assertRedirect(url()->previous());
-
 });

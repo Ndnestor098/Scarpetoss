@@ -53,7 +53,7 @@ class StripeController extends Controller
         $products = Cart::with('product') // Carga los productos relacionados con los carritos
             ->select('product_id', 'user_id', 'sizes', DB::raw('COUNT(*) as count_total')) // Selecciona los campos necesarios y cuenta las filas agrupadas
             ->groupBy('product_id', 'user_id', 'sizes') // Agrupa por product_id, user_id y sizes
-            ->where('user_id', auth()->user()->id)
+            ->where('user_id', Auth::user()->id)
             ->get(); // Ejecuta la consulta y obtiene los resultados
         
         // Verificar si hay productos en el carrito
@@ -159,8 +159,8 @@ class StripeController extends Controller
 
     public function showPurchase(Request $request)
     {
-        $sells = Sell::with('product')->where('user_id', auth()->user()->id)->get();
+        $data = Sell::with('product')->where('user_id', Auth::user()->id)->get();
 
-        return view('client.sell', ['sells' => $sells]);
+        return view('client.sell', ['sells' => $data]);
     }
 }

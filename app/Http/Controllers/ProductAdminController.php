@@ -9,21 +9,26 @@ use App\Services\AdminServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ProductAdminController extends Controller
 {
     //==================================================Area de edicion de Productos====================================================
-    public function index()
+    public function index(Request $request)
     {
-        if(Cache::has("product_admin")){
-            $data = Cache::get("product_admin");
+        $CacheName = "product_admin_ " . Auth::user()->id . "_page_" . $request->page;
+
+        if(Cache::has($CacheName)){
+            $data = Cache::get($CacheName);
+
         } else {
             $data = Product::paginate(20);
 
             $data->appends(request()->query())->links('vendor.pagination.tailwind'); 
             
-            Cache::put("product_admin", $data, now()->addMinutes(10));
+            Cache::put($CacheName, $data, now()->addMinutes(10));
         }
 
         return view("admin.product", ['data' => $data]);
@@ -50,6 +55,9 @@ class ProductAdminController extends Controller
             'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
+        Log::info('Archivos recibidos:', $request->file('images'));
+
+
         // Verificar si no se proporciona un nombre de imagen o si se proporciona una nueva imagen
         if ($request->hasFile("images")){
             // Llamar al servicio de crear y pasar una imagen a la carpeta designada
@@ -63,7 +71,7 @@ class ProductAdminController extends Controller
             }
         }
 
-        Cache::forget("product_admin");
+        Cache::flush();
 
         return redirect(route('products'));
     }
@@ -122,7 +130,7 @@ class ProductAdminController extends Controller
             return redirect()->back()->withErrors([$result["message"]])->withInput();
         }
         
-        Cache::forget("product_admin");
+        Cache::flush();
 
         return redirect(route('products'));
     }
@@ -142,7 +150,7 @@ class ProductAdminController extends Controller
 
         $product->delete();
 
-        Cache::forget("product_admin");
+        Cache::flush();
 
         return redirect()->back();
     }

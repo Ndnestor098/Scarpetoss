@@ -66,7 +66,7 @@
             </form>
         </div>
         <div class="p-5">
-            {{$data->links()}}
+            {{ $data->appends(request()->query())->links('vendor.pagination.tailwind') }}
         </div>
     </main>
 </x-app>

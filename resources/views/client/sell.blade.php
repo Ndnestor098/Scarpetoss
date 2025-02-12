@@ -24,12 +24,17 @@
                         @foreach ($sells as $item)
                             <tr class="product-row variant-{{$rowVariant}}">
                                 <td class="text-center">
-                                    <img src="{{ Storage::url($item->product->imageP) }}" 
-                                         alt="{{$item->product->name}}" 
-                                         height="50" width="50">
+                                    <a href="{{route('products.show', ['slug' => $item->product->slug])}}">
+                                    @php
+                                        $image = Storage::url(json_decode($item->product->images)[0])
+                                    @endphp
+                                    <img src="{{ $image }}" 
+                                        alt="{{$item->product->name}}" 
+                                        height="50" width="50">
+                                    </a>
                                 </td>
                                 <td>{{$item->product->name}}</td>
-                                <td class="text-center">{{$item->count}}</td>
+                                <td class="text-center"><a href="{{route('products.show', ['slug' => $item->product->slug])}}">{{$item->count}}</a></td>
                                 <td class="text-center">{{$item->price}}</td>
                                 <td class="text-center hidden-column">{{$item->size}}</td>
                                 <td class="text-center">{{$item->created_at}}</td>

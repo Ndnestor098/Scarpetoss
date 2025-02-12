@@ -37,23 +37,23 @@ Route::get("/products/{slug}", ProductController::class)->name("products.show");
 
 
 //==========================================Area de LOGIN============================================
-Route::controller(LoginController::class)->group(function(){
-    Route::get("/login", "index")->name("login")->middleware('guest');
+Route::controller(LoginController::class)->middleware('guest')->group(function(){
+    Route::get("/login", "index")->name("login");
 
-    Route::get('auth/google', "google")->name("google")->middleware('guest');
-    Route::get('auth/google/callback', "googleCallback")->name("google.callback")->middleware('guest');
+    Route::get('auth/google', "google")->name("google");
+    Route::get('auth/google/callback', "googleCallback")->name("google.callback");
 
-    Route::get('auth/twitter', "twitter")->name("twitter")->middleware('guest');
-    Route::get('auth/twitter/callback', "twitterCallback")->name("twitter.callback")->middleware('guest');
+    Route::get('auth/twitter', "twitter")->name("twitter");
+    Route::get('auth/twitter/callback', "twitterCallback")->name("twitter.callback");
 
-    Route::get('auth/github', "github")->name("github")->middleware('guest');
-    Route::get('auth/github/callback', "githubCallback")->name("github.callback")->middleware('guest');
+    Route::get('auth/github', "github")->name("github");
+    Route::get('auth/github/callback', "githubCallback")->name("github.callback");
 
     Route::post("/login", "login")->name("login.post");
 
     Route::get("/logout", "logout")->name("logout");
 
-    Route::get("/register", "create")->name("register")->middleware('guest');
+    Route::get("/register", "create")->name("register");
 
     Route::post("/register", "register")->name("register.post");
 });
@@ -68,11 +68,6 @@ Route::controller(ClientController::class)->middleware("auth")->group(function()
 
     Route::put("/client/details/password", "editPassword")->name("edit.password");
 
-});
-
-//=============================================== Area de Administrador=================================================
-Route::middleware(["auth", AdminMiddleware::class])->controller(AdminController::class)->group(function(){
-    Route::get("/client/admin", "index")->name("admin");
 });
 
 //=============================================== Area de Administrador / Productos =================================================
@@ -91,7 +86,7 @@ Route::middleware(["auth", AdminMiddleware::class])->controller(SalesController:
 });
 
 //=============================================== Area de Administrador / Usuarios =================================================
-Route::middleware(["auth", AdminMiddleware::class])->controller(UserController::class)->group(function () {
+Route::middleware([AdminMiddleware::class])->controller(UserController::class)->group(function () {
     Route::get("/client/admin/users", "index")->name("users");
     Route::get("/client/admin/users/create", 'create')->name('users.create');
     Route::post("/client/admin/users", "store")->name("users.store");

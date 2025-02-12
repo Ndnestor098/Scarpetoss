@@ -1,6 +1,6 @@
 <x-app>
     <x-slot name="title">Shopping</x-slot>
-    <x-slot name="style">
+    <x-slot name="link">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </x-slot>
 
@@ -93,7 +93,8 @@
 
                     <!-- Paginación -->
                     <div class="pagination">
-                        {{ $products->links('vendor.pagination.tailwind') }}
+                        {{ $products->appends(request()->query())->links('vendor.pagination.tailwind') }}
+
                     </div>
                 </div>
             </section>

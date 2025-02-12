@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
 
 beforeEach(function () {
@@ -14,6 +15,12 @@ test('Render_Login', function () {
         ->assertSee("Password")
         ->assertSee("have an account?")
         ->assertSee("Sign up");
+
+    $this->actingAs(User::find(1));
+
+    $response = $this->get(route("login"));
+
+    $response->assertStatus(302)->assertRedirect(route("home"));
 });
 
 test('Valid_Login', function () {
@@ -22,7 +29,8 @@ test('Valid_Login', function () {
         'password' => 'cronos098'
     ]));
 
-    $response->assertStatus(302)->assertRedirect(route("home"));
+    $response->assertStatus(302)
+        ->assertRedirect(route("home"));
 });
 
 test('Invalid_Login', function () {
@@ -54,9 +62,20 @@ test('Invalid_Login', function () {
         ->assertSessionHasErrors([
             'login' => 'Las credenciales proporcionadas son incorrectas.'
         ]);
+
+    // Test - 4
+    $this->actingAs(User::find(1));
+
+    $response = $this->post(route("login.post", [
+        'email' => 'nd10salom@gmail',
+        'password' => 'cronos123123123'
+    ]));
+
+    $response->assertStatus(302)->assertRedirect(route("home"));
 });
 
 test('Render_Register', function () {
+    // Test - 1
     $response = $this->get(route("register"));
 
     $response->assertStatus(200)
@@ -64,6 +83,13 @@ test('Render_Register', function () {
         ->assertSee("Name and Lastname")
         ->assertSee("have an account?")
         ->assertSee("Sign up");
+
+    // Test - 2
+    $this->actingAs(User::find(1));
+
+    $response = $this->get(route("register"));
+
+    $response->assertStatus(302)->assertRedirect(route("home"));
 });
 
 test('Valid_Register', function () {
@@ -124,4 +150,16 @@ test('Invalid_Register', function () {
             'password',
             'terms',
         ]);
+
+    // Test - 4
+    $this->actingAs(User::find(1));
+
+    $response = $this->post(route("register.post", [
+        'name' => 'Nestor Daniel',
+        'email' => 'trabajo.nestor.098@gmail.com',
+        'password' => 'Cronos09888',
+        'terms' => true,
+    ]));
+
+    $response->assertStatus(302)->assertRedirect(route("home"));
 });
