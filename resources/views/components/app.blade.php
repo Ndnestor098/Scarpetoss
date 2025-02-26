@@ -9,19 +9,26 @@
 	<!-- =======================================DESCRIPCION======================================= -->
     <title>Scarpetoss - {{ $title }}</title>
     <meta name="description" content="Vendemos zapatos de tu preferencias para que estes comodo y contento con tus elecciones.">
-    
-    <meta name="product_id" content="102856451">
-    <meta property="fb:admins" content="100000984792126">
-    <meta property="fb:app_id" content="255986568181021">
+    <meta name="keywords" content=" buy, sell, rent, properties, real estate, dream home">
+    <meta name="author" content="Nestor Salom">
+    <meta name="robots" content="noindex, nofollow">
 
 	<!-- =======================================OPENGRAPH======================================= -->
-    <meta property="og:site_name" content="Scarpetoss">
+    <!-- Open Graph (para Facebook, LinkedIn, etc.) -->
+    <meta property="og:title" content="Scarpetoss">
     <meta property="og:description" content="Vendemos zapatos de tu preferencias para que estes comodo y contento con tus elecciones.">
-    <meta property="og:title" content="Tienda online - Scarpetoss">
-    <meta property="og:url" content="{{request()->url()}}">
     <meta property="og:image" content="/image/logo.jpeg">
-    <meta property="og:updated_time" content="{{now()}}">
+    <meta property="og:url" content="https://scarpetoss.com">
     <meta property="og:type" content="website">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Scarpetoss">
+    <meta name="twitter:description" content="Vendemos zapatos de tu preferencias para que estes comodo y contento con tus elecciones.">
+    <meta name="twitter:image" content="/image/logo.jpeg">
+
+    <!-- Security -->
+    <meta name="referrer" content="no-referrer">
 
 	<!-- =======================================PRECONECCIONES	======================================= -->
     <meta rel="canonical" href="{{request()->url()}}">

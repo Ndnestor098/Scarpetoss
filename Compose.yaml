@@ -1,0 +1,11 @@
+service:
+  scarpetoss:
+    container_name: scarpetoss
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./:/var/www
+    ports:
+      - "7000"
+    restart : always

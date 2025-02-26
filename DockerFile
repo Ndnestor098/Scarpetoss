@@ -1,34 +1,43 @@
 # Usa una imagen base de PHP con Composer y extensiones requeridas
-FROM php:8.1-fpm
+FROM php:8.2-fpm-alpine
 
-# Instala dependencias necesarias para Laravel
-RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    zip \
-    unzip \
-    git \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql
+# Actualiza y se agrega dependencias del sistema
+RUN apk --no-cache upgrade && \
+    apk --no-cache add bash git sudo openssh libxml2-dev oniguruma-dev autoconf gcc g++ make npm freetype-dev libjpeg-turbo-dev libpng-dev libzip-dev libssh2 libssh2-dev
 
-# Instala Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Instalar extensiones de PHP necesarias
+RUN pecl channel-update pecl.php.net && \
+    pecl install pcov swoole redis && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install mbstring xml pcntl gd zip pdo pdo_mysql bcmath soap && \
+    docker-php-ext-enable mbstring xml gd zip pcov pcntl bcmath pdo pdo_mysql soap swoole redis
+
+# Instalar Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Instalar RoadRunner
+COPY --from=spiralscout/roadrunner:2.4.2 /usr/bin/rr /usr/bin/rr
 
 # Establece el directorio de trabajo
-WORKDIR /var/www/html
+WORKDIR /var/www
 
 # Copia el código del proyecto al contenedor
 COPY . .
 
-# Ejecuta Composer para instalar las dependencias
-RUN composer install --optimize-autoloader --no-dev
+# Instalar dependencias de PHP y de Octane/RoadRunner
+RUN composer install && \
+    composer require laravel/octane spiral/roadrunner
 
-# Da permisos a los archivos
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Configurar entorno
+COPY .env.example .env
+RUN php artisan octane:install --server="swoole"
 
-# Expone el puerto 10000 para servir Laravel
-EXPOSE 10000
+# Instalar dependencias de Node y construir assets
+RUN npm install && npm run build
 
-# Comando para iniciar Laravel
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=10000"]
+RUN php artisan key:generate
+
+RUN php artisan migrate
+
+# Iniziar servidor
+CMD ["php", "artisan", "octane:start", "--server=swoole", "--host=0.0.0.0", "--port=7000"]
