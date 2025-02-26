@@ -31,10 +31,10 @@ class CarouselService
         
                 // Si es un array, transformar las rutas
                 if (is_array($decoded)) {
-                    return array_map(fn($img) => Storage::url('public/' . $img), $decoded);
+                    return array_map(fn($img) => Storage::url($img), $decoded);
                 }
         
-                return Storage::url('public/' . $item);
+                return Storage::url($item);
             })->flatten()->toArray();
         
             return $carousel;
