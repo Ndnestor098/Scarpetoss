@@ -249,6 +249,7 @@ main{
     width: 100%;
     display: flex;
     padding: 145px 50px 0 50px;
+    background-size: cover;
 }
 
 .hero .hero-container{ 
@@ -2533,7 +2534,38 @@ padding: 10px 0px;
     font-weight: 600;
 }
 
+.info {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 320px;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    background: #509AF8;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px -3px #111;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+}
 
+.info__icon {
+width: 20px;
+height: 20px;
+transform: translateY(-2px);
+margin-right: 8px;
+}
+
+.info__icon path {
+fill: #fff;
+}
+
+.info__title {
+font-weight: 500;
+font-size: 14px;
+color: #fff;
+}
 
 /* ===========================================RESPONSIVE=========================================== */
 @media only screen and (max-width: 1150px){
