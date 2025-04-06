@@ -1,5 +1,7 @@
 <x-app>
     <x-slot name="title">{{$product->name}}</x-slot>
+    <x-slot name="description">{{$product->description}}</x-slot>
+    <x-slot name="image">{{$product->images[0]}}</x-slot>
 
     <main>
         {{-- Submenu --}}

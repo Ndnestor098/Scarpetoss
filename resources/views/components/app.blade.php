@@ -8,24 +8,37 @@
 
 	<!-- =======================================DESCRIPCION======================================= -->
     <title>Scarpetoss - {{ $title }}</title>
-    <meta name="description" content="Vendemos zapatos de tu preferencias para que estes comodo y contento con tus elecciones.">
-    <meta name="keywords" content=" buy, sell, rent, properties, real estate, dream home">
-    <meta name="author" content="Nestor Salom">
-    <meta name="robots" content="noindex, nofollow">
-
-	<!-- =======================================OPENGRAPH======================================= -->
-    <!-- Open Graph (para Facebook, LinkedIn, etc.) -->
-    <meta property="og:title" content="Scarpetoss">
-    <meta property="og:description" content="Vendemos zapatos de tu preferencias para que estes comodo y contento con tus elecciones.">
-    <meta property="og:image" content="/image/logo.jpeg">
-    <meta property="og:url" content="https://scarpetoss.com">
-    <meta property="og:type" content="website">
-
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Scarpetoss">
-    <meta name="twitter:description" content="Vendemos zapatos de tu preferencias para que estes comodo y contento con tus elecciones.">
-    <meta name="twitter:image" content="/image/logo.jpeg">
+    @if(isset($description) && isset($image))
+        <meta name="description" content="{{ $description }}">
+        <meta name="keywords" content=" buy, sell, rent, properties, real estate, dream home">
+        <meta name="author" content="Nestor Salom">
+        <meta name="robots" content="noindex, nofollow">
+    
+        <!-- =======================================OPENGRAPH======================================= -->
+        <meta property="og:title" content="Scarpetoss - Tu tienda de zapatos">
+        <meta property="og:description" content="Descubre los mejores zapatos para cada estilo y momento. Comodidad, calidad y diseño a tu alcance.">
+        <meta property="og:image" content="{{ $image }}">
+        <meta property="og:image:alt" content="Imagen de nuestros productos de zapatos">
+        <meta property="og:url" content="https://scarpetoss.com">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Scarpetoss">
+        <meta property="og:locale" content="es_ES">
+    @else
+        <meta name="description" content="Vendemos zapatos de tu preferencias para que estes comodo y contento con tus elecciones.">
+        <meta name="keywords" content=" buy, sell, rent, properties, real estate, dream home">
+        <meta name="author" content="Nestor Salom">
+        <meta name="robots" content="noindex, nofollow">
+    
+        <!-- =======================================OPENGRAPH======================================= -->
+        <meta property="og:title" content="Scarpetoss - Tu tienda de zapatos">
+        <meta property="og:description" content="Descubre los mejores zapatos para cada estilo y momento. Comodidad, calidad y diseño a tu alcance.">
+        <meta property="og:image" content="https://scarpetoss.ndnestor.com/image/portada-home.png">
+        <meta property="og:image:alt" content="Imagen de nuestros productos de zapatos">
+        <meta property="og:url" content="https://scarpetoss.com">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Scarpetoss">
+        <meta property="og:locale" content="es_ES">    
+    @endif
 
     <!-- Security -->
     <meta name="referrer" content="no-referrer">
