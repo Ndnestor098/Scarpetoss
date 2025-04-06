@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContactController;
@@ -49,13 +48,13 @@ Route::controller(LoginController::class)->middleware('guest')->group(function()
     Route::get('auth/github', "github")->name("github");
     Route::get('auth/github/callback', "githubCallback")->name("github.callback");
 
-    Route::post("/login", "login")->name("login.post");
+    Route::post("/login", "login")->name("login.post")->middleware('throttle:5,3');
 
     Route::get("/logout", "logout")->name("logout");
 
     Route::get("/register", "create")->name("register");
 
-    Route::post("/register", "register")->name("register.post");
+    Route::post("/register", "register")->name("register.post")->middleware('throttle:5,3');
 });
 
 //===============================================Area de usuario=================================================
