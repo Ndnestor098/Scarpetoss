@@ -63,8 +63,12 @@
                             @method('put')
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                             
-                            <label for="sizes">Seleccione una talla:
-                                <select name="sizes" id="sizes" required>
+                            <label for="sizes" style="display: flex; justify-content: center; align-items: center;">Seleccione una talla:
+                                <select 
+                                    name="sizes" 
+                                    id="sizes" 
+                                    required
+                                >
                                     <option value="" disabled selected>Seleccionar talla</option>
                                     @foreach ($product->sizes as $item)
                                         <option value="{{ $item->sizes }}">
