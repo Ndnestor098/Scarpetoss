@@ -47,7 +47,7 @@
     <meta rel="canonical" href="{{request()->url()}}">
     <meta name="robots" content="NOODP,NOYDIR">
 
-    <link rel="stylesheet" href="/css/style.css?v=1.9">
+    <link rel="stylesheet" href="/css/style.css?v=2.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://kit.fontawesome.com">
     <script src="https://kit.fontawesome.com/8f34396e62.js" crossorigin="anonymous"></script>
