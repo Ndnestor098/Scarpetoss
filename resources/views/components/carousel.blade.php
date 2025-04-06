@@ -15,7 +15,9 @@
                         <p class="product-title">{{$item->name}}</p>
                         <p class="product-price">${{$item->price}}</p>
                     </a>
-                    <span class="view-product-link">Ver Producto</span>
+                    <a class="view-product-link" href="{{route('products.show', ['slug' => $item->slug])}}">
+                        Ver Producto
+                    </a>
                 </div>
             </div>
         @endforeach

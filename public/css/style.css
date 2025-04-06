@@ -3025,6 +3025,7 @@ color: #fff;
     .image-thumbnails figure .thumbnail-image{
         width: 100px !important;
         height: 100px !important;
+        padding: 0 !important;
     }
 
     .product-gallery figure img{
