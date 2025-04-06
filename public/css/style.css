@@ -1339,7 +1339,7 @@ main{
 
 .product-content .product-price{
     background-color: #efefef;
-    height: 80px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2993,5 +2993,20 @@ padding: 10px 0px;
     .image-thumbnails figure .thumbnail-image{
         width: 100px !important;
         height: 100px !important;
+    }
+
+    .product-gallery figure img{
+        width: 100% !important;
+        padding: 0px 5px !important;
+    }
+
+    .delivery-info span p {
+        width: 300px !important;
+    }
+
+    .product-image{
+        display: flex;
+        justify-content: center;
+        width: 100%;
     }
 }

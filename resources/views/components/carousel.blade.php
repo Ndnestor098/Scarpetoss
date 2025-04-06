@@ -15,7 +15,7 @@
                         <p class="product-title">{{$item->name}}</p>
                         <p class="product-price">${{$item->price}}</p>
                     </a>
-                    <span class="view-product-link">View Product</span>
+                    <span class="view-product-link">Ver Producto</span>
                 </div>
             </div>
         @endforeach
