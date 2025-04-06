@@ -50,12 +50,13 @@ Route::controller(LoginController::class)->middleware('guest')->group(function()
 
     Route::post("/login", "login")->name("login.post")->middleware('throttle:5,3');
 
-    Route::get("/logout", "logout")->name("logout");
-
     Route::get("/register", "create")->name("register");
 
     Route::post("/register", "register")->name("register.post")->middleware('throttle:5,3');
 });
+
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
+
 
 //===============================================Area de usuario=================================================
 Route::controller(ClientController::class)->middleware("auth")->group(function(){
