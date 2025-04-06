@@ -55,9 +55,6 @@ class ProductAdminController extends Controller
             'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
-        Log::info('Archivos recibidos:', $request->file('images'));
-
-
         // Verificar si no se proporciona un nombre de imagen o si se proporciona una nueva imagen
         if ($request->hasFile("images")){
             // Llamar al servicio de crear y pasar una imagen a la carpeta designada

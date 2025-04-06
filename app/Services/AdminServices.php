@@ -25,7 +25,7 @@ class AdminServices
         $product->name = $request->name; // Nombre del producto
         $product->description = $request->description; // Descripción del producto
         $product->price = str_replace(",", ".", $request->price); // Precio del producto
-        $product->gender = $request->genero; // Género del producto
+        $product->gender = $request->gender; // Género del producto
         $product->images = $images; // Ruta de las imagenes
         $product->stock = $request->stock; // Stock del producto
         $product->brand = $request->supplier; // Marca o proveedor del producto
