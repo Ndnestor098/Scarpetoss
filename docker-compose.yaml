@@ -6,6 +6,8 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - ./:/var/www
-    ports:
+    expose:
       - "7000"
+    ports:
+      - "7000:7000"
     restart : always
