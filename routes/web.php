@@ -39,14 +39,14 @@ Route::get("/products/{slug}", ProductController::class)->name("products.show");
 Route::controller(LoginController::class)->middleware('guest')->group(function(){
     Route::get("/login", "index")->name("login");
 
-    Route::get('auth/google', "google")->name("google");
-    Route::get('auth/google/callback', "googleCallback")->name("google.callback");
+    Route::get('/auth/google/redirect', "redirectToGoogle")->name("google");
+    Route::get('/auth/google/callback', "handleGoogleCallback")->name("google.callback");
 
-    Route::get('auth/twitter', "twitter")->name("twitter");
-    Route::get('auth/twitter/callback', "twitterCallback")->name("twitter.callback");
+    // Route::get('auth/twitter', "twitter")->name("twitter");
+    // Route::get('auth/twitter/callback', "twitterCallback")->name("twitter.callback");
 
-    Route::get('auth/github', "github")->name("github");
-    Route::get('auth/github/callback', "githubCallback")->name("github.callback");
+    // Route::get('auth/github', "github")->name("github");
+    // Route::get('auth/github/callback', "githubCallback")->name("github.callback");
 
     Route::post("/login", "login")->name("login.post")->middleware('throttle:5,3');
 

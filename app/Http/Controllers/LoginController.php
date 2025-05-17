@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -22,38 +23,33 @@ class LoginController extends Controller
     }
 
 
-    public function google()
+    public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
     }
 
-    public function googleCallback()
+    public function handleGoogleCallback()
     {
-        $user = Socialite::driver('google')->user();
+        try {
+            $googleUser = Socialite::driver('google')->stateless()->user();
 
-        $authUser = User::where('google_id', $user->id)->first();
+            $user = User::firstOrCreate(
+                ['email' => $googleUser->getEmail()],
+                [
+                    'name' => $googleUser->getName(),
+                    'google_id' => $googleUser->getId(),
+                    'password' => bcrypt(Str::random(24)),
+                ]
+            );
 
-        if ($authUser) {
-            Auth::login($authUser);
-        } else {
-            $existUser = User::where('email', $user->email)->first();
+            Auth::login($user);
 
-            if($existUser){
-                return redirect()->back()->withErrors(['login_error' => 'El campo correo electrónico ya ha sido registrado.'])->withInput();
-            }
-
-            $authUser = User::create([
-                'google_id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-            ]);
-
-            Auth::login($authUser);
-            
+            return redirect('/dashboard'); // o a donde quieras llevar al usuario
+        } catch (\Exception $e) {
+            return redirect('/login')->withErrors('No se pudo iniciar sesión con Google.');
         }
-        
-        return redirect()->route('home');
     }
+    
 
     public function twitter()
     {
