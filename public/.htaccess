@@ -9,6 +9,9 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
+    RewriteCond %{HTTP_HOST} ^www\.scarpetoss\.ndnestor\.com$ [NC]
+    RewriteRule ^(.*)$ https://scarpetoss.ndnestor.com/$1 [L,R=301]
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
@@ -18,4 +21,24 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    <IfModule mod_headers.c>
+        # HTTP Strict Transport Security (HSTS) for enforcing HTTPS
+        Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        
+        # Content-Security-Policy Removed (No restrictions on external sources or inline styles)
+        # Removed the CSP headers that were causing issues for inline styles and external resources.
+
+        # X-Frame-Options to prevent clickjacking attacks
+        Header always set X-Frame-Options "DENY"
+
+        # X-Content-Type-Options to prevent MIME-sniffing attacks
+        Header always set X-Content-Type-Options "nosniff"
+
+        # Referrer-Policy to control how much referrer information is sent with requests
+        Header always set Referrer-Policy "no-referrer-when-downgrade"
+
+        # Permissions-Policy to limit the use of certain browser features and APIs
+        Header always set Permissions-Policy "geolocation=(self), camera=()"
+    </IfModule>
 </IfModule>
