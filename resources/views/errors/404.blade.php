@@ -614,7 +614,7 @@
 </head>
 <body>
     <h1>Error: vuelva al Home</h1>
-    <a href="Home">Home</a>
+    <a href="/">Home</a>
     <div class="main_wrapper">
         <div class="main">
         <div class="antenna">
