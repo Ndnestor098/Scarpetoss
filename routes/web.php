@@ -39,8 +39,12 @@ Route::get("/products/{slug}", ProductController::class)->name("products.show");
 Route::controller(LoginController::class)->middleware('guest')->group(function(){
     Route::get("/login", "index")->name("login");
 
-    Route::get('/auth/google/redirect', "redirectToGoogle")->name("google");
-    Route::get('/auth/google/callback', "handleGoogleCallback")->name("google.callback");
+    Route::get('/auth/google/redirect', "redirectToGoogle")
+        ->middleware('throttle:5,3') // Limitar a 5 intentos cada 3 minutos
+        ->name("google");
+
+    Route::get('/auth/google/callback', "handleGoogleCallback")
+        ->name("google.callback");
 
     // Route::get('auth/twitter', "twitter")->name("twitter");
     // Route::get('auth/twitter/callback', "twitterCallback")->name("twitter.callback");
@@ -48,11 +52,15 @@ Route::controller(LoginController::class)->middleware('guest')->group(function()
     // Route::get('auth/github', "github")->name("github");
     // Route::get('auth/github/callback', "githubCallback")->name("github.callback");
 
-    Route::post("/login", "login")->name("login.post")->middleware('throttle:5,3');
+    Route::post("/login", "login")
+        ->middleware('throttle:5,3')
+        ->name("login.post");
 
     Route::get("/register", "create")->name("register");
 
-    Route::post("/register", "register")->name("register.post")->middleware('throttle:5,3');
+    Route::post("/register", "register")
+        ->middleware('throttle:5,3')
+        ->name("register.post");
 });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
