@@ -7,7 +7,10 @@
             <div class="carousel-item">
                 <a href="{{route('products.show', ['slug' => $item->slug])}}">
                     <div class="product-image">
-                        <img src="{{ $item->images[0] }}" alt="Product image">
+                        <img
+                            src="{{ $item->images[0] }}"
+                            alt="Product image"
+                        >
                     </div>
                 </a>
                 <div class="product-info">

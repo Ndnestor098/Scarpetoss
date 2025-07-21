@@ -35,7 +35,11 @@
         <section class="product-detail">
             <div class="product-gallery">
                 <figure>
-                    <img src="{{ $product->images[0] }}" id="main-image" class="main-image" alt="Zapato - {{ $product->name }}">
+                    <img
+                        src="{{ $product->images[0] }}"
+                        id="main-image"
+                        class="main-image"
+                        alt="Zapato - {{ $product->name }}">
                 </figure>
         
                 <div class="image-thumbnails">
